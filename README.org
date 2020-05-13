@@ -1,20 +1,31 @@
 * Emacs工具篇
 ** 常用快捷键(ctrl-c; alt-m)
-   | 功能               | 快捷键         |
-   | 新建文件or打开文件 | c-x c-f        |
-   | eshell             | m-x eshell     |
-   | 添加有名称的超链接 | [[url] [name]] |
-   |                    |                |
+   | 功能                      | 快捷键             |
+   | 新建文件or打开文件        | c-x c-f            |
+   | eshell：emacs端命令行窗口 | m-x eshell         |
+   | 添加有名称的超链接        | [[url] [name]]     |
+   | c-g                       | 取消一切指令       |
+   | c-s                       | buffer内部全局搜索 |
+   | 上下分屏                  | c-x 2              |
+   | 左右分屏                  | c-x 3              |
+   | 关闭当前分屏              | c-x 0              |
+   | 只保留当前分屏            | c-x 1              |
+** 日程提醒功能
+   1. 删除 ~/.emacs.d/gtd.org
+   2. c-c r打开添加事项buffer, 选择t(to do)，添加事项
+   3. shift + 上下按键调节任务优先级
+   4. c-c c-c保存，c-c c-k退出不保存
+   5. c-c a进入agenda buffer,选择a查看当前用户日程
 * LeetCode刷题篇
 ** 每日题目分配
-   | date  | 李云良 | 徐叶琛 | 勒一凡 |
-   |-------+--------+--------+--------|
-   | 05/14 |        |        |        |
-   |       |        |        |        |
-   |       |        |        |        |
-   |       |        |        |        |
-   |       |        |        |        |
-   |       |        |        |        |
+   | date  | 李云良   | 徐叶琛             | 勒一凡     |
+   |-------+----------+--------------------+------------|
+   | 05/14 | [[https://leetcode-cn.com/problems/house-robber/][打家劫舍]] | [[https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/][买卖股票的最佳时机]] | [[https://leetcode-cn.com/problems/maximum-subarray/][最大子序和]] |
+   |       |          |                    |            |
+   |       |          |                    |            |
+   |       |          |                    |            |
+   |       |          |                    |            |
+   |       |          |                    |            |
 ** 解题思路
 *** example
 **** 题目名字/url/date
@@ -22,4 +33,15 @@
      + 解题思路
      + code_dir：py文件地址
 *** 正式样本
+**** 样本一（替换）
+     + 
 * MachineLearning分享篇
+** 学习计划
+   | 专题 | deaaline     |
+   | SVM  | 05/16~ 05/17 |
+   |      |              |
+** 分享链接（专题笔记文件地址）
+*** SVM
+    + 李云良：
+    + 徐叶琛：
+    + 勒一凡：

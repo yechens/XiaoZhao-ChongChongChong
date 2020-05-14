@@ -25,7 +25,7 @@
    |       |              |                          |                |       |
 ** 解题思路
 *** 题目列表
-    + [[file:./coding/121_买卖股票的最佳时机.python][121.买卖股票的最佳时机]]   
+    + [[file:./coding/121_买卖股票的最佳时机.py][121.买卖股票的最佳时机]]
     + [[file:./coding/198_打家劫舍.py][198.打家劫舍]] / 推荐阅读:[[https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/solution/yi-ge-fang-fa-tuan-mie-6-dao-gu-piao-wen-ti-by-l-3/][一个方法团灭6道股票问题]]
     + [[/coding/53_最大子序和.py][53.最大子序和]]
 * MachineLearning分享篇

@@ -17,6 +17,8 @@
    4. c-c c-c保存，c-c c-k退出不保存
    5. c-c a进入agenda buffer,选择a查看当前用户日程
 * LeetCode刷题篇
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成6）/截屏2020-05-14 下午8.50.18.png @ 2020-05-14 20:50:24
+[[file:Screen-Pictures/LeetCode%E5%88%B7%E9%A2%98%E7%AF%87/2020-05-14_20-50-24_%E6%88%AA%E5%B1%8F2020-05-14%20%E4%B8%8B%E5%8D%888.50.18.png]]
 ** 每日题目分配
    | Date  | 李云良       | 徐叶琛                   | 勒一凡         | Check |
    |-------+--------------+--------------------------+----------------+-------|

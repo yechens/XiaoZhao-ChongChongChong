@@ -29,7 +29,7 @@
     + [[file:./coding/198_打家劫舍.py][198.打家劫舍]] / 推荐阅读:[[https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/solution/yi-ge-fang-fa-tuan-mie-6-dao-gu-piao-wen-ti-by-l-3/][一个方法团灭6道股票问题]]
     + [[/coding/53_最大子序和.py][53.最大子序和]]
 * MachineLearning分享篇
-** 学习计划
+** ✈️学习计划
    | 专题 | deaaline     |
    | SVM  | 05/16~ 05/17 |
 ** 分享链接（专题笔记文件地址）

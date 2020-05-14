@@ -18,49 +18,39 @@
    5. c-c a进入agenda buffer,选择a查看当前用户日程
 * LeetCode刷题篇
 ** 每日题目分配
-   | date  | 李云良       | 徐叶琛                   | 勒一凡         |
-   |-------+--------------+--------------------------+----------------|
-   | 05/14 | [[https://leetcode-cn.com/problems/house-robber/][打家劫舍]]     | [[https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/][买卖股票的最佳时机]]       | [[https://leetcode-cn.com/problems/maximum-subarray/][最大子序和]]     |
-   | 05/15 | [[https://leetcode-cn.com/problems/house-robber-iii/][打家劫舍 III]] | [[https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/][最佳买卖股票时机含冷冻期]] | [[https://leetcode-cn.com/problems/longest-increasing-subsequence/][最长上升子序列]] |
-   |       |              |                          |                |
-   |       |              |                          |                |
-   |       |              |                          |                |
-   |       |              |                          |                |
+   | Date  | 李云良       | 徐叶琛                   | 勒一凡         | Check |
+   |-------+--------------+--------------------------+----------------+-------|
+   | 05/14 | [[https://leetcode-cn.com/problems/house-robber/][打家劫舍]]     | [[https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/][买卖股票的最佳时机]]       | [[https://leetcode-cn.com/problems/maximum-subarray/][最大子序和]]     |       |
+   | 05/15 | [[https://leetcode-cn.com/problems/house-robber-iii/][打家劫舍 III]] | [[https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/][最佳买卖股票时机含冷冻期]] | [[https://leetcode-cn.com/problems/longest-increasing-subsequence/][最长上升子序列]] |       |
+   |       |              |                          |                |       |
 ** 解题思路
-*** example
-**** 题目名字/url/date
-     + 题目描述
-     + 解题思路
-     + code_dir：py文件地址
-*** 正式样本
+*** 题目列表
 **** [[https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/][121. 买卖股票的最佳时机]]
 ***** 题目描述
       + 给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。
       + 如果你最多只允许完成一笔交易（即买入和卖出一支股票一次），设计一个算法来计算你所能获取的最大利润。 
       + 注意：你不能在买入股票前卖出股票。
 ***** 示例
-      + 输入: [7,1,5,3,6,4] 
-      + 输出: 5
+      + 输入: [7,1,5,3,6,4] ~ 输出: 5
       + 解释: 在第 2 天（股票价格 = 1）的时候买入，在第 5 天（股票价格 = 6）的时候卖出，最大利润 = 6-1 = 5 。
-      + 注意利润不能是 7-1 = 6, 因为卖出价格需要大于买入价格；同时，你不能在买入前卖出股票。
+      + 注意利润不能是 7-1 = 6, 因为卖出价格需要大于买入价格；同时，你不能在买入前卖出股票
 ***** 解题思路
       + 使用“状态穷举”团灭6道股票问题。对于本题，每天都有三种「选择」：买入、卖出、无操作，且只允许交易一次
       + 我们可以定义一个三维数组 dp 穷举这三种状态：dp[i][k][0 or 1]；第一个i是天数，第二个k是允许交易的最大次数，第三个是当前的持有状态（1-持有，0-未持有）
       + 例如：dp[3][2][1] 的含义就是：今天是第三天，我现在手上持有股票，至今最多进行 2 次交易
       + 状态转移:
       + (1)今天我没有持有股票，有两种可能：
-      + 要么是我昨天就没有持有，然后今天 不操作，所以我今天还是没有持有；
-      + 要么是我昨天持有股票，但是今天我 卖出 了，所以我今天没有持有股票了。
+	+ 我昨天就“没有持有”，然后今天“不操作”，所以我今天还是“没有持有”；
+	+ 我昨天“持有”股票，但是今天我“卖出”了，所以我今天“没有持有”股票了
       + (2)今天我持有着股票，有两种可能：
-      + 要么我昨天就持有着股票，然后今天选择 不操作，所以我今天还持有着股票；
-      + 要么我昨天本没有持有，但今天我选择 买入，所以今天我就持有股票了
-      + coding: [[file:./codeing/121_买卖股票的最佳时机.py]]
+	+ 我昨天就“持有”股票，然后今天选择“不操作”，所以我今天还“持有”股票；
+	+ 我昨天本“没有持有”，但今天我选择“买入”，所以今天我就“持有”股票了
+      + coding: [[file:./coding/121_买卖股票的最佳时机.py][121.买卖股票的最佳时机]]
       + 推荐阅读:[[https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/solution/yi-ge-fang-fa-tuan-mie-6-dao-gu-piao-wen-ti-by-l-3/][一个方法团灭6道股票问题]]
 * MachineLearning分享篇
 ** 学习计划
    | 专题 | deaaline     |
    | SVM  | 05/16~ 05/17 |
-   |      |              |
 ** 分享链接（专题笔记文件地址）
 *** SVM
     + 李云良：

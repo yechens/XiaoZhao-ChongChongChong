@@ -18,15 +18,16 @@
    5. c-c a进入agenda buffer,选择a查看当前用户日程
 * LeetCode刷题篇
 ** 每日题目分配
-   | Date  | 李云良       | 徐叶琛                   | 勒一凡         | Check |
-   |-------+--------------+--------------------------+----------------+-------|
-   | 05/14 | [[https://leetcode-cn.com/problems/house-robber/][打家劫舍]]     | [[https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/][买卖股票的最佳时机]]       | [[https://leetcode-cn.com/problems/maximum-subarray/][最大子序和]]     |       |
-   | 05/15 | [[https://leetcode-cn.com/problems/house-robber-iii/][打家劫舍 III]] | [[https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/][最佳买卖股票时机含冷冻期]] | [[https://leetcode-cn.com/problems/longest-increasing-subsequence/][最长上升子序列]] |       |
-   |       |              |                          |                |       |
+   | Date  | 李云良       | 徐叶琛                   | 勒一凡          | Check |
+   |-------+--------------+--------------------------+-----------------+-------|
+   | 05/14 | [[https://leetcode-cn.com/problems/house-robber/][打家劫舍]]     | [[https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/][买卖股票的最佳时机]]    ☑️  | [[https://leetcode-cn.com/problems/maximum-subarray/][最大子序和]]    ☑️ |       |
+   | 05/15 | [[https://leetcode-cn.com/problems/house-robber-iii/][打家劫舍 III]] | [[https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/][最佳买卖股票时机含冷冻期]] | [[https://leetcode-cn.com/problems/longest-increasing-subsequence/][最长上升子序列]]  |       |
+   |       |              |                          |                 |       |
 ** 解题思路
 *** 题目列表
     + [[file:./coding/121_买卖股票的最佳时机][121买卖股票的最佳时机]]
     + [[file:./coding/198_打家劫舍.py][198打家劫舍]] / 推荐阅读:[[https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/solution/yi-ge-fang-fa-tuan-mie-6-dao-gu-piao-wen-ti-by-l-3/][一个方法团灭6道股票问题]]
+    + [[/coding/53_最大子序和.py][53.最大子序和]]
 * MachineLearning分享篇
 ** 学习计划
    | 专题 | deaaline     |

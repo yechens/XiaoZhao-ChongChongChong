@@ -16,5 +16,18 @@
 解释: 小偷一晚能够盗取的最高金额 = 3 + 3 + 1 = 7.
 
 解题思路：
-
+采用动态规划加递归方法，对于每个节点，其最大收益为 max(当前节点选择偷+2个子节点选择不偷的收益, 当前节点不偷+2个节点偷或者不偷的最大收益）
 """
+class Solution:
+    def rob(self, root: TreeNode) -> int:
+        result = self.helper(root)
+        return max(result)
+    
+    def helper(self, root):
+        if not root:
+            return [0, 0]
+        left = self.helper(root.left)
+        right = self.helper(root.right)
+        res0 = max(left) + max(right)
+        res1 = root.val + left[0] + right[0]
+        return [res0, res1]

@@ -1,15 +1,21 @@
 * 🔧Emacs工具篇
 ** 常用快捷键(ctrl-c; alt-m)
-   | 功能                      | 快捷键             |
-   | 新建文件or打开文件        | c-x c-f            |
-   | eshell：emacs端命令行窗口 | m-x eshell         |
-   | 添加有名称的超链接        | [[url] [name]]     |
-   | c-g                       | 取消一切指令       |
-   | c-s                       | buffer内部全局搜索 |
-   | 上下分屏                  | c-x 2              |
-   | 左右分屏                  | c-x 3              |
-   | 关闭当前分屏              | c-x 0              |
-   | 只保留当前分屏            | c-x 1              |
+   | 功能                      | 快捷键                               |
+   | 新建文件or打开文件        | c-x c-f                              |
+   | eshell：emacs端命令行窗口 | m-x eshell                           |
+   | 添加有名称的超链接        | [[url] [name]]                       |
+   | 添加github文件超链接      | [[file: ./ 文件夹 /文件] [描述字段]] |
+   | c-g                       | 取消一切指令                         |
+   | c-s                       | buffer内部全局搜索                   |
+   | 上下分屏                  | c-x 2                                |
+   | 左右分屏                  | c-x 3                                |
+   | 关闭当前分屏              | c-x 0                                |
+   | 只保留当前分屏            | c-x 1                                |
+   | 打开最近使用的文件buffer  | c-x c-r                              |
+   | 删除buffer                | c-x k                                |
+   | 切换到其他buffer          | c-x b                                |
+   | 有道词典查单词            | 选中单词后，c-c o                    |
+   |                           |                                      |
 ** 日程提醒功能
    1. 删除 ~/.emacs.d/gtd.org
    2. c-c r打开添加事项buffer, 选择t(to do)，添加事项

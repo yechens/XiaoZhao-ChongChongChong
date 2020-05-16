@@ -15,7 +15,7 @@
    | 删除buffer                | c-x k                                |
    | 切换到其他buffer          | c-x b                                |
    | 有道词典查单词            | 选中单词后，c-c o                    |
-   | EMACS快捷键教程           | [[file:/utils/EMACS TUTORIAL-MAC.pdf][EMACS_tutorial_for_mac]]               |
+   | EMACS快捷键教程           | [[file:./utils/EMACS_TUTORIAL_MAC.pdf][EMACS_tutorial_for_mac]]               |
 ** 日程提醒功能
    1. 删除 ~/.emacs.d/gtd.org
    2. c-c r打开添加事项buffer, 选择t(to do)，添加事项

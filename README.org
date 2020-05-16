@@ -15,7 +15,7 @@
    | 删除buffer                | c-x k                                |
    | 切换到其他buffer          | c-x b                                |
    | 有道词典查单词            | 选中单词后，c-c o                    |
-   |                           |                                      |
+   | EMACS快捷键教程           | [[file:/utils/EMACS TUTORIAL-MAC.pdf][EMACS_tutorial_for_mac]]               |
 ** 日程提醒功能
    1. 删除 ~/.emacs.d/gtd.org
    2. c-c r打开添加事项buffer, 选择t(to do)，添加事项
@@ -26,11 +26,12 @@
 #+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成6）/截屏2020-05-14 下午8.50.18.png @ 2020-05-14 20:50:24
 [[file:Screen-Pictures/LeetCode%E5%88%B7%E9%A2%98%E7%AF%87/2020-05-14_20-50-24_%E6%88%AA%E5%B1%8F2020-05-14%20%E4%B8%8B%E5%8D%888.50.18.png]]
 ** 🐈每日题目分配
-   | Date  | 李云良       | 徐叶琛                   | 勒一凡         | Check |
-   |-------+--------------+--------------------------+----------------+-------|
-   | 05/14 | [[https://leetcode-cn.com/problems/house-robber/][打家劫舍]]     | [[https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/][买卖股票的最佳时机]]       | [[https://leetcode-cn.com/problems/maximum-subarray/][最大子序和]]     |       |
-   | 05/15 | [[https://leetcode-cn.com/problems/house-robber-iii/][打家劫舍 III]] | [[https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/][最佳买卖股票时机含冷冻期]] | [[https://leetcode-cn.com/problems/longest-increasing-subsequence/][最长上升子序列]] |       |
-   | 05/16 | [[https://leetcode-cn.com/problems/minimum-path-sum/][最小路径和]]   | [[https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/][买卖股票的最佳时机 III]]   | [[https://leetcode-cn.com/problems/longest-palindromic-substring/][最长回文子串]]   |       |
+   | Date    | 李云良       | 徐叶琛                   | 勒一凡         | Check |
+   |---------+--------------+--------------------------+----------------+-------|
+   | 05/14   | [[https://leetcode-cn.com/problems/house-robber/][打家劫舍]]     | [[https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/][买卖股票的最佳时机]]       | [[https://leetcode-cn.com/problems/maximum-subarray/][最大子序和]]     | ☑️     |
+   | 05/15   | [[https://leetcode-cn.com/problems/house-robber-iii/][打家劫舍 III]] | [[https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/][最佳买卖股票时机含冷冻期]] | [[https://leetcode-cn.com/problems/longest-increasing-subsequence/][最长上升子序列]] | ☑️     |
+   | 05/16   | [[https://leetcode-cn.com/problems/minimum-path-sum/][最小路径和]]   | [[https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/][买卖股票的最佳时机 III]]   | [[https://leetcode-cn.com/problems/longest-palindromic-substring/][最长回文子串]]   |       |
+   | 05/17   | [[https://leetcode-cn.com/problems/coin-change/][零钱兑换]]     | [[https://leetcode-cn.com/problems/word-break/][单词拆分]]                 | [[https://leetcode-cn.com/problems/partition-equal-subset-sum/][分割等和子集]]   |       |
 ** 🧠解题思路
 *** 题目列表
     * [[file:./coding/121_买卖股票的最佳时机.py][121.买卖股票的最佳时机]]🍉推荐阅读:[[https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/solution/yi-ge-fang-fa-tuan-mie-6-dao-gu-piao-wen-ti-by-l-3/][一个方法团灭6道股票问题]]
@@ -39,10 +40,12 @@
     * [[file:./coding/337_打家劫舍III.py][🍊337.打家劫舍III]]
     * [[file:./coding/309_最佳买卖股票时机含冷冻期.py][309.最佳买卖股票时机含冷冻期]]
     * [[file:./coding/300_最长上升子序列.py][300.最长上升子序列]]😣
+    * 💰[[file:/coding/123_买卖股票的最佳时机III.py][123.买票股票的最佳时机III]]
 * 📣MachineLearning分享篇
 ** ✈️学习计划
-   | 专题 | deaaline     |
-   | SVM  | 05/16~ 05/17 |
+   | 专题 | deaaline      |
+   | SVM  | 05/14 ~ 05/17 |
+   | Todo |               |
 ** 分享链接（专题笔记文件地址）
 *** SVM
     + 李云良：

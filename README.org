@@ -26,7 +26,7 @@
 #+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成6）/截屏2020-05-14 下午8.50.18.png @ 2020-05-14 20:50:24
 [[file:Screen-Pictures/LeetCode%E5%88%B7%E9%A2%98%E7%AF%87/2020-05-14_20-50-24_%E6%88%AA%E5%B1%8F2020-05-14%20%E4%B8%8B%E5%8D%888.50.18.png]]
 ** 🐈每日题目分配
-   | Date  | Topic  | 李云良                 | 徐叶琛                   | 勒一凡                   | Check |
+   | Date  | Topic  | Black_tear    | Giant       | Van             | Check |
    |-------+--------+------------------------+--------------------------+--------------------------+-------|
    | 05/14 | DP     | [[https://leetcode-cn.com/problems/house-robber/][打家劫舍]]               | [[https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/][买卖股票的最佳时机]]       | [[https://leetcode-cn.com/problems/maximum-subarray/][最大子序和]]               | ☑️     |
    | 05/15 | DP     | [[https://leetcode-cn.com/problems/house-robber-iii/][打家劫舍 III]]           | [[https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/][最佳买卖股票时机含冷冻期]] | [[https://leetcode-cn.com/problems/longest-increasing-subsequence/][最长上升子序列]]           | ☑️     |
@@ -64,9 +64,9 @@
    |xgboost| 05~27 ~ 06/02 |
 ** 分享链接（专题笔记文件地址）
 *** SVM
-    + 李云良：
-    + 徐叶琛：
-    + 勒一凡:[[file:./docs/SVM/机器学习-svm全手写推导.pdf][机器学习-svm全手写推导.pdf]]
+    + Black_tear：
+    + Giant：
+    + Van:[[file:./docs/SVM/机器学习-svm全手写推导.pdf][机器学习-svm全手写推导.pdf]]
    
 *   TO_DO list
    |数学基础| 6月 待安排 |

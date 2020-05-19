@@ -67,7 +67,7 @@
 *** SVM
     + Black_tear：
     + Giant：
-    + Van:[[https://pan.zju.edu.cn/share/8da47bdefa54a08ae4f0a08b5e][机器学习-svm全手写推导.pdf]] 
+    + Van:[[file:./docs/SVM/机器学习-svm全手写推导_compressed.pdf][机器学习-svm全手写推导.pdf]]
    
 *   TO_DO list
    |数学基础| 6月 待安排 |

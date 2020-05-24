@@ -60,6 +60,7 @@
      * [[file:./coding/121_买卖股票的最佳时机.py][121.买卖股票的最佳时机]]🍉推荐阅读:[[https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/solution/yi-ge-fang-fa-tuan-mie-6-dao-gu-piao-wen-ti-by-l-3/][一个方法团灭6道股票问题]]
      * 💰[[file:/coding/123_买卖股票的最佳时机III.py][123.买票股票的最佳时机III]]
      * 🥤[[file:./coding/139_单词拆分.py][139.单词拆分]]
+     * [[file:./coding/152_乘积的最大子数组.py][152.乘积的最大子数组]]🦷
      * [[file:./coding/198_打家劫舍.py][198.打家劫舍]]
      * [[file:./coding/300_最长上升子序列.py][300.最长上升子序列]]😣
      * [[file:./coding/309_最佳买卖股票时机含冷冻期.py][309.最佳买卖股票时机含冷冻期]]

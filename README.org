@@ -28,7 +28,7 @@
 ** 🐈每日题目分配
    | Date  | Topic  | Black_tear             | Giant                    | Van                      | Check |
    |-------+--------+------------------------+--------------------------+--------------------------+-------|
-   | 05/14 | DP     | [[https://leetcode-cn.com/problems/house-robber/][打家劫舍]]  [[file:./coding/198_打家劫舍.py][答案]]         | [[https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/][买卖股票的最佳时机]]       | [[https://leetcode-cn.com/problems/maximum-subarray/][最大子序和]]               | ☑️     |
+   | 05/14 | DP     | [[https://leetcode-cn.com/problems/house-robber/][打家劫舍]]               | [[https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/][买卖股票的最佳时机]]       | [[https://leetcode-cn.com/problems/maximum-subarray/][最大子序和]]               | ☑️     |
    | 05/15 | DP     | [[https://leetcode-cn.com/problems/house-robber-iii/][打家劫舍 III]]           | [[https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/][最佳买卖股票时机含冷冻期]] | [[https://leetcode-cn.com/problems/longest-increasing-subsequence/][最长上升子序列]]           | ☑️     |
    | 05/16 | DP     | [[https://leetcode-cn.com/problems/minimum-path-sum/][最小路径和]]             | [[https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/][买卖股票的最佳时机 III]]   | [[https://leetcode-cn.com/problems/longest-palindromic-substring/][最长回文子串]]             |       |
    | 05/17 | DP     | [[https://leetcode-cn.com/problems/coin-change/][零钱兑换]]               | [[https://leetcode-cn.com/problems/word-break/][单词拆分]]                 | [[https://leetcode-cn.com/problems/partition-equal-subset-sum/][分割等和子集]]             |       |
@@ -68,6 +68,8 @@
     * [[file:/coding/538_把二叉搜索树转换为累加树.py][538.把二叉搜索树转换为累加树]]
     * [[file:./coding/114_二叉树展开为链表.py][114.二叉树展开链表]]🐶
     * [[file:/coding/124_二叉树中的最大路径和.py][124. 二叉树中的最大路径和]]
+    * [[file:./coding/543_二叉树的直径.py][543.二叉树的直径😊]]
+    * [[file:./coding/312_戳气球.py][312.戳气球😖]]
 * 📣MachineLearning分享篇
 ** ✈️学习计划
    | 专题    | deadline      |

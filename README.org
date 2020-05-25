@@ -67,7 +67,7 @@
      * [[file:./coding/322_零钱兑换.py][322.零钱兑换]]
      * [[file:./coding/337_打家劫舍III.py][🍊337.打家劫舍III]]
      * [[file:./coding/416_分割等和子集.py][416.分割等和子集]]🤓
-     * [[file:/coding/279_完全平方数.py][279.完全平方数]]😄
+     * [[file:/coding/279_完全平方数.py][279.完全平方数]]😄(类似题型: [[https://leetcode-cn.com/problems/coin-change/][零钱兑换]])
 **** 二叉树
     * [[file:./coding/94_二叉树的中序遍历.py][94.二叉树的中序遍历]]
     * [[file:./coding/96_不同的二叉搜索树.py][96.不同的二叉搜索树]]😭
@@ -87,7 +87,7 @@
 **** 栈   
     * [[file:./coding/32_最长有效括号.py][32.最长有效括号😭]]
 **** 链表
-    * [[file:/coding/142_环形链表II.py][142.环形链表II]]
+    * [[file:/coding/142_环形链表II.py][142.环形链表II]]😊
 * 📣MachineLearning分享篇
 ** ✈️学习计划
    | 专题     | deadline      |

@@ -62,12 +62,12 @@
      * 🥤[[file:./coding/139_单词拆分.py][139.单词拆分]]
      * [[file:./coding/152_乘积的最大子数组.py][152.乘积的最大子数组]]🦷
      * [[file:./coding/198_打家劫舍.py][198.打家劫舍]]
+     * [[file:/coding/279_完全平方数.py][279.完全平方数]]😄(类似题型: [[https://leetcode-cn.com/problems/coin-change/][零钱兑换]])
      * [[file:./coding/300_最长上升子序列.py][300.最长上升子序列]]😣
      * [[file:./coding/309_最佳买卖股票时机含冷冻期.py][309.最佳买卖股票时机含冷冻期]]
      * [[file:./coding/322_零钱兑换.py][322.零钱兑换]]
      * [[file:./coding/337_打家劫舍III.py][🍊337.打家劫舍III]]
      * [[file:./coding/416_分割等和子集.py][416.分割等和子集]]🤓
-     * [[file:/coding/279_完全平方数.py][279.完全平方数]]😄(类似题型: [[https://leetcode-cn.com/problems/coin-change/][零钱兑换]])
 **** 二叉树
     * [[file:./coding/94_二叉树的中序遍历.py][94.二叉树的中序遍历]]
     * [[file:./coding/96_不同的二叉搜索树.py][96.不同的二叉搜索树]]😭
@@ -97,6 +97,7 @@
    | 决策树   | -             |
    | xgboost  | -             |
    |          |               |
+   |          |               |
 ** 分享链接（专题笔记文件地址）
    | topic    | black_tear | giant | van                        |
    | SVM      | -          | -     | [[file:./docs/SVM/机器学习-svm全手写推导_compressed.pdf][机器学习-svm全手写推导.pdf]] |
@@ -107,3 +108,10 @@
    | 笔试题         | 6月 待安排 |
    | ML比赛         | 待安排     |
    | python高级编程 | 待安排     |
+*   面试必备
+** ML/NLP 面经
+**** Todo
+** 知识点归纳整理
+| 主题           | 标题                                                     | 来源 | 传送门 |
+| 预训练语言模型 | NLP算法面试必备！史上最全！PTMs：NLP预训练模型的全面总结 | 知乎 | [[https://zhuanlan.zhihu.com/p/115014536?utm_source=wechat_session&utm_medium=social&utm_oi=824921009521053696][👉]]     |
+|                |                                                          |      |        |

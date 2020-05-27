@@ -118,6 +118,6 @@
 ** ML/NLP 面经
 **** Todo
 ** 知识点归纳整理
-| 主题           | 标题                                                     | 来源 | 传送门 |
-| 预训练语言模型 | NLP算法面试必备！史上最全！PTMs：NLP预训练模型的全面总结 | 知乎 | [[https://zhuanlan.zhihu.com/p/115014536?utm_source=wechat_session&utm_medium=social&utm_oi=824921009521053696][👉]]     |
-|                |                                                          |      |        |
+| 主题           | 标题                                                     | 来源 | 传送门         |
+| 预训练语言模型 | NLP算法面试必备！史上最全！PTMs：NLP预训练模型的全面总结 | 知乎 | [[https://zhuanlan.zhihu.com/p/115014536?utm_source=wechat_session&utm_medium=social&utm_oi=824921009521053696][👉]]             |
+| 多模态特征融合 | [[https://www.aclweb.org/anthology/P19-1046/][HFFN]]                                                     | ACL  | [[todo_exaplain][TODO on zhihu]] |

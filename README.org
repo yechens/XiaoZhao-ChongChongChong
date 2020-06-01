@@ -1,3 +1,131 @@
+git push
+git add .
+ls
+mkdir MachineLearning
+mkdir LeetCode
+cd MachineLearning/
+mkdir SVM
+cd ../LeetCode/
+cd ..
+git add .
+git commit -m '更新readme‘'
+git push
+cd ../../gitlab/sentence-similarity/
+ls
+cd match_zoo/
+ls
+mkdir BIMPM
+cd BIMPM/
+ls
+cd ..
+cd ../
+cd ../
+ls
+cd QA-SOTA/
+ls
+cd ../../github/
+ls
+git clone https://github.com/AI-confused/QA-SOTA.git
+cd QA-SOTA/
+ls
+mv ../../gitlab/QA-SOTA/* ./
+ls
+ls -a
+cd ../../gitlab/QA-SOTA/
+ls
+ls -a
+cat .gitignore 
+mv .gitignore  ../../github/QA-SOTA/.gitignore
+cd ..
+rm -r QA-SOTA/
+cd ../github/QA-SOTA/
+s
+ls
+cat .gitignore 
+ls
+git add .
+git commit -m 'first update'
+git push
+ls
+cd ..
+cd QA-SOTA/
+git pull
+cd ../QiuZhao-ChongChongChong
+ls
+ls
+cd LeetCode/
+ls
+cd ..
+git pull
+ls
+rm -r LeetCode/
+rm -r MachineLearning/
+ls
+cd coding/
+ls
+mv 121_\ 买卖股票的最佳时机.py 121_买卖股票的最佳时机.py
+ls
+cd ..
+ls
+git add .
+git commit -m 'update'
+git push
+git pull
+cd coding/
+ls
+git add .
+git commit -m 'update'
+git push
+git add .
+git commit -m 'update'
+git add .
+cd ..
+git add .
+git commit -m 'update;'
+git push
+git add .
+git commit -m 'u'
+git push
+git add .
+git commit -m 'i;'
+git push
+git add .
+git commit -m 'o'
+git push
+git add .
+git commit -m 'h'
+git push
+git add .
+git commit -m 'mao'
+git push
+rm ~/gitlab/sentence-similarity/match_zoo/BIMPM/src_code/run_bimpm.py 
+cd ~/gitlab/sentence-similarity/match_zoo/BIMPM/src_code/
+ls
+cd ../../
+cd ../
+git add .
+git commit -m 'update bimpm'
+git push
+git add .
+git status
+git commit -m 'update bimpm'
+git push
+cd ../../github/QiuZhao-ChongChongChong/
+git pull
+git add .
+git commit -m 'update 0515'
+git push
+git pull
+git add .
+git commit -m '0515'
+git status
+git push
+git add .
+git commit -m '0515'
+git push
+git pull
+git pull
+git pull
 * 🔧Emacs工具篇
 ** 常用快捷键(ctrl-c; alt-m)
    | 功能                      | 快捷键                               |
@@ -97,6 +225,7 @@
     * [[file:/coding/31_下一个排列.py][31.下一个排列]]
     * [[file:./coding/169_多数元素.py][169.多数元素😄]]
     * [[file:/coding/240_搜索二维矩阵II.py][240.搜索二维矩阵 II😄]]
+    * [[file:./coding/973_最接近原点的k个点.py][973.最接近原点的k个点]]
 **** 双指针
      + [[file:./coding/15_三数之和.py][15.三数之和😂]]
 **** 栈   

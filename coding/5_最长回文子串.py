@@ -13,7 +13,22 @@
 输出: "bb"
 
 解题思路:
-    递归判断子字符串是否为回文子串！
+
+DP：
+    dp[i][j]表示位置i(包含)到位置j（包含）这段子字符串是否为回文子串(i<j!!!,i不可能大于j的！！！)
+
+    即 递推判断子字符串是否为回文子串！
+    举个🌰：
+    对bcbd：
+    我们已经知道
+    dp[0][0]=True
+    dp[1][1]=True
+    dp[1][2]=False
+    那么dp[1][3]=  False if dp[3]!=dp[1] else: dp[2][2](True)
+    那么dp[2][3]=  False if dp[2]!=dp[3] else: False
+    dp[3][3]=True
+    那么dp[1][4]= False if dp[4]!=dp[1] else: dp[2][3]](False)
+    ...
 
 
 '''

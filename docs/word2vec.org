@@ -1,8 +1,8 @@
 * skip-gram
 参考链接：[[https://zhuanlan.zhihu.com/p/27234078]]
 ** 模型定义
-#+DOWNLOADED: file:/Users/blacktear/Downloads/IMG_4F0624F55D1E-1.jpeg @ 2020-06-02 11:08:41
-[[file:Screen-Pictures/skip-gram/2020-06-02_11-08-41_IMG_4F0624F55D1E-1.jpeg]]
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成51）/截屏2020-06-02 下午3.41.38.png @ 2020-06-02 15:41:43
+[[file:Screen-Pictures/skip-gram/2020-06-02_15-41-43_%E6%88%AA%E5%B1%8F2020-06-02%20%E4%B8%8B%E5%8D%883.41.38.png]]
 建模过程中需要得到副产物词向量矩阵
 ** 输入和输出部分选择
 #+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成45）/截屏2020-06-02 上午11.11.14.png @ 2020-06-02 11:11:17
@@ -19,7 +19,7 @@
 #+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成48）/截屏2020-06-02 下午2.04.03.png @ 2020-06-02 14:04:06
 [[file:Screen-Pictures/skip-gram/2020-06-02_14-04-06_%E6%88%AA%E5%B1%8F2020-06-02%20%E4%B8%8B%E5%8D%882.04.03.png]]
 ** 输出层
-
+输出层是一个(300, V)的矩阵，隐藏层的输出(1, 300)*(300, V)=(1,V)得到输出层在词表空间的输出概率，
 * cbow
 * 哈夫曼softmax
 * 负采样

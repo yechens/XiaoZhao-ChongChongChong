@@ -1,4 +1,5 @@
 * skip-gram
+参考链接：[[https://zhuanlan.zhihu.com/p/27234078]]
 ** 模型定义
 #+DOWNLOADED: file:/Users/blacktear/Downloads/IMG_4F0624F55D1E-1.jpeg @ 2020-06-02 11:08:41
 [[file:Screen-Pictures/skip-gram/2020-06-02_11-08-41_IMG_4F0624F55D1E-1.jpeg]]
@@ -10,6 +11,14 @@
 ** 模型结构
 #+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成46）/截屏2020-06-02 上午11.30.40.png @ 2020-06-02 11:30:43
 [[file:Screen-Pictures/skip-gram/2020-06-02_11-30-43_%E6%88%AA%E5%B1%8F2020-06-02%20%E4%B8%8A%E5%8D%8811.30.40.png]]
+输入为one-hot向量，隐藏层无激活函数，输出为词表空间维度的概率（V，），经过softmax激活，一般会采用分层softmax加快速度。
+** 隐藏层
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成47）/截屏2020-06-02 下午1.59.29.png @ 2020-06-02 13:59:33
+[[file:Screen-Pictures/skip-gram/2020-06-02_13-59-33_%E6%88%AA%E5%B1%8F2020-06-02%20%E4%B8%8B%E5%8D%881.59.29.png]]
+隐藏层本身即为需要得到的词向量矩阵，输出为输入词的词向量，（1，V）*（V，300）=（1，300），但实际上不是进行矩阵乘法，而是采用查找表的形式根据输入向量为1的维度作为索引行取得词向量，作为隐藏层的输出。
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成48）/截屏2020-06-02 下午2.04.03.png @ 2020-06-02 14:04:06
+[[file:Screen-Pictures/skip-gram/2020-06-02_14-04-06_%E6%88%AA%E5%B1%8F2020-06-02%20%E4%B8%8B%E5%8D%882.04.03.png]]
+** 输出层
 
 * cbow
 * 哈夫曼softmax

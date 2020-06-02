@@ -19,7 +19,33 @@
 #+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成48）/截屏2020-06-02 下午2.04.03.png @ 2020-06-02 14:04:06
 [[file:Screen-Pictures/skip-gram/2020-06-02_14-04-06_%E6%88%AA%E5%B1%8F2020-06-02%20%E4%B8%8B%E5%8D%882.04.03.png]]
 ** 输出层
-输出层是一个(300, V)的矩阵，隐藏层的输出(1, 300)*(300, V)=(1,V)得到输出层在词表空间的输出概率，
+输出层是一个(300, V)的矩阵，隐藏层的输出(1, 300)*(300, V)=(1,V)得到输出层在词表空间的输出概率
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成52）/截屏2020-06-02 下午3.46.40.png @ 2020-06-02 15:46:45
+[[file:Screen-Pictures/skip-gram/2020-06-02_15-46-45_%E6%88%AA%E5%B1%8F2020-06-02%20%E4%B8%8B%E5%8D%883.46.40.png]]
+直观上相当于将输入vector乘以输出vector，得到相似度分数，经过softmax得到预测概率，符合实际情况。loss的计算应该是用交叉墒计算，最大化输出词语所在词表维度的似然概率
+** 训练过程
+*** 存在问题
+   + 模型权重巨大，梯度下降相当慢
+   + 训练数据数量庞大，导致训练很繁重
+   + 高频词例如‘the’对词语语义的贡献微乎其微，且高频词数目很大，带来了很多无关的训练样本
+   + 词语组合具有特殊意义，例如'New York'
+*** 解决方案
+**** 高频词抽样
+     对于训练原始文本中遇到的每一个词语，都有一定概率被删除，被删除的概率和单词频率成正比
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成53）/截屏2020-06-02 下午4.13.58.png @ 2020-06-02 16:14:02
+[[file:Screen-Pictures/skip-gram/2020-06-02_16-14-02_%E6%88%AA%E5%B1%8F2020-06-02%20%E4%B8%8B%E5%8D%884.13.58.png]]
+y-单词被保留的概率，x-单词出现频率
+**** word pairs and 'phases'
+     对特殊的单词组合不进行拆分
+**** negative sampling
+     + 参考链接：[[https://blog.csdn.net/qq_34467412/article/details/95861279]]
+     + 从负标签中采样num_sample个负标签，和正标签计算softmax，减少计算量
+       #+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成58）/截屏2020-06-02 下午4.53.40.png @ 2020-06-02 16:53:42
+       [[file:Screen-Pictures/skip-gram/2020-06-02_16-53-42_%E6%88%AA%E5%B1%8F2020-06-02%20%E4%B8%8B%E5%8D%884.53.40.png]]
+       #+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成59）/截屏2020-06-02 下午4.54.04.png @ 2020-06-02 16:54:07
+       [[file:Screen-Pictures/skip-gram/2020-06-02_16-54-07_%E6%88%AA%E5%B1%8F2020-06-02%20%E4%B8%8B%E5%8D%884.54.04.png]]
+       #+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成61）/截屏2020-06-02 下午4.55.41.png @ 2020-06-02 16:55:44
+       [[file:Screen-Pictures/skip-gram/2020-06-02_16-55-44_%E6%88%AA%E5%B1%8F2020-06-02%20%E4%B8%8B%E5%8D%884.55.41.png]]
+     + 一个单词被选作负样本的概率正比于出现频次
 * cbow
-* 哈夫曼softmax
-* 负采样
+* 层级softmax

@@ -130,7 +130,7 @@
    | 专题                      | deadline      |
    | SVM                       | 05/14 ~ 05/19 |
    | DecisionTree+RandomForest | 06/01 ~ 0605  |
-   | word2vec                  | -             |
+   | word2vec                  | 06/04         |
    | xgboost                   | -             |
    |                           |               |
 ** 分享链接（专题笔记文件地址）

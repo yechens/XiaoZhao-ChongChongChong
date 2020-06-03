@@ -139,7 +139,7 @@
 ** 分享链接（专题笔记文件地址）
    | topic    | black_tear | giant | van                        |
    | SVM      | -          | -     | [[file:./docs/SVM/机器学习-svm全手写推导_compressed.pdf][机器学习-svm全手写推导.pdf]] |
-   | Word2Vec | [[file:./docs/word2vec.org][word2vec]]   |       |                            |
+   | Word2Vec | [[file:./docs/word2vec/word2vec.org][word2vec]]   |       |                            |
 *   TO_DO list
    | 数学基础       | 6月 待安排 |
    | 笔试题         | 6月 待安排 |

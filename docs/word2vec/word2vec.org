@@ -60,3 +60,10 @@ y-单词被保留的概率，x-单词出现频率
 ** 问题探讨
    + 隐藏层和输出层的权重矩阵都是词向量，但是我们只用了隐藏层的词向量，实际上也可以2个词向量矩阵取平均作为目标词向量矩阵
 * 层级softmax
+  参考链接：[[https://zhuanlan.zhihu.com/p/56139075]]
+  + Logitic Regression：利用Sigmoid函数把任意值映射到（0,1）的区间上来实现分类问题（主要是二分类）,在这里的应用是判断在哈夫曼🌲中是走左子树还是右子🌲的概率
+  + softmax: 多分类的Logistic Regression，相当于把很多个Logistic Regression组合在一起
+  + 哈夫曼树
+    #+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成69）/截屏2020-06-04 上午10.35.30.png @ 2020-06-04 10:35:32
+    [[file:Screen-Pictures/%E5%B1%82%E7%BA%A7softmax/2020-06-04_10-35-32_%E6%88%AA%E5%B1%8F2020-06-04%20%E4%B8%8A%E5%8D%8810.35.30.png]]
+

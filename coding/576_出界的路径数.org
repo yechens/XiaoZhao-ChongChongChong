@@ -4,7 +4,7 @@
 * 思路
   + DFS+存储状态值，用memo存储(i, j, k)的能到达边界的路径数目，例如(0, 0, 2)表示在(0, 0)点，还有2词移动次数的情况下能到达边界的路径数目。某个点的路径数目等于四周点的移动次数降低1后的路径数目相加。
 * code
-#+BEGIN_SRC 
+#+BEGIN_SRC python
 class Solution:
     def findPaths(self, m: int, n: int, N: int, i: int, j: int) -> int:
         def helper(memo, i, j, k):

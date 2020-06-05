@@ -36,10 +36,10 @@
    | 05/18              | 二叉树 | [[https://leetcode-cn.com/problems/merge-two-binary-trees][617.合并二叉树]]             | [[https://leetcode-cn.com/problems/maximum-depth-of-binary-tree][104.二叉树的最大深度]]         | [[https://leetcode-cn.com/problems/symmetric-tree][101.对称二叉树]]                             | ☑️     |
    | 05/19              | 遍历   | [[https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal][105.从前序和中序构造二叉树]] | [[https://leetcode-cn.com/problems/binary-tree-inorder-traversal/][94.非递归中序遍历]]            | [[https://leetcode-cn.com/problems/binary-tree-level-order-traversal/][102.非递归层序遍历]]                         | ☑️     |
    | 05/20              | 二叉树 | [[https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree][236.二叉树的最近公共祖先]]   | [[https://leetcode-cn.com/problems/validate-binary-search-tree][98.验证二叉搜索树]]            | [[https://leetcode-cn.com/problems/unique-binary-search-trees][96.不同的二叉搜索树]]                        | ☑️     |
-   | 05/21              | 二叉树 | [[https://leetcode-cn.com/problems/diameter-of-binary-tree][543.二叉树的直径]]           | [[https://leetcode-cn.com/problems/convert-bst-to-greater-tree][538.把二叉树转换为累加树]]     | [[https://leetcode-cn.com/problems/flatten-binary-tree-to-linked-list][114.二叉树展开为链表]]                       |       |
+   | 05/21              | 二叉树 | [[https://leetcode-cn.com/problems/diameter-of-binary-tree][543.二叉树的直径]]           | [[https://leetcode-cn.com/problems/convert-bst-to-greater-tree][538.把二叉树转换为累加树]]     | [[https://leetcode-cn.com/problems/flatten-binary-tree-to-linked-list][114.二叉树展开为链表]]                       | ☑️     |
    | 05/22              | 分治   | [[https://leetcode-cn.com/problems/burst-balloons][312.戳气球]]                 | [[https://leetcode-cn.com/problems/binary-tree-maximum-path-sum][124.二叉树中的最大路径和]]     | [[https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree][297.二叉树的序列化与反序列化]]               |       |
    | 05/23              | DP     | [[https://leetcode-cn.com/problems/maximal-rectangle/][85.最大矩形]]                | [[https://leetcode-cn.com/problems/regular-expression-matching/][10.正则表达式匹配]]            | [[https://leetcode-cn.com/problems/longest-valid-parentheses/][32.最长有效括号]]                            |       |
-   | 05/24              | 链表   | [[https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list][19.删除链表倒数第N个节点]]   | [[https://leetcode-cn.com/problems/linked-list-cycle-ii][142.环形链表]]                 | [[https://leetcode-cn.com/problems/merge-k-sorted-lists][23.合并k个排序链表]]                         |       |
+   | 05/24              | 链表   | [[https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list][19.删除链表倒数第N个节点]]   | [[https://leetcode-cn.com/problems/linked-list-cycle-ii][142.环形链表]]                 | [[https://leetcode-cn.com/problems/merge-k-sorted-lists][23.合并k个排序链表]]                         | ☑️     |
    | 05/25              | DP     | [[https://leetcode-cn.com/problems/counting-bits/][338.比特位计数]]             | [[https://leetcode-cn.com/problems/perfect-squares/][279.完全平方数]]               | [[https://leetcode-cn.com/problems/unique-paths/][62.不同路径]]                                |       |
    | 05/26              | DP     | [[https://leetcode-cn.com/problems/target-sum/][494.目标和]]                 | [[https://leetcode-cn.com/problems/maximal-square/][221.最大正方形]]               | [[https://leetcode-cn.com/problems/maximum-product-subarray/][152.乘积最大子数组]]                         |       |
    | 05/27              | DP     | [[https://leetcode-cn.com/problems/trapping-rain-water/][42.接雨水]]                  | [[https://leetcode-cn.com/problems/edit-distance/][72.编辑距离]]                  | [[https://leetcode-cn.com/problems/wildcard-matching][44.通配符匹配]]                              |       |
@@ -127,6 +127,7 @@
 **** DFS
     * [[file:/coding/200_岛屿数量.py][200.岛屿数量]]😊
     * [[file:./coding/207_课程表.py][207.课程表]]
+    * [[file:/coding/695_岛屿的最大面积.py][695.岛屿的最大面积😁]]
 **** 堆
     + [[file:./coding/215_数组中的第K个最大元素.py][215.数组中的第K个最大元素]]😊
 **** 双向队列
@@ -137,8 +138,9 @@
 ** ✈️学习计划
    | 专题                      | deadline      |
    | SVM                       | 05/14 ~ 05/19 |
-   | DecisionTree+RandomForest | 06/01 ~ 0605  |
    | word2vec                  | 06/04 ~ 0606  |
+   | CRF                       | 06/01～0605   |
+   | DecisionTree+RandomForest | 06/08 ~ 0612  |
    | xgboost                   | -             |
    |                           |               |
 ** 分享链接（专题笔记文件地址）
@@ -150,7 +152,7 @@
    | 笔试题         | 6月 待安排 |
    | ML比赛         | 待安排     |
    | python高级编程 | 待安排     |
-*   面试必备
+*   面试必备系列
 ** ML/NLP 面经
 **** Todo
 ** 知识点归纳整理

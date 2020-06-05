@@ -2,7 +2,7 @@
 #+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成74）/截屏2020-06-05 上午11.52.45.png @ 2020-06-05 11:52:48
 [[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-05_11-52-48_%E6%88%AA%E5%B1%8F2020-06-05%20%E4%B8%8A%E5%8D%8811.52.45.png]]
 * 思路
-  + DFS
+  + DFS+存储状态值，用memo存储(i, j, k)的能到达边界的路径数目，例如(0, 0, 2)表示在(0, 0)点，还有2词移动次数的情况下能到达边界的路径数目。某个点的路径数目等于四周点的移动次数降低1后的路径数目相加。
 * code
 #+BEGIN_SRC 
 class Solution:

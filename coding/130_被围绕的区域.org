@@ -1,0 +1,44 @@
+* 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成79）/截屏2020-06-06 上午11.20.16.png @ 2020-06-06 11:20:18
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-06_11-20-18_%E6%88%AA%E5%B1%8F2020-06-06%20%E4%B8%8A%E5%8D%8811.20.16.png]]
+* 思路
+  + 构建board的复制列表marked，先遍历四边的'O'，在marked中将四边的'O'相连的区域置为'#'，再重新遍历board，访问非'X'和marked中非'#'的元素，置为'X'
+* code
+#+BEGIN_SRC python
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        self.m = len(board)
+        if not self.m:
+            return None
+        self.n = len(board[0])
+        self.directions = [(0, -1), (-1, 0), (0, 1), (1, 0)]
+        self.marked = board
+        for j in range(self.n):
+            if board[0][j]=='O' and self.marked[0][j]=='O':
+                self.search(board,0,j)
+            if board[self.m-1][j]=='O' and self.marked[self.m-1][j]=='O':
+                self.search(board,self.m-1,j)
+        for i in range(self.m):
+            if board[i][0]=='O' and self.marked[i][0]=='O':
+                self.search(board,i,0)
+            if board[i][self.n-1]=='O' and self.marked[i][self.n-1]=='O':
+                self.search(board,i,self.n-1)
+
+        for i in range(self.m):
+            for j in range(self.n):
+                if self.marked[i][j]=='O':
+                    board[i][j] = 'X'
+                elif self.marked[i][j]=='#':
+                    board[i][j] = 'O'
+        return board
+
+    def search(self,board,i,j):
+        self.marked[i][j] = '#'
+        # print(self.marked)
+        for dx, dy in self.directions:
+            if 0<=i+dx<self.m and 0<=j+dy<self.n and self.marked[i+dx][j+dy]=='O':
+                self.search(board, i+dx, j+dy)
+#+END_SRC

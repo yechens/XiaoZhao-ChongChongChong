@@ -1,6 +1,6 @@
 * 题目
-#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿）/截屏2020-06-06 上午10.30.26.png @ 2020-06-06 10:30:30
-[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-06_10-30-30_%E6%88%AA%E5%B1%8F2020-06-06%20%E4%B8%8A%E5%8D%8810.30.26.png]]
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成4）/截屏2020-06-06 上午10.46.41.png @ 2020-06-06 10:46:43
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-06_10-46-43_%E6%88%AA%E5%B1%8F2020-06-06%20%E4%B8%8A%E5%8D%8810.46.41.png]]
 * 思路
   + (1)BFS: 对二叉树做层序遍历，每一层保存最右侧节点值即可
   + (2)DFS: 按照 根->右->左 的顺序访问，就可以保证每层都是最先访问最右边的节点;同时需要更新当前层的树的深度，确保只保存最右侧的节点值

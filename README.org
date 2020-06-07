@@ -54,7 +54,7 @@
    | 06/04              | DFS    | [[https://leetcode-cn.com/problems/course-schedule][207.课程表]]                 | [[https://leetcode-cn.com/problems/number-of-islands][200.岛屿数量]]                 | [[https://leetcode-cn.com/problems/decode-string][394.字符串解码]]                             |       |
    | 06/05              | DFS    | [[https://leetcode-cn.com/problems/out-of-boundary-paths][576.出界的路径数]]           | [[https://leetcode-cn.com/problems/max-area-of-island][695.岛屿的最大面积]]           | [[https://leetcode-cn.com/problems/shopping-offers][638.大礼包]]                                 |       |
    | 06/06              | DFS    | [[https://leetcode-cn.com/problems/surrounded-regions/][130.被围绕的区域]]           | [[https://leetcode-cn.com/problems/binary-tree-right-side-view/][199.二叉树的右视图]]           | [[https://leetcode-cn.com/problems/pacific-atlantic-water-flow/][417.太平洋大西洋水流问题]]                   |       |
-   | 06/07              | BFS    | [[https://leetcode-cn.com/problems/intersection-of-two-linked-lists][160.相交链表]]               | [[https://leetcode-cn.com/problems/reverse-linked-list][206.反转链表]]                 | [[https://leetcode-cn.com/problems/palindrome-linked-list][234.回文链表]]                               |       |
+   | 06/07              | 链表   | [[https://leetcode-cn.com/problems/intersection-of-two-linked-lists][160.相交链表]]               | [[https://leetcode-cn.com/problems/reverse-linked-list][206.反转链表]]                 | [[https://leetcode-cn.com/problems/palindrome-linked-list][234.回文链表]]                               |       |
 ** 🧠解题思路
 *** 题目列表
 **** 动态规划
@@ -105,6 +105,7 @@
      + [[file:/coding/16_最接近的三数之和.py][16.最接近的三数之和]]😁
      + [[file:./coding/344_反转字符串.py][344.反转字符串😊]]
      + [[file:/coding/345_反转字符串中的元音字母.py][345.反转字符串中的元音字母]]
+     + [[file:./coding/160_相交链表.org][160.相交链表]]
 **** 三指针
     * [[file:./coding/74_颜色分类.py][74.颜色分类]]😭
 **** 栈   

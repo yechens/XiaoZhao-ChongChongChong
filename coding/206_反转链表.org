@@ -1,0 +1,39 @@
+* 题目
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成5）/截屏2020-06-07 上午9.35.13.png @ 2020-06-07 09:35:16
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-07_09-35-16_%E6%88%AA%E5%B1%8F2020-06-07%20%E4%B8%8A%E5%8D%889.35.13.png]]
+* 思路
+1.头指针尾插法
+2.递归遍历，不断让head的next指针指向head自身
+* code
+#+BEGIN_SRC python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+
+        if not head or not head.next: return head
+
+        # 2.递归法
+        def helper(head):
+            if not head or not head.next:
+                return head
+            cur =  helper(head.next)
+            head.next.next = head # 让 head 指针的下一个节点指向 head 自己
+            head.next = None # 避免循环指向
+            return cur
+        res = helper(head)
+        return res
+
+        # 1.头插法
+        tail = None
+        while head:
+            nxt = head.next
+            head.next = tail
+            tail = head
+            head = nxt
+        return tail
+#+END_SRC

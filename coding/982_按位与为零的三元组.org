@@ -1,0 +1,27 @@
+* 题目
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成6）/截屏2020-06-09 上午9.44.54.png @ 2020-06-09 09:44:57
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-09_09-44-57_%E6%88%AA%E5%B1%8F2020-06-09%20%E4%B8%8A%E5%8D%889.44.54.png]]
+* 思路
+字典记忆法!
+首先使用字典记录两两相与的值以及出现的次数，从头遍历一遍，找出每个元素可以得到0的那些值
+常规三层遍历，时间复杂度O(n^3)；以O(n)的空间复杂度，将时间复杂度降至O(n^2)
+* code
+#+BEGIN_SRC python
+class Solution:
+    def countTriplets(self, A: List[int]) -> int:
+
+        # 字典记忆法
+        # 首先使用字典记录两两相与的值以及出现的次数，从头遍历一遍，找出每个元素可以得到0的那些值
+        from collections import defaultdict
+        d = defaultdict(int)
+        for num1 in A:
+            for num2 in A:
+                d[num1 & num2] += 1 
+        print(d)
+        cot = 0
+        for num in A:
+            for k in d.keys():
+                if num & k == 0: # 找到一组 按位与为零 的三元组
+                    cot += d[k]
+        return cot
+#+END_SRC

@@ -1,6 +1,0 @@
-* 题目
-* 思路
-* code
-#+BEGIN_SRC python
-
-#+END_SRC

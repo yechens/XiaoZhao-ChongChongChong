@@ -1,0 +1,23 @@
+* 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成90）/截屏2020-06-09 上午11.56.12.png @ 2020-06-09 11:56:16
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-09_11-56-16_%E6%88%AA%E5%B1%8F2020-06-09%20%E4%B8%8A%E5%8D%8811.56.12.png]]
+* 思路
+[[https://leetcode-cn.com/problems/valid-permutations-for-di-sequence/solution/tu-jie-nong-qing-dong-tai-gui-hua-jie-fa-by-mo-mo-/][参考题解链接]]
+* code
+#+BEGIN_SRC python
+class Solution:
+    def numPermsDISequence(self, S: str) -> int:
+        n = len(S)
+        dp = [[0 for i in range(n+1)] for j in range(n+1)]
+        dp[0][0] = 1
+        S = [0] + list(S)
+        for i in range(1, n+1):
+            for j in range(0, i+1):
+                if S[i] == 'D':
+                    for k in range(j, i):
+                        dp[i][j] += dp[i-1][k]
+                else:
+                    for k in range(0, j):
+                        dp[i][j] += dp[i-1][k]
+        return sum(dp[n]) % (10**9+7)
+#+END_SRC

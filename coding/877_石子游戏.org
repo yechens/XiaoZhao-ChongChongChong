@@ -1,0 +1,19 @@
+* 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成91）/截屏2020-06-09 下午3.55.13.png @ 2020-06-09 15:55:15
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-09_15-55-15_%E6%88%AA%E5%B1%8F2020-06-09%20%E4%B8%8B%E5%8D%883.55.13.png]]
+
+* 思路
+[[https://leetcode-cn.com/problems/stone-game/solution/jie-jue-bo-yi-wen-ti-de-dong-tai-gui-hua-tong-yong/]]
+* code
+#+BEGIN_SRC python
+class Solution:
+    def stoneGame(self, piles: List[int]) -> bool:
+        turns = len(piles)
+        dp = [[[0,0] for j in range(turns)] for j in range(turns)]
+        for i in range(turns):
+            dp[i][i] = [piles[i], 0]
+        for i in range(turns-2, -1, -1):
+            for j in range(i+1, turns):
+                dp[i][j][0] = max(piles[i] + dp[i+1][j][1], piles[j] + dp[i][j-1][1])
+        return dp[0][turns-1][0] - dp[0][turns-1][1] > 0
+#+END_SRC

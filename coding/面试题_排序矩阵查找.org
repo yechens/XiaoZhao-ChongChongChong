@@ -1,0 +1,23 @@
+* 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成92）/截屏2020-06-09 下午4.17.28.png @ 2020-06-09 16:17:31
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-09_16-17-31_%E6%88%AA%E5%B1%8F2020-06-09%20%E4%B8%8B%E5%8D%884.17.28.png]]
+
+* 思路
+矩阵的二分法，从右上节点开始，逐步和target进行比较，相等返回True，大于的话向左走，小于的话向下走，直至遍历完整个矩阵
+* code
+#+BEGIN_SRC python
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        if not matrix:
+            return False
+        m, n = len(matrix), len(matrix[0])
+        start_point = [0, n-1]
+        while 0 <= start_point[0] < m and 0 <= start_point[1] < n:
+            if matrix[start_point[0]][start_point[1]] == target:
+                return True
+            elif matrix[start_point[0]][start_point[1]] > target:
+                start_point[1] -= 1
+            else:
+                start_point[0] += 1
+        return False
+#+END_SRC

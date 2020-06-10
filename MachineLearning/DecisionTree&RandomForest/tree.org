@@ -2,29 +2,78 @@
 #+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成9）/截屏2020-06-10 下午5.26.23.png @ 2020-06-10 17:26:27
 [[file:Screen-Pictures/%E5%86%B3%E7%AD%96%E6%A0%91/2020-06-10_17-26-27_%E6%88%AA%E5%B1%8F2020-06-10%20%E4%B8%8B%E5%8D%885.26.23.png]]
 
-** 1.1 定义[100%]
- + [X] 分类决策树模型是一种描述对实例进行分类的树形结构。决策树由结点（node）和有向边（directed edge）组成。结点由两种类型：内部结点和叶结点。内部结点表示一个特征或属性，叶结点表示一个类。
- + [X] 决策树学习通常包含3个步骤：特征选择、决策树的生成和决策树的剪枝。
-** 1.2 决策树的特征选择[%]
+** 1.1 定义
+**** 分类决策树模型是一种描述对实例进行分类的树形结构。决策树由结点（node）和有向边（directed edge）组成。结点由两种类型：内部结点和叶结点。内部结点表示一个特征或属性，叶结点表示一个类。
+**** 决策树学习通常包含3个步骤：特征选择、决策树的生成和决策树的剪枝。
+
+** 1.2 决策树的特征选择
 *** 1.2.1 信息增益
-**** 熵（entropy）
-表示随机变量不确定性的度量。
+*** 熵（entropy）
 #+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成10）/截屏2020-06-10 下午7.19.19.png @ 2020-06-10 19:19:22
 [[file:Screen-Pictures/%E5%86%B3%E7%AD%96%E6%A0%91/2020-06-10_19-19-22_%E6%88%AA%E5%B1%8F2020-06-10%20%E4%B8%8B%E5%8D%887.19.19.png]]
-熵越大，随机变量的不确定性就越大。
-**** 条件熵 
-H(Y|X) 表示在已知随机变量X的条件下随机变量Y的不确定性
+
+**** 熵越大，随机变量的不确定性就越大。
+*** 条件熵 
+**** H(Y|X) 表示在已知随机变量X的条件下随机变量Y的不确定性
 #+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成11）/截屏2020-06-10 下午7.21.33.png @ 2020-06-10 19:21:35
 [[file:Screen-Pictures/%E5%86%B3%E7%AD%96%E6%A0%91/2020-06-10_19-21-35_%E6%88%AA%E5%B1%8F2020-06-10%20%E4%B8%8B%E5%8D%887.21.33.png]]
-**** 信息增益
+
+*** 信息增益
 #+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成12）/截屏2020-06-10 下午7.24.21.png @ 2020-06-10 19:24:23
 [[file:Screen-Pictures/%E5%86%B3%E7%AD%96%E6%A0%91/2020-06-10_19-24-23_%E6%88%AA%E5%B1%8F2020-06-10%20%E4%B8%8B%E5%8D%887.24.21.png]]
-决策树中某个特征 A 对应的信息增益，表示由于特征 A 而使得对数据集 D 的分类的不确定减少的程度。不同的特征往往具有不同的信息增益，信息增益大的特征具有更强的分类能力（即优先选择信息增益大的特征）。
 
+**** 决策树中某个特征 A 对应的信息增益，表示由于特征 A 而使得对数据集 D 的分类的不确定减少的程度。不同的特征往往具有不同的信息增益，信息增益大的特征具有更强的分类能力（即优先选择信息增益大的特征）。
+*** 信息增益算法示例
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成13）/截屏2020-06-10 下午7.35.31.png @ 2020-06-10 19:35:36
+[[file:Screen-Pictures/%E5%86%B3%E7%AD%96%E6%A0%91/2020-06-10_19-35-36_%E6%88%AA%E5%B1%8F2020-06-10%20%E4%B8%8B%E5%8D%887.35.31.png]]
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成14）/截屏2020-06-10 下午7.36.33.png @ 2020-06-10 19:36:37
+[[file:Screen-Pictures/%E5%86%B3%E7%AD%96%E6%A0%91/2020-06-10_19-36-37_%E6%88%AA%E5%B1%8F2020-06-10%20%E4%B8%8B%E5%8D%887.36.33.png]]
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成15）/截屏2020-06-10 下午7.37.16.png @ 2020-06-10 19:37:22
+[[file:Screen-Pictures/%E5%86%B3%E7%AD%96%E6%A0%91/2020-06-10_19-37-22_%E6%88%AA%E5%B1%8F2020-06-10%20%E4%B8%8B%E5%8D%887.37.16.png]]
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成16）/截屏2020-06-10 下午7.38.01.png @ 2020-06-10 19:38:05
+[[file:Screen-Pictures/%E5%86%B3%E7%AD%96%E6%A0%91/2020-06-10_19-38-05_%E6%88%AA%E5%B1%8F2020-06-10%20%E4%B8%8B%E5%8D%887.38.01.png]]
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成17）/截屏2020-06-10 下午7.38.37.png @ 2020-06-10 19:38:41
+[[file:Screen-Pictures/%E5%86%B3%E7%AD%96%E6%A0%91/2020-06-10_19-38-41_%E6%88%AA%E5%B1%8F2020-06-10%20%E4%B8%8B%E5%8D%887.38.37.png]]
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成18）/截屏2020-06-10 下午7.39.04.png @ 2020-06-10 19:39:07
+[[file:Screen-Pictures/%E5%86%B3%E7%AD%96%E6%A0%91/2020-06-10_19-39-07_%E6%88%AA%E5%B1%8F2020-06-10%20%E4%B8%8B%E5%8D%887.39.04.png]]
 
 
 *** 1.2.2 信息增益率
+**** 以信息增益作为划分训练数据集的特征，存在偏向于选择取值较多的特征的问题。使用信息增益比（information gain ratio）可以对这一类问题进行校正。信息增益比是特征选择的另一准则。
 
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成19）/截屏2020-06-10 下午7.40.47.png @ 2020-06-10 19:40:52
+[[file:Screen-Pictures/%E5%86%B3%E7%AD%96%E6%A0%91/2020-06-10_19-40-52_%E6%88%AA%E5%B1%8F2020-06-10%20%E4%B8%8B%E5%8D%887.40.47.png]]
+
+** 1.3 决策树的生成 
+**** 1.信息增益 -> ID3 算法
+**** 2.信息增益率 -> C4.5 算法
+**** 3.基尼指数 -> CART 算法
+*** 1.3.1 ID3 算法
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成20）/截屏2020-06-10 下午7.58.59.png @ 2020-06-10 19:59:03
+[[file:Screen-Pictures/%E5%86%B3%E7%AD%96%E6%A0%91/2020-06-10_19-59-03_%E6%88%AA%E5%B1%8F2020-06-10%20%E4%B8%8B%E5%8D%887.58.59.png]]
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成21）/截屏2020-06-10 下午8.05.56.png @ 2020-06-10 20:06:00
+[[file:Screen-Pictures/%E5%86%B3%E7%AD%96%E6%A0%91/2020-06-10_20-06-00_%E6%88%AA%E5%B1%8F2020-06-10%20%E4%B8%8B%E5%8D%888.05.56.png]]
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成22）/截屏2020-06-10 下午8.06.30.png @ 2020-06-10 20:06:34
+[[file:Screen-Pictures/%E5%86%B3%E7%AD%96%E6%A0%91/2020-06-10_20-06-34_%E6%88%AA%E5%B1%8F2020-06-10%20%E4%B8%8B%E5%8D%888.06.30.png]]
+
+**** ID3 算法只有树的生成，所以该算法生成的树容易产生过拟合。
+*** 1.3.2 C4.5 算法
+**** 与ID3算法类似，C4.5在生成树的过程中，用信息增益来选择特征。
+
+
+
+*** 决策树何时划分结束？
+ + 1.叶子结点中全部都是一种类型
+ + 2.没有特征可以划分
 
 
 * 随机森林

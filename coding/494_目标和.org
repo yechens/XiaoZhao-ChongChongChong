@@ -1,0 +1,65 @@
+* 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成93）/截屏2020-06-10 上午12.27.25.png @ 2020-06-10 00:27:27
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-10_00-27-27_%E6%88%AA%E5%B1%8F2020-06-10%20%E4%B8%8A%E5%8D%8812.27.25.png]]
+
+* 思路
+  + DP   
+    #+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成94）/截屏2020-06-10 上午12.30.03.png @ 2020-06-10 00:30:05
+    [[file:Screen-Pictures/%E6%80%9D%E8%B7%AF/2020-06-10_00-30-05_%E6%88%AA%E5%B1%8F2020-06-10%20%E4%B8%8A%E5%8D%8812.30.03.png]]
+    需要注意初始位置可能为0的特殊情况，有2种分别是+0和-0
+  + 递归（超时）
+    从后往前递归，前i个的和为k的种类 = sum(前i-1的和为k+nums[i]的种类, 前i-1的和为k-nums[i]的种类)
+  + DFS
+   #+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成95）/截屏2020-06-10 上午12.42.03.png @ 2020-06-10 00:42:09
+   [[file:Screen-Pictures/%E6%80%9D%E8%B7%AF/2020-06-10_00-42-09_%E6%88%AA%E5%B1%8F2020-06-10%20%E4%B8%8A%E5%8D%8812.42.03.png]] 一共走len(nums)步，每一步有2种选择，+1/-1，利用DFS探索每一步能否到达目标点S，用数组存储状态。
+* code
+#+BEGIN_SRC python
+#递归
+class Solution:
+    def findTargetSumWays(self, nums: List[int], S: int) -> int:
+        #DP
+        m = sum(nums)
+        dp = [[0 for j in range(2*m+1)] for i in range(len(nums))]
+        if nums[0] == 0:
+            dp[0][nums[0]+m] = 2
+        else:
+            dp[0][nums[0]+m] = 1
+            dp[0][-nums[0]+m] = 1
+        if len(nums) > 1:
+            for i in range(1, len(nums)):
+                for j in range(-sum(nums[:i]), sum(nums[:i])+1):
+                    dp[i][j+nums[i]+m] += dp[i-1][j+m]
+                    dp[i][j-nums[i]+m] += dp[i-1][j+m]
+        return dp[len(nums)-1][S+m] if -sum(nums) <= S <= sum(nums) else 0
+
+#DFS
+class Solution:
+    def findTargetSumWays(self, nums: List[int], S: int) -> int:
+        def search(s, k):
+            if k == len(nums)-1:
+                if s + nums[k] == S:
+                    self.ans += 1
+                if s - nums[k] == S:
+                    self.ans += 1
+                return
+            search(s+nums[k], k+1)
+            search(s-nums[k], k+1)
+        self.ans = 0
+        search(0, 0)
+        return self.ans
+
+#递归
+class Solution:
+    def findTargetSumWays(self, nums: List[int], S: int) -> int:
+        return self.helper(nums, S)
+        
+    def helper(self, nums, S):
+        if len(nums)==1 and nums[0]==S and nums[0]==-S:
+            return 2
+        elif len(nums)==1 and (nums[0]==S or nums[0]==-S):
+            return 1
+        elif len(nums)==1:
+            return 0
+        a, b = S - nums[-1], S + nums[-1]
+        return self.helper(nums[:-1], a) + self.helper(nums[:-1], b)
+#+END_SRC

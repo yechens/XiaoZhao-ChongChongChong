@@ -1,0 +1,38 @@
+* 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成97）/截屏2020-06-10 上午10.08.33.png @ 2020-06-10 10:08:35
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-10_10-08-35_%E6%88%AA%E5%B1%8F2020-06-10%20%E4%B8%8A%E5%8D%8810.08.33.png]]
+
+* 思路
+相当于下三角求最小路径和，分情况讨论第i层第j个节点可能由哪个方向的节点走过来。DP[i][j]保存到[i,j]的最小路径和
+* code
+#+BEGIN_SRC python
+# O(m*n)
+class Solution:
+    def minimumTotal(self, triangle: List[List[int]]) -> int:
+        m, n = len(triangle), len(triangle[-1])
+        dp = [[0 for j in range(n)] for i in range(m)]
+        dp[0][0] = triangle[0][0]
+        for i in range(1, m):
+            for j in range(len(triangle[i])):
+                if j == 0:
+                    dp[i][j] = dp[i-1][j] + triangle[i][j]
+                elif j > 0 and j < len(triangle[i])-1:
+                    dp[i][j] = min(dp[i-1][j-1], dp[i-1][j]) + triangle[i][j]
+                else:
+                    dp[i][j] = dp[i-1][j-1] + triangle[i][j]
+        return min(dp[m-1])
+
+# O(1)
+class Solution:
+    def minimumTotal(self, triangle: List[List[int]]) -> int:
+        m, n = len(triangle), len(triangle[-1])
+        for i in range(1, m):
+            for j in range(len(triangle[i])):
+                if j == 0:
+                    triangle[i][j] = triangle[i-1][j] + triangle[i][j]
+                elif j > 0 and j < len(triangle[i])-1:
+                    triangle[i][j] = min(triangle[i-1][j-1], triangle[i-1][j]) + triangle[i][j]
+                else:
+                    triangle[i][j] = triangle[i-1][j-1] + triangle[i][j]
+        return min(triangle[m-1])
+#+END_SRC

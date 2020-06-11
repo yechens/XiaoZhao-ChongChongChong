@@ -1,0 +1,31 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成28）/截屏2020-06-11 上午8.56.23.png @ 2020-06-11 08:56:27
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-11_08-56-27_%E6%88%AA%E5%B1%8F2020-06-11%20%E4%B8%8A%E5%8D%888.56.23.png]]
+
+* 思路
+*** 摩尔投票法
+**** 核心是对拼消耗
+找出一组数字序列中出现次数大于总数1/2的数字（并且假设这个数字一定存在）；则每次从序列里选择两个不相同的数字删除掉（或称为“抵消”），最后剩下一个数字或几个相同的数字，就是出现次数大于总数一半的那个
+* code
+#+BEGIN_SRC python
+class Solution:
+    def majorityElement(self, nums: List[int]) -> int:
+
+        if not nums: return -1
+        if len(nums) == 1: return nums[0]
+        if len(list(nums)) == len(set(nums)): return -1 # 一定没有主要元素（排除摩尔投票法不满足的特例）
+
+        tmp = nums[0]
+        cot = 1
+        for num in nums[1:]:
+            if num == tmp:
+                cot += 1
+            else:
+                cot -= 1
+                if cot == 0:
+                    tmp = num # 更新可能是主要元素的值
+                    cot = 1
+        if cot > 0:
+            return tmp
+#+END_SRC

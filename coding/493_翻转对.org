@@ -1,0 +1,54 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成29）/截屏2020-06-11 上午9.54.43.png @ 2020-06-11 09:54:45
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-11_09-54-45_%E6%88%AA%E5%B1%8F2020-06-11%20%E4%B8%8A%E5%8D%889.54.43.png]]
+
+* 思路
+**** 归并排序
+ + 题中 i < j 且 nums[i] > 2 * nums[j] 的要求与逆序对类似，因此我们可以使用归并排序的方法求出翻转对的数目
+ + 在归并排序中，当我们归并两个子数组 nums[start .. mid] 和 nums[mid + 1 .. end] 时，我们可以计算出对于前者中的每一个元素 nums[i]，后者中满足 nums[i] > 2 * nums[j] 的 j 的数目
+
+* code
+#+BEGIN_SRC python
+class Solution:
+    def reversePairs(self, nums: List[int]) -> int:
+
+        def merge(nums, start, mid, end):
+            # 对 nums 原地进行归并排序
+            l1, l2 = mid - start + 1, end - mid
+            arr1, arr2 = [], []
+            for i in range(l1):
+                arr1.append(nums[start + i]) 
+            for j in range(l2):
+                arr2.append(nums[j + mid + 1])
+            i, j = 0, 0
+            for k in range(start, end + 1): # end 可以取到！
+                if j >= l2 or (i < l1 and arr1[i] <= arr2[j]): # l1 l2 不可取到
+                    nums[k] = arr1[i]
+                    i += 1
+                else:
+                    nums[k] = arr2[j]
+                    j += 1
+
+        # 归并排序并且计算翻转对的个数
+        def mergesort_and_count(nums, start, end):
+            # print("nums:", nums)
+            if start < end:
+                mid = start + (end - start) // 2
+                # 递归地将 nums 进行分割、合并
+                # count = 左半段中的翻转对 + 右半段中的翻转对
+                count = mergesort_and_count(nums, start, mid) + mergesort_and_count(nums, mid+1, end)
+                j = mid + 1
+                for i in range(start, mid+1): # i: 0 -> mid
+                    # 计算使得 nums[i] > 2*nums[j] 不再成立的分界点
+                    while j <= end and nums[i] > 2 * nums[j]:
+                        j += 1
+                    count += j - (mid + 1)
+                # 将两段 nums 合并
+                merge(nums, start, mid, end)
+                return count
+            else:
+                return 0
+        
+        return mergesort_and_count(nums, 0, len(nums) - 1)
+#+END_SRC

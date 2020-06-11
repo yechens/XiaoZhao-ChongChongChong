@@ -1,0 +1,34 @@
+* 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成107）/截屏2020-06-11 下午3.06.24.png @ 2020-06-11 15:06:27
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-11_15-06-27_%E6%88%AA%E5%B1%8F2020-06-11%20%E4%B8%8B%E5%8D%883.06.24.png]]
+
+* 思路
+堆排序后取前k个值
+* code
+#+BEGIN_SRC python
+#堆排序
+        def build_heap(arr, root, end):
+            while 1:
+                child = 2*root+1
+                if child > end:
+                    break
+                if child+1 <= end and arr[child+1] > arr[child]:
+                    child += 1
+                if arr[root] < arr[child]:
+                    arr[root], arr[child] = arr[child], arr[root]
+                    root = child
+                else:
+                    break
+
+        def heap_sort(arr):
+            n = len(arr)
+            first_root = n//2 -1
+            for root in range(first_root, -1, -1):
+                build_heap(arr, root, len(arr)-1)
+            for end in range(len(arr)-1, 0, -1):
+                arr[0], arr[end] = arr[end], arr[0]
+                build_heap(arr, 0, end-1)
+
+        heap_sort(arr)
+        return arr[:k]
+#+END_SRC

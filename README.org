@@ -61,6 +61,8 @@
    | 06/09              | DP       | [[https://leetcode-cn.com/problems/triangle][三角形最小路径和]] / [[https://leetcode-cn.com/problems/robot-in-a-grid-lcci][迷路的机器人]]  | [[https://leetcode-cn.com/problems/one-away-lcci][一次编辑]] / [[https://leetcode-cn.com/problems/number-of-2s-in-range-lcci][2出现的次数]]          | [[https://leetcode-cn.com/problems/max-black-square-lcci][最大方阵]]/ [[https://leetcode-cn.com/problems/longest-zigzag-path-in-a-binary-tree][二叉树中的最长交错路径]]                |       |
    | 06/10              | 二分查找 | [[https://leetcode-cn.com/problems/powx-n][Pow(x, n)]] /[[https://leetcode-cn.com/problems/kth-smallest-element-in-a-sorted-matrix][有序矩阵中第K小的元素]] | [[https://leetcode-cn.com/problems/find-the-duplicate-number][找出重复数]]/[[https://leetcode-cn.com/problems/find-peak-element][寻找峰值]]             | [[https://leetcode-cn.com/problems/divide-two-integers][两数相➗]]/[[https://leetcode-cn.com/problems/kth-smallest-element-in-a-bst][二叉搜索树中第K小的元素]]                |       |
    | 06/11              | 分治     | [[https://leetcode-cn.com/problems/smallest-k-lcci][最小K个数]] / [[https://leetcode-cn.com/problems/partition-list-lcci][分割链表]]             | [[https://leetcode-cn.com/problems/beautiful-array][漂亮数组]]/ [[https://leetcode-cn.com/problems/linked-list-cycle-lcci][环路检测]]              | [[https://leetcode-cn.com/problems/fu-za-lian-biao-de-fu-zhi-lcof/][复杂链表的复制]]/[[https://leetcode-cn.com/problems/remove-zero-sum-consecutive-nodes-from-linked-list][从链表中删去总和值为零的连续节点]] |       |
+   | 06/12              | 图       | [[https://leetcode-cn.com/problems/satisfiability-of-equality-equations][等式方程的可满足性]]/ [[https://leetcode-cn.com/problems/route-between-nodes-lcci][节点间通路]]   | [[https://leetcode-cn.com/problems/redundant-connection][冗余🔗]] / [[https://leetcode-cn.com/problems/count-servers-that-communicate][统计参与通信的服务器]]   | [[https://leetcode-cn.com/problems/evaluate-division][除法求值]]/[[https://leetcode-cn.com/problems/find-eventual-safe-states][找出最终的安全状态]]                     |       |
+   | 06/13              |          |                                  |                                 |                                                 |       |
 ** 🧠解题思路
 *** 题目列表
 **** 动态规划
@@ -116,6 +118,7 @@
      + [[file:./coding/344_反转字符串.py][344.反转字符串😊]]
      + [[file:/coding/345_反转字符串中的元音字母.py][345.反转字符串中的元音字母]]
      + [[file:./coding/160_相交链表.org][160.相交链表]]
+     + [[file:./coding/分割链表.org][分割链表]]
 **** 三指针
     * [[file:./coding/74_颜色分类.py][74.颜色分类]]😭
 **** 栈   
@@ -147,10 +150,12 @@
     * [[file:./coding/338_比特位计数.py][338.比特位计数]]
 **** 堆
     + [[file:./coding/215_数组中的第K个最大元素.py][215.数组中的第K个最大元素]]😊
+    + [[file:./coding/最小k个数.org][最小k个数]]
 **** 双向队列
     * [[file:/coding/239_滑动窗口最大值.py][239.滑动窗口最大值]]😭
 **** 二分查找
     * [[file:/coding/4_寻找两个正序数组的中位数.py][4.寻找两个正序数组的中位数]]
+    * [[file:./coding/378_有序矩阵中第K小的元素.org][378.有序矩阵中第K小的元素]]😭
 **** 递归
     * [[file:./coding/638_大礼包.py][638.大礼包]]
     * [[file:/coding/1140_石子游戏II.org][1140.石子游戏 II]]😭

@@ -1,0 +1,42 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成30）/截屏2020-06-11 下午5.03.45.png @ 2020-06-11 17:03:47
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-11_17-03-47_%E6%88%AA%E5%B1%8F2020-06-11%20%E4%B8%8B%E5%8D%885.03.45.png]]
+
+* 思路
+**** 时间复杂度 O(logN) -> 二分查找
+**** 不断查找数组的中位数 nums[mid]，如果 nums[mid] < nums[mid+1]，说明 nums[mid] 正处于上升序列，峰值一定出现在 mid 右侧（不含mid）
+**** 同理，如果 nums[mid] > nums[mid+1]，说明 mid 可能正好是拐点（峰值）或者 nums[mid] 正处于下降序列，峰值出现在 mid 左侧（含mid）
+**** 注意：nums[i] != nums[i+1] 的约束！
+* code
+#+BEGIN_SRC python
+class Solution:
+    def findPeakElement(self, nums: List[int]) -> int:
+
+        if len(nums) == 1: return 0 # badcase
+
+        # 2.递归二分查找
+        def binarySearch(nums, i, j):
+            if i == j:
+                return i
+            mid = i + (j - i) // 2
+            if mid < len(nums) - 1 and nums[mid] < nums[mid+1]: # nums[mid] 出于上升序列，峰值一定出现在mid右边
+                i = mid + 1
+            else:
+                j = mid
+            return binarySearch(nums, i, j)
+
+        return binarySearch(nums, 0, len(nums) - 1)
+
+
+        # 1.迭代二分查找
+        i, j = 0, len(nums) - 1
+        while i < j:
+            print(i, j)
+            mid = i + (j - i) // 2
+            if mid < len(nums) and nums[mid] < nums[mid+1]: # nums[mid] 处于上升期，峰值出现在mid右边(可能刚好为mid)
+                i = mid + 1
+            else:
+                j = mid
+        return i
+#+END_SRC

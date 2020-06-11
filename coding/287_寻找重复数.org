@@ -1,0 +1,42 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成31）/截屏2020-06-11 下午5.08.31.png @ 2020-06-11 17:08:33
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-11_17-08-33_%E6%88%AA%E5%B1%8F2020-06-11%20%E4%B8%8B%E5%8D%885.08.31.png]]
+
+* 思路
+*** 1.数学法
+**** 因为只存在1个重复的整数，可以通过对原始数组求和，再减去去重后的数组的和，除以去重前后数组长度的差值（重复出现的次数），即为重复的数。
+*** 2.二分查找
+**** 抽屉原理：桌上有十个苹果，要把这十个苹果放到九个抽屉里，无论怎样放，我们会发现至少会有一个抽屉里面放不少于两个苹果。
+**** 先猜一个数（有效范围 [left, right]里的中间数 mid），然后统计原始数组中「小于等于」这个中间数的元素的个数 cnt，如果 cnt 「严格大于」 mid，根据抽屉原理，重复元素就在区间 [left, mid] 里
+**** 最终时间复杂度：O(NlogN)。本题的时间换空间，是非常规思路。
+
+* code
+#+BEGIN_SRC python
+class Solution:
+    def findDuplicate(self, nums: List[int]) -> int:
+
+        # 1.数学法
+        sum1 = sum(nums)
+        sum2 = sum(set(nums))
+        res = (sum1 - sum2) // (len(nums) - len(set(nums)))
+        return res
+
+        # 2.二分查找
+        # 时间换空间，不是常规的思路
+        # reference：https://leetcode-cn.com/problems/find-the-duplicate-number/solution/er-fen-fa-si-lu-ji-dai-ma-python-by-liweiwei1419/
+        left, right = 1, len(nums) - 1
+        while left < right:
+            mid = (left + right) // 2
+            print('left: {}, right: {}, mid: {}'.format(left, right, mid))
+            cot = 0
+            for num in nums:
+                if num <= mid:
+                    cot += 1
+            if cot > mid: # [mid, right] 一定存在重复数（注意：严格大于）
+                right = mid
+            else:
+                left = mid + 1
+        return left
+
+#+END_SRC

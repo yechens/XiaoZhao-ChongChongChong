@@ -14,7 +14,7 @@
    [[file:Screen-Pictures/%E6%80%9D%E8%B7%AF/2020-06-10_00-42-09_%E6%88%AA%E5%B1%8F2020-06-10%20%E4%B8%8A%E5%8D%8812.42.03.png]] 一共走len(nums)步，每一步有2种选择，+1/-1，利用DFS探索每一步能否到达目标点S，用数组存储状态。
 * code
 #+BEGIN_SRC python
-#递归
+#DP
 class Solution:
     def findTargetSumWays(self, nums: List[int], S: int) -> int:
         #DP

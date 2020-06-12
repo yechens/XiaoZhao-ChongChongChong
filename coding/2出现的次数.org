@@ -1,0 +1,44 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成32）/截屏2020-06-12 上午9.33.36.png @ 2020-06-12 09:33:38
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-12_09-33-38_%E6%88%AA%E5%B1%8F2020-06-12%20%E4%B8%8A%E5%8D%889.33.36.png]]
+
+* 思路
+**** 找规律，对数组切片！（扩展性好）
+**** 具体参考：https://leetcode-cn.com/problems/number-of-2s-in-range-lcci/solution/xiao-xue-sheng-du-neng-kan-dong-de-zhao-gui-lu-fa-/
+* code
+#+BEGIN_SRC python
+class Solution:
+    def numberOf2sInRange(self, n: int) -> int:
+
+        # 2.找规律
+        s= str(n)
+        x= 2 # 目标数（扩展性好，可以扩展到“x”出现的次数）
+        count = 0
+        for i in range(len(s)): # 从最高位开始依次遍历查找
+            current = int(s[i])
+            high = 0 if s[:i]=='' else int(s[:i])
+            low =0 if s[i+1:]=='' else int(s[i+1:])
+            if current>x:
+                count += (high+1)*(10**len(s[i+1:]))
+            elif current<x:
+                count += (high) * (10 ** len(s[i + 1:]))
+            else:
+                count += (high) * (10 ** len(s[i + 1:])) + low + 1
+        return count
+
+        # 1.常规 分治 超时
+        # from collections import defaultdict
+        # memo = defaultdict(str)
+        # def split(nums):
+        #     if len(nums) >= 2:
+        #         half = len(nums) // 2
+        #         left = split(nums[:half])
+        #         right = split(nums[half:])
+        #         return left + right
+        #     cot = str(nums[0]).count('2')
+        #     return cot
+
+        # nums = [i for i in range(n+1)]
+        # return split(nums)
+#+END_SRC

@@ -1,0 +1,64 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成34）/截屏2020-06-12 上午9.35.58.png @ 2020-06-12 09:36:00
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-12_09-36-00_%E6%88%AA%E5%B1%8F2020-06-12%20%E4%B8%8A%E5%8D%889.35.58.png]]
+
+* 思路
+*** 1.双指针
+**** 分别从前往后、从后往前进行搜索，如果两个字符串出现了不一致则停止遍历。
+**** 如果两个方向出现不同点的位置，距离超过1，说明要大于1次编辑
+*** 2.单指针
+**** 分情况讨论，也能AC
+* code
+#+BEGIN_SRC python
+class Solution:
+    def oneEditAway(self, first: str, second: str) -> bool:
+
+        l1, l2 = len(first), len(second)
+        if abs(l1 - l2) >= 2: # badcase
+            return False
+
+        # 2.双指针
+        i, j, k = 0, l1-1, l2-1
+        while i<l1 and i<l2 and first[i] == second[i]:
+            i += 1
+        # print('i:', i)
+        while j>=0 and k>=0 and first[j] == second[k]:
+            j -= 1
+            k -= 1
+        # print('j:', j, 'k:', k)
+        return j - i < 1 and k - i < 1
+
+
+        # 1.单指针分类讨论
+        cot = 1
+        if l1 == l2: # 只能是替换
+            for i in range(l1):
+                if first[i] != second[i]:
+                    if cot == 0:
+                        return False
+                    cot -= 1
+        elif l1 > l2: # 只能删除l1 1个字符
+            first = [j for j in first]
+            second = [j for j in second]
+            for i in range(l2):
+                if first[i] != second[i]:
+                    if cot == 0:
+                        return False
+                    first.pop(i)
+                    cot -= 1
+                    if first[i] != second[i]:
+                        return False
+        else: # 只能删除 l2 1个字符        
+            first = [j for j in first]
+            second = [j for j in second]
+            for i in range(l1):
+                if first[i] != second[i]:
+                    if cot == 0:
+                        return False
+                    second.pop(i)
+                    cot -= 1
+                    if first[i] != second[i]:
+                        return False        
+        return True
+#+END_SRC

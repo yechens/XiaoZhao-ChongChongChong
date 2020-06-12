@@ -1,0 +1,50 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成35）/截屏2020-06-12 上午9.44.14.png @ 2020-06-12 09:44:18
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-12_09-44-18_%E6%88%AA%E5%B1%8F2020-06-12%20%E4%B8%8A%E5%8D%889.44.14.png]]
+
+* 思路
+*** 分治法
+**** 将数组A拆分为两个子数组，使得两个子数组之间不存在违背漂亮数组的情况，再依次拆分下去
+**** 以【1，2，3，4，5，6，7，8，9，10，11，12，13，14，15，16，17，18，19，20】为例
+**** 1、【1，2，3】 【2，3，4】.....等不是漂亮数组，故拆分为
+**** A1=[1,3,5,7,9,11,13,15,17,19] A2=[2,4,6,8,10,12,14,16,18,20]
+**** 不存在i in A1，j in A2，k任意，使得 A[k] * 2 = A[i] + A[j]
+**** 2、A1=【1,3,5,7,9,11,13,15,17,19】中， 【1 3 5】 【3，5，7】 【5，7，9】都不是漂亮数组，
+**** 故拆分为A11=【1，5，9,13,17】 A12=【3，7，11,15,19】
+**** 不存在i in A11，j in A12，k任意，使得 A[k] * 2 = A[i] + A[j]
+**** 3、同样，继续将A11拆分为A111,A112, 直到元素数量小于等于2为止
+**** A111=【1，9,17】 A112 = [5,13] 即
+**** [1，2，3，4，5，6，7，8，9，10，11，12，13，14，15，16，17，18，19，20]
+**** = [1,3,5,7,9,11,13,15,17,19] [2,4,6,8,10,12,14,16,18,20]
+**** = [1，5，9,13,17] [3，7，11,15,19] [2,6,10,14,18] [4,8,12,16,20]
+**** = [1,9,17] [5,13] [3,11,19] [7,15] [2,10,18] [6,14] [4,12,20] [8,16]
+**** = [1,17] [9] [5,13] [3,19] [11] [7,15] [2,18] [10] [6,14] [4,20][12] [8,16]
+
+* code
+#+BEGIN_SRC python
+class Solution:
+    def beautifulArray(self, N: int) -> List[int]:
+        # reference：https://leetcode-cn.com/problems/beautiful-array/solution/fen-zhi-fa-by-xue-xi-test/
+        memory = [[i+1 for i in range(N)]]
+        while True:
+            isbreak = True
+            new_memory = []
+            for item in memory:
+                if len(item) <= 2:
+                    new_memory.append(item)
+                else: # 需要继续分割
+                    tmp1 = item[0::2]
+                    tmp2 = item[1::2]
+                    new_memory.append(tmp1)
+                    new_memory.append(tmp2)
+                    isbreak = False # 还要继续循环，判断是否可以结束分割
+            memory = new_memory
+            # print("memory:", memory)
+            if isbreak:
+                break
+        res = []
+        for item in memory:
+            res.extend(item)
+        return res
+#+END_SRC

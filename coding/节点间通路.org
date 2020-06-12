@@ -1,0 +1,27 @@
+* 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成113）/截屏2020-06-12 下午2.25.50.png @ 2020-06-12 14:25:53
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-12_14-25-53_%E6%88%AA%E5%B1%8F2020-06-12%20%E4%B8%8B%E5%8D%882.25.50.png]]
+
+* 思路
+利用BFS从start遍历，直到遇到target（True）或者全部遍历（False）
+需要注意的是：平行边用set解决，自成环需要判定一下邻接表节点中是否有自己
+* code
+#+BEGIN_SRC python
+class Solution:
+    def findWhetherExistsPath(self, n: int, graph: List[List[int]], start: int, target: int) -> bool:
+        adajace_list = [set() for i in range(n)]
+        for i, j in graph:
+            adajace_list[i].add(j)
+        queue = [start]
+        while queue:
+            queue_len = len(queue)
+            for i in range(queue_len):
+                node = queue.pop(0)
+                if target in adajace_list[node]:
+                    return True
+                for n in adajace_list[node]:
+                    if n != node:
+                        queue.append(n)
+        return False
+
+#+END_SRC

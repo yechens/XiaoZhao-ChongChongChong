@@ -1,0 +1,44 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿）/截屏2020-06-13 下午5.45.39.png @ 2020-06-13 17:45:43
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-13_17-45-43_%E6%88%AA%E5%B1%8F2020-06-13%20%E4%B8%8B%E5%8D%885.45.39.png]]
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成2）/截屏2020-06-13 下午5.45.55.png @ 2020-06-13 17:45:57
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-13_17-45-57_%E6%88%AA%E5%B1%8F2020-06-13%20%E4%B8%8B%E5%8D%885.45.55.png]]
+
+* 思路
+*** 计数法
+**** 1.先统计一行中“1”的个数x，如果x大于1说明存在通信的计算机，最终结果+x，并将数组中这一行对应位置为1的点更新为2（避免按列遍历时重复计算）
+**** 2.统计一列中“1”和“2”的个数和x',如果x'大于1说明该列存在通信计算机，最终结果+（x'-这一列中“2”的个数）；因为“2”的位置遍历行时已经统计过，所以需要减去。
+* code
+#+BEGIN_SRC python
+class Solution:
+    def countServers(self, grid: List[List[int]]) -> int:
+
+        if not grid or not grid[0]:
+            return 0
+
+        # 1.数组遍历法
+        m, n = len(grid), len(grid[0])
+        res = 0
+        # 遍历行
+        for i in range(m):
+            arr = grid[i]
+            num_1 = arr.count(1)
+            # print("num_1:", num_1)
+            if num_1 <= 1: continue
+            res += num_1
+            for j in range(n):
+                if grid[i][j] == 1:
+                    grid[i][j] = 2
+        # print(grid)
+        # 遍历列
+        for i in range(n):
+            arr = [g[i] for g in grid]
+            num_1 = arr.count(1) + arr.count(2)
+            if num_1 <= 1: continue
+            num_2 = arr.count(2) # 表示这个数在统计行时已经被统计过了
+            res += num_1 - num_2
+        return res
+
+#+END_SRC

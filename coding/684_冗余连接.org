@@ -1,0 +1,44 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成4）/截屏2020-06-13 下午5.49.53.png @ 2020-06-13 17:49:56
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-13_17-49-56_%E6%88%AA%E5%B1%8F2020-06-13%20%E4%B8%8B%E5%8D%885.49.53.png]]
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成5）/截屏2020-06-13 下午5.50.08.png @ 2020-06-13 17:50:10
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-13_17-50-10_%E6%88%AA%E5%B1%8F2020-06-13%20%E4%B8%8B%E5%8D%885.50.08.png]]
+
+* 思路
+*** 并查集
+**** 明确概念：
+**** 1.集合树：所有节点以代表节点为父节点构成的多叉树
+**** 2.节点的代表节点：可以理解为节点的父节点，从当前节点出发，可以向上找到的第一个节点
+**** 3.集合的代表节点：可以理解为根节点，意味着该集合内所有节点向上走，最终都能到达的节点
+**** 具体解析：
+**** 1.初识时，1-N每一个结点独自构成一个集合，每一个结点所在集合的「代表结点」就是该结点自身
+**** 2.引入一条边[a, b]时，统一视为a -> b，即a指向b，可以视b是a的父结点；分别计算a、b结点各自所在集合的代表结点a'，b'
+**** 3.如果 a'==b'。说明加入边[a, b]后肯定形成了闭环，直接返回[a, b]；否则更新 nums[a'] = b'；继续遍历下一条边。 
+* code
+#+BEGIN_SRC python
+class Solution:
+    def findRedundantConnection(self, edges: List[List[int]]) -> List[int]:
+
+        def find(nums, val):
+            # 查找 val 所在集合的「代表节点」
+            while val != nums[val]:    
+                val = nums[val]
+            return val
+                    
+        n = len(edges)
+        # 并查集初始化
+        nums = [i for i in range(n + 1)]
+        for e in edges:
+            e1, e2 = e
+            # 两个结点都需要去查找自己所在集合的代表节点!
+            e1 = find(nums, e1)
+            e2 = find(nums, e2)
+            if e1 == e2: # 集合的代表结点出现重复，肯定存在环
+                return e
+            nums[e1] = e2
+        return []
+
+        # reference：https://leetcode-cn.com/problems/redundant-connection/solution/tong-su-jiang-jie-bing-cha-ji-bang-zhu-xiao-bai-ku/
+#+END_SRC

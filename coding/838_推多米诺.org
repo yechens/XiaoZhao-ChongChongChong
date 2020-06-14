@@ -1,0 +1,30 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成6）/截屏2020-06-14 下午10.22.51.png @ 2020-06-14 22:22:55
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-14_22-22-55_%E6%88%AA%E5%B1%8F2020-06-14%20%E4%B8%8B%E5%8D%8810.22.51.png]]
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成7）/截屏2020-06-14 下午10.23.06.png @ 2020-06-14 22:23:08
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-14_22-23-08_%E6%88%AA%E5%B1%8F2020-06-14%20%E4%B8%8B%E5%8D%8810.23.06.png]]
+
+* 思路
+*** 字符串替换法（找规律）
+**** 1）R.L 部分始终保持稳定
+**** 2）.L 部分会被更新为 LL
+**** 3）R. 部分会被更新为 RR
+**** 如果字符串不再发生改变，说明已到达最终的稳定状态
+* code
+#+BEGIN_SRC python
+class Solution:
+    def pushDominoes(self, dominoes: str) -> str:
+
+        # 字符串替换法
+        if not dominoes: return ""
+        tmp = ""
+        while tmp != dominoes: # 如果字符串不再发生变化，循环结束
+            tmp = dominoes
+            dominoes = dominoes.replace("R.L", "T") # 不会被推倒的部分先打上一个特殊标记
+            dominoes = dominoes.replace(".L", "LL")
+            dominoes = dominoes.replace("R.", "RR")
+            dominoes = dominoes.replace("T", "R.L") # 还原 T 部分
+        return tmp
+#+END_SRC

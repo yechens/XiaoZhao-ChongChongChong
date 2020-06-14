@@ -126,6 +126,8 @@
      + [[file:/coding/一次编辑.org][面试题_一次编辑]]
 **** 三指针
     * [[file:./coding/74_颜色分类.py][74.颜色分类]]😭
+**** 字符串
+    * [[file:/coding/838_推多米诺.org][838.推多米诺]]
 **** 栈   
     * [[file:./coding/32_最长有效括号.py][32.最长有效括号😭]]
     * [[file:./coding/42_接雨水.py][42.接雨水🦆]]
@@ -146,11 +148,12 @@
     * [[file:./coding/301_删除无效的括号.py][301.删除无效的括号]]
     * [[file:./coding/节点间通路.org][节点通路]]
 **** DFS
+    * [[file:./coding/130_被围绕的区域.org][130.被围绕的区域😭]]
     * [[file:/coding/200_岛屿数量.py][200.岛屿数量]]😊
     * [[file:./coding/417_太平洋大西洋水流问题.py][417.太平洋大西洋水流问题]]👖
-    * [[file:/coding/695_岛屿的最大面积.py][695.岛屿的最大面积😁]]
+    * [[file:/coding/486_预测赢家.org][486.预测赢家.org]]
     * [[file:./coding/576_出界的路径数.org][576.出界的路径数]]
-    * [[file:./coding/130_被围绕的区域.org][130.被围绕的区域😭]]
+    * [[file:/coding/695_岛屿的最大面积.py][695.岛屿的最大面积😁]]
 **** 拓扑排序
     * [[file:./coding/207_课程表.py][207.课程表]]
 **** 位运算
@@ -196,15 +199,20 @@
    | 笔试题         | 6月 待安排 |
    | ML比赛         | 待安排     |
    | python高级编程 | 待安排     |
+   |                |            |
+   |                |            |
 *   面试必备系列
 ** ML/NLP 面经
 **** Todo
 ** 知识点归纳整理
-| 主题             | 标题                                                     | 来源        | 传送门 |
-| 预训练语言模型   | NLP算法面试必备！史上最全！PTMs：NLP预训练模型的全面总结 | 知乎        | [[https://zhuanlan.zhihu.com/p/115014536?utm_source=wechat_session&utm_medium=social&utm_oi=824921009521053696][👉]]     |
-| Bert             | 关于BERT，面试官们都怎么问                               | 公众号      | [[https://mp.weixin.qq.com/s/q3qMzCfCPKyRM0-DzD__pw][👉]]     |
-| 机器学习概述博客 |                                                          | gitbooks.io | [[https://shunliz.gitbooks.io/machine-learning/content/dl/word2vec/cbow-skip-n.html][🚢]]     |
-|                  |                                                          |             |        |
+| 主题               | 标题                                                     | 来源        | 传送门 |
+| 预训练语言模型     | NLP算法面试必备！史上最全！PTMs：NLP预训练模型的全面总结 | 知乎        | [[https://zhuanlan.zhihu.com/p/115014536?utm_source=wechat_session&utm_medium=social&utm_oi=824921009521053696][👉]]     |
+| Bert               | 关于BERT，面试官们都怎么问                               | 公众号      | [[https://mp.weixin.qq.com/s/q3qMzCfCPKyRM0-DzD__pw][👉]]     |
+| 机器学习概述博客   |                                                          | gitbooks.io | [[https://shunliz.gitbooks.io/machine-learning/content/dl/word2vec/cbow-skip-n.html][🚢]]     |
+| BERT、XLNet、MPNet | 从BERT、XLNet到MPNet，细看NLP预训练模型发展变迁史        | 知乎        | [[https://zhuanlan.zhihu.com/p/146325984][👉]]     |
+|                    |                                                          |             |        |
 ** 优秀论文推荐及解析
-| 主题           | 标题 | 来源    | 一句话概述                             |
-| 多模态特征融合 | [[https://www.aclweb.org/anthology/P19-1046/][HFFN]] | ACL2019 | 如何有效结合语音、文本、图像的特征向量 |
+| 主题           | 标题                                  | 来源    | 一句话概述                                        |
+| 多模态特征融合 | [[https://www.aclweb.org/anthology/P19-1046/][HFFN]]                                  | ACL2019 | 如何有效结合语音、文本、图像的特征向              |
+| Word2vec       | word2vec Parameter Learning Explained | arxiv   | 详细推导和解释word2vec模型的参数更新公式(CBOW/SG) |
+|                |                                       |         | 量                                                |

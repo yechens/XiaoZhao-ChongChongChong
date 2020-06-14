@@ -1,0 +1,42 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成8）/截屏2020-06-14 下午10.25.52.png @ 2020-06-14 22:25:55
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-14_22-25-55_%E6%88%AA%E5%B1%8F2020-06-14%20%E4%B8%8B%E5%8D%8810.25.52.png]]
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成9）/截屏2020-06-14 下午10.26.04.png @ 2020-06-14 22:26:07
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-14_22-26-07_%E6%88%AA%E5%B1%8F2020-06-14%20%E4%B8%8B%E5%8D%8810.26.04.png]]
+
+* 思路
+*** 带备忘录的递归遍历（DFS）
+**** 1.如果数组是偶数，先手一定能获胜。因为如果玩家1选择拿法A，玩家2选择拿法B，玩家1输了。则玩家1换一种拿法选择拿法B，因为玩家1是先手，所以玩家1一定可以获胜
+**** 2.如果数组是奇数，则递归判断：（1）如果我们先选了左边 对手一定会选择一个让我们总和最小的数（2）如果我们选了右边，对手也一定会选择一个让我们总和最小的数
+* code
+#+BEGIN_SRC python
+class Solution:
+    def PredictTheWinner(self, nums: List[int]) -> bool:
+
+        memo = {}
+        def meFirst(i, j):
+            """当前我和对手能够选择的数组索引范围，我是先手
+               返回我作为先手所能获得的最大得分
+            """
+            if (i, j) in memo:
+                return memo[(i, j)]
+            if i > j:
+                return 0
+            if i == j:
+                return nums[i]
+            score1 = nums[i] + min(meFirst(i+2, j), meFirst(i+1, j-1))
+            score2 = nums[j] + min(meFirst(i+1, j-1), meFirst(i, j-2))
+            # 更新备忘录
+            memo[(i, j)] = max(score1, score2)
+            return memo[(i, j)] # 返回我能获得的最大得分
+        
+        n = len(nums)
+        if n % 2 == 0:
+            return True
+
+        res = meFirst(0, n - 1)
+        # print(memo)
+        return res >= sum(nums) - res
+#+END_SRC

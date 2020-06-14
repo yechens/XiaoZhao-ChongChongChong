@@ -1,9 +1,9 @@
 * 题目
-#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成111）/截屏2020-06-12 下午2.04.05.png @ 2020-06-12 14:04:08
-[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-12_14-04-08_%E6%88%AA%E5%B1%8F2020-06-12%20%E4%B8%8B%E5%8D%882.04.05.png]]
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成119）/截屏2020-06-14 下午6.27.25.png @ 2020-06-14 18:27:28
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-14_18-27-28_%E6%88%AA%E5%B1%8F2020-06-14%20%E4%B8%8B%E5%8D%886.27.25.png]]
 
 * 思路
-图的连通问题，利用并查集先对相等的元素合并，在对不等的元素查找是否非连通
+利用并查集解决问题，相等式子说明两个变量是连通的，不等的式子说明2个变量不连通，先遍历等式，构建并查集，再遍历不等式，如果不等式的2个变量是连通的，则矛盾，返回False
 * code
 #+BEGIN_SRC python
 class Union_set(object):
@@ -12,7 +12,6 @@ class Union_set(object):
 
     def find(self, index):
         while index != self.parent[index]:
-            # self.parent[index] = self.parent[self.parent[index]]
             index = self.parent[index]
         return index
 

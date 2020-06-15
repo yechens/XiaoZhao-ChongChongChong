@@ -1,0 +1,33 @@
+* 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿）/截屏2020-06-15 下午12.45.11.png @ 2020-06-15 12:45:14
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-15_12-45-14_%E6%88%AA%E5%B1%8F2020-06-15%20%E4%B8%8B%E5%8D%8812.45.11.png]]
+
+* 思路
+[[https://leetcode-cn.com/problems/new-21-game/solution/dong-tai-gui-hua-python3-by-bu-hui-er-cha-shu/][题解]]
+* code
+#+BEGIN_SRC python
+class Solution:
+    def new21Game(self, N: int, K: int, W: int) -> float:
+        if not N or not K:
+            return 1
+        dp = [0 for i in range(N+1)]
+        pre_sum = [0 for i in range(N+1)]
+        dp[1] = 1/W
+        pre_sum[1] = 1/W
+        for i in range(2, N+1):
+            if i <= W:
+                # dp[i] = (1 + sum(dp[1:min(i, K)]))/W
+                if i < K:
+                    dp[i] = (1 + pre_sum[i-1])/W
+                else:
+                    dp[i] = (1 + pre_sum[K-1])/W
+                pre_sum[i] = pre_sum[i-1] + dp[i]
+            else:
+                # dp[i] = sum(dp[i-W:min(i, K)]) /W
+                if i < K:
+                    dp[i] = (pre_sum[i-1]-pre_sum[i-W-1])/W
+                else:
+                    dp[i] = (pre_sum[K-1]-pre_sum[i-W-1])/W
+                pre_sum[i] = pre_sum[i-1] + dp[i]
+        return sum(dp[K : N+1])
+#+END_SRC

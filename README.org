@@ -236,5 +236,5 @@
 | 主题                     | 标题                                  | 来源     | 一句话概述                                        |
 | 多模态特征融合           | [[https://www.aclweb.org/anthology/P19-1046/][HFFN]]                                  | ACL2019  | 如何有效结合语音、文本、图像的特征向              |
 | Word2vec                 | word2vec Parameter Learning Explained | arxiv    | 详细推导和解释word2vec模型的参数更新公式(CBOW/SG) |
-| semi-supervised learning | UDA                                   | CVPR2019 | 图片和文本的半监督数据增强及训练                  |
+| semi-supervised learning | [[https://arxiv.org/pdf/1904.12848.pdf][UDA]]                                   | CVPR2019 | 图片和文本的半监督数据增强及训练                  |
 |                          |                                       |          |                                                   |

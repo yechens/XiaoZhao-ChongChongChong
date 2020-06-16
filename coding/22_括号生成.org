@@ -1,0 +1,27 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成16）/截屏2020-06-16 上午10.44.42.png @ 2020-06-16 10:44:47
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-16_10-44-47_%E6%88%AA%E5%B1%8F2020-06-16%20%E4%B8%8A%E5%8D%8810.44.42.png]]
+
+* 思路
+*** DFS
+**** 用两个变量分别统计左括号“（”和右括号“）”的个数
+**** 只有左括号数 >= 右括号数，才会是有效的组合
+* code
+#+BEGIN_SRC python
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+
+        res = []
+        # 分别用两个变量来统计左括号和右括号的个数
+        def count(s, cot1=0, cot2=0):
+            if cot1 > n or cot2 > n: return
+            if cot1 == n and cot2 == n:
+                res.append(s)
+                return 
+            if cot1 >= cot2: # 确保左括号的数量一定大于等于右括号，这样的括号组合才是有效的
+                count(s + "(", cot1 + 1, cot2)
+                count(s + ")", cot1, cot2 + 1)
+        count("")
+        return res
+#+END_SRC

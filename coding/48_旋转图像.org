@@ -1,0 +1,32 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成14）/截屏2020-06-16 上午10.41.38.png @ 2020-06-16 10:41:42
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-16_10-41-42_%E6%88%AA%E5%B1%8F2020-06-16%20%E4%B8%8A%E5%8D%8810.41.38.png]]
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成15）/截屏2020-06-16 上午10.41.50.png @ 2020-06-16 10:41:53
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-16_10-41-53_%E6%88%AA%E5%B1%8F2020-06-16%20%E4%B8%8A%E5%8D%8810.41.50.png]]
+
+* 思路
+*** 找规律
+**** 通过两个步骤可以完成矩阵/图像的旋转
+**** 1.沿着主对角线对称变化
+**** 2.交换列的顺序
+* code
+#+BEGIN_SRC python
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        if not matrix or not matrix[0]:
+            return
+        n = len(matrix)
+        # 先沿主对角线对称变化，再交换列顺序
+        for i in range(n):
+            for j in range(i+1, n):
+                matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
+        half = n // 2
+        for i in range(half):
+            for j in range(n):
+                matrix[j][i], matrix[j][n-i-1] = matrix[j][n-i-1], matrix[j][i]
+#+END_SRC

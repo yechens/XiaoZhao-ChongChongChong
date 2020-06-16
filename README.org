@@ -235,6 +235,7 @@
 | Bert               | 关于BERT，面试官们都怎么问                               | 公众号      | [[https://mp.weixin.qq.com/s/q3qMzCfCPKyRM0-DzD__pw][👉]]     |
 | 机器学习概述博客   |                                                          | gitbooks.io | [[https://shunliz.gitbooks.io/machine-learning/content/dl/word2vec/cbow-skip-n.html][🚢]]     |
 | BERT、XLNet、MPNet | 从BERT、XLNet到MPNet，细看NLP预训练模型发展变迁史        | 知乎        | [[https://zhuanlan.zhihu.com/p/146325984][👉]]     |
+| EDA、半监督综述    | NLP中的少样本困境问题探究                                | 公众号      | [[https://mp.weixin.qq.com/s/gt-XJCTXJ-4GUizjoqzWvw][👉]]     |
 |                    |                                                          |             |        |
 ** 优秀论文推荐及解析
 | 主题                     | 标题                                  | 来源     | 一句话概述                                        |

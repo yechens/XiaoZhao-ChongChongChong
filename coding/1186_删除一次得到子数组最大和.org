@@ -1,0 +1,40 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成10）/截屏2020-06-16 上午9.57.14.png @ 2020-06-16 09:57:18
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-16_09-57-17_%E6%88%AA%E5%B1%8F2020-06-16%20%E4%B8%8A%E5%8D%889.57.14.png]]
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成11）/截屏2020-06-16 上午9.57.26.png @ 2020-06-16 09:57:30
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-16_09-57-30_%E6%88%AA%E5%B1%8F2020-06-16%20%E4%B8%8A%E5%8D%889.57.26.png]]
+
+* 思路
+*** 通用 dp 解法：删除n次得到子数组的最大和
+**** dp[i][j] 表示以 arr[i] 结尾，已经删除 j 次的子数组最大和
+* code
+#+BEGIN_SRC python
+class Solution:
+    def maximumSum(self, nums: List[int]) -> int:
+
+        if len(nums) <= 1: return nums[0]
+
+        # 通用解法dp ： 删除n次得到子数组的最大值
+        # dp[i][j] 表示以arr[i]结尾的，已经删除j次的子数组最大和
+        n = len(nums)
+        k = 1 # 删除的次数，本题中为1
+        dp = [[0] * (k+1) for i in range(n)]
+        mmax = nums[0]
+        # 初始化
+        dp[0][0] = nums[0]
+        for i in range(1, n):
+            dp[i][0] = max(dp[i - 1][0] + nums[i], nums[i])
+            # 这里也需要更新 mmax !
+            mmax = max(dp[i][0], mmax)
+        print(dp)
+        # dp
+        for i in range(1, n):
+            for j in range(1, k + 1):
+                # 前者表示不删除 nums[i]，后者表示删除
+                dp[i][j] = max(dp[i - 1][j] + nums[i], dp[i - 1][j - 1])
+                mmax = max(mmax, dp[i][j]) # 不断更新最大子数组和
+                # print("mmax:", mmax)
+        return mmax
+#+END_SRC

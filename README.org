@@ -1,4 +1,4 @@
-
+*   Git加速插件：[[https://chrome.google.com/webstore/detail/github%E5%8A%A0%E9%80%9F/mfnkflidjnladnkldfonnaicljppahpg][GitHub加速😊]]
 * 🔧Emacs工具篇
 ** 常用快捷键(ctrl-c; alt-m)
    | 功能                      | 快捷键                               |

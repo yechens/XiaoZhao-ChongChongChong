@@ -105,6 +105,7 @@
      * [[file:./coding/1155_掷骰子的N种方法.py][1155.掷骰子的N种方法😢]]
      * [[file:/coding/1186_删除一次得到子数组最大和.org][1186.删除一次得到子数组最大和]]😭基础版:[[https://leetcode-cn.com/problems/maximum-subarray/][53. 最大子序和]]
      * [[file:/coding/983_最低票价.org][983.最低票价]]😁
+     * [[file:./coding/46_全排列.org][46.全排列]]
 **** 二叉树
     * [[file:./coding/94_二叉树的中序遍历.py][94.二叉树的中序遍历]]
     * [[file:./coding/96_不同的二叉搜索树.py][96.不同的二叉搜索树]]😭

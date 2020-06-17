@@ -1,0 +1,27 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成17）/截屏2020-06-17 上午9.42.33.png @ 2020-06-17 09:42:37
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-17_09-42-37_%E6%88%AA%E5%B1%8F2020-06-17%20%E4%B8%8A%E5%8D%889.42.33.png]]
+
+* 思路
+*** 单调栈
+**** 维护一个单调递减栈，栈中存放元素的下标索引
+**** 如果当日温度低于前一日，直接入栈；否则更新栈尾日期需要等待的天数（存在比栈尾所指向日期的温度高），并出栈
+* code
+#+BEGIN_SRCs python
+class Solution:
+    def dailyTemperatures(self, T: List[int]) -> List[int]:
+
+        if not T: return []
+
+        # 维护一个单调递减栈，栈中存放元素的下标索引
+        stack = []
+        res = [0] * len(T)
+        for i in range(len(T)):
+            while stack and T[stack[-1]] < T[i]:
+                # 更新栈！
+                res[stack[-1]] = i - stack[-1] 
+                stack.pop()
+            stack.append(i)
+        return res
+#+END_SRCs

@@ -213,7 +213,7 @@
     * [[file:/coding/684_冗余连接.org][684.冗余连接]]🍭
     * [[file:./coding/990_等式方程的可满足性.org][990.等式方程的可满足性]]
 **** 位运算
-    * [[file:./coding/338_比特位计数.py][338.比特位计数]]
+    * [[file:./coding/338_比特位计数.org][338.比特位计数]]
 * 📣MachineLearning分享篇
 ** ✈️学习计划
    | 专题                      | deadline      |

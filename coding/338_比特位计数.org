@@ -1,0 +1,44 @@
+* 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成17）/截屏2020-06-18 下午9.49.14.png @ 2020-06-18 21:49:17
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-18_21-49-17_%E6%88%AA%E5%B1%8F2020-06-18%20%E4%B8%8B%E5%8D%889.49.14.png]]
+
+* 思路
+  + DP
+    #+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成18）/截屏2020-06-18 下午9.50.04.png @ 2020-06-18 21:50:08
+    [[file:Screen-Pictures/%E6%80%9D%E8%B7%AF/2020-06-18_21-50-08_%E6%88%AA%E5%B1%8F2020-06-18%20%E4%B8%8B%E5%8D%889.50.04.png]]
+
+* code
+#+BEGIN_SRC python
+# 位运算
+class Solution:
+    def countBits(self, num: int) -> List[int]:
+        dp = [0 for i in range(num+1)]
+        # print(dp)
+        for n in range(1, num+1):
+            dp[n] = self.helper(n)
+        # print(dp)
+        return dp
+
+    def helper(self, num):
+        count = 0
+        while num > 0:
+            if num & 1 == 1:
+                count += 1
+            num >>= 1
+        return count
+
+
+
+# DP解法
+class Solution:
+    def countBits(self, num: int) -> List[int]:
+        dp = [0 for i in range(num+1)]
+        if num>=1:
+            dp[1] = 1
+        t = 1
+        for i in range(2, num+1):
+            dp[i] = dp[i-2**t] + 1
+            if i == 2**(t+1)-1:
+                t += 1
+        return dp
+#+END_SRC

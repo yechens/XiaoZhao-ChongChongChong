@@ -1,0 +1,76 @@
+* 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成12）/截屏2020-06-18 下午3.27.38.png @ 2020-06-18 15:27:41
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-18_15-27-41_%E6%88%AA%E5%B1%8F2020-06-18%20%E4%B8%8B%E5%8D%883.27.38.png]]
+
+* 思路
+[[https://leetcode-cn.com/problems/maximal-rectangle/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by-1-8/]]
+* code
+#+BEGIN_SRC python
+# 暴力法（超时）
+class Solution:
+    def maximalRectangle(self, matrix: List[List[str]]) -> int:
+        max_value = 0
+        if not matrix:
+            return max_value
+        m, n = len(matrix), len(matrix[0])
+        width = [[0 for j in range(n)] for i in range(m)]
+        for i in range(m):
+            for j in range(n):
+                if j == 0:
+                    if matrix[i][j] == '1':
+                        width[i][j] = 1
+                else:
+                    if matrix[i][j] == '1':
+                        width[i][j] = width[i][j-1] + int(matrix[i][j])
+                    else:
+                        width[i][j] = 0
+                min_width = width[i][j]
+                if min_width:
+                    k = i
+                    while k >= 0:
+                        min_width = min(min_width, width[k][j])
+                        max_value = max(max_value, min_width*(i-k+1))
+                        k -= 1
+        return max_value
+
+# 单调栈
+class Solution:
+    def maximalRectangle(self, matrix: List[List[str]]) -> int:
+        if not matrix:
+            return 0
+        def helper(nums:List[int]):
+            nums = [-1] + nums + [-1]
+            stk = [0]
+            max_value = -1
+            for i in range(1, len(nums)):
+                if nums[i] >= nums[stk[-1]]:
+                    stk.append(i)
+                else:
+                    while nums[stk[-1]] > nums[i]:
+                        current_height = nums[stk.pop()]
+                        while nums[stk[-1]] == current_height:
+                            stk.pop()
+                        max_width = i - stk[-1] - 1
+                        max_value = max(max_value, max_width * current_height)
+                    stk.append(i)
+            return max_value
+        m, n = len(matrix), len(matrix[0])
+        max_value = 0
+        for i in range(m):
+            for j in range(n):
+                if i == 0:
+                    if matrix[i][j] == '1':
+                        matrix[i][j] = 1
+                    else:
+                        matrix[i][j] = 0
+                else:
+                    if matrix[i][j] == '1':
+                        matrix[i][j] = int(matrix[i][j]) + matrix[i-1][j]
+                    else:
+                        matrix[i][j] = 0
+            max_value = max(max_value, helper(matrix[i]))
+        return max_value
+
+# DP
+
+#+END_SRC

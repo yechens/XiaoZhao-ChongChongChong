@@ -1,0 +1,57 @@
+* 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成10）/截屏2020-06-18 上午10.47.02.png @ 2020-06-18 10:47:06
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-18_10-47-06_%E6%88%AA%E5%B1%8F2020-06-18%20%E4%B8%8A%E5%8D%8810.47.02.png]]
+
+* 思路
+[[https://leetcode-cn.com/problems/burst-balloons/solution/jie-ti-guan-jian-xu-ni-qi-qiu-hui-su-fen-zhi-dong-/]]
+  + 分治递归
+  #+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成11）/截屏2020-06-18 上午10.52.47.png @ 2020-06-18 10:52:51
+[[file:Screen-Pictures/%E6%80%9D%E8%B7%AF/2020-06-18_10-52-51_%E6%88%AA%E5%B1%8F2020-06-18%20%E4%B8%8A%E5%8D%8810.52.47.png]]
+  + DP
+    通过从最小子问题开始进行简单尝试，可以发现长度为2的子问题的解仅依赖于长度为1子问题的解；长度为3的子问题的解仅依赖于长度为2的子问题的解
+* code
+#+BEGIN_SRC python
+# 分治
+class Solution:
+    def maxCoins(self, nums: List[int]) -> int:
+        memo = {}
+        return self.helper(memo, nums, 1, 1, 0, len(nums)-1)
+
+    def helper(self, memo, nums, left, right, start, end):
+        if (start, end) not in memo.keys(): 
+            if start > end:
+                memo[(start, end)] = 0
+            elif start == end:
+                memo[(start, end)] = nums[start]*left*right
+            else:
+                tmp = []
+                for i in range(start, end+1):
+                    tmp.append(nums[i]*left*right + 
+		    self.helper(memo, nums, left, nums[i], start, i-1) +
+		    self.helper(memo, nums, nums[i], right, i+1, end))
+                memo[(start, end)] = max(tmp)
+        return memo[(start, end)]
+
+# DP
+class Solution:
+    def maxCoins(self, nums: List[int]) -> int:
+        # DP
+        if not nums:
+            return 0
+        def fill(nums, dp, start, end):
+            max_value = 0
+            for k in range(start, end+1):
+                left = 1 if start==0 else nums[start-1]
+                right = 1 if end==len(nums)-1 else nums[end+1]
+                max_value = max(max_value, nums[k]*left*right + (0 if k==start else dp[start][k-1]) + (0 if k==end else dp[k+1][end]))
+            dp[start][end] = max_value
+
+        dp = [[0 for i in range(len(nums))] for j in range(len(nums))]
+        for i in range(len(nums)):
+            for j in range(len(nums)-i):
+                fill(nums, dp, j, j+i)
+        return dp[0][len(nums)-1]
+
+# 回溯
+超时
+#+END_SRC

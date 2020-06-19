@@ -223,9 +223,10 @@
    | word2vec                  | 06/04 ~ 0606  |
    | CRF                       | 06/01～0605   |
    | DecisionTree+RandomForest | 06/08 ~ 0612  |
-   | xgboost                   | 06/17 ~ 0623 |
+   | xgboost                   | 06/17 ~ 0623  |
    | 朴素贝叶斯                | 0615 ~ 0620   |
-   |                           |               |
+   | PCA                       | 0624~ 0631    |
+   | VAE                       | 0620~0731    |
 ** 分享链接（专题笔记文件地址）
    | topic                     | black_tear | giant        | van                    |
    | SVM                       | -          | -            | [[file:./MachineLearning/SVM/机器学习-svm全手写推导_compressed.pdf][机器学习-svm全手写推导]] |
@@ -234,6 +235,8 @@
    | DecisionTree+RandomForest | -          | [[file:/MachineLearning/DecisionTree&RandomForest/tree.org][decisiontree]] | -                      |
    | xgboost                   |            |              | xgboost                |
    | KMeans                    | -          | [[file:/MachineLearning/KMeans/pytorch_手推KMeans.org][手推kmeans]]   | -                      |
+   | PCA                       |            |              | PCA                    |
+   | VAE                       |            |              | VAE                    |
 *   TO_DO list
    | 数学基础       | 6月 待安排 |
    | 笔试题         | 6月 待安排 |

@@ -31,6 +31,15 @@
 - 快慢指针第一次相遇时，快指针走过了 2nb 步，慢指针走过了 nb 步，其中 b 表示链表环节点个数
 - 设链表头部到环入口节点个数为 a （不包括环入口节点），将快指针重新设置为头节点，和慢指针一起向前走 a 步后停下，两者将在入口节点重合
 方法2时间复杂度：O(n), 空间复杂度：O(1)
+
+add-lyf:
+解题思路：
+快慢指针：
+    关键点-slow从index0开始，fast从index1开始（即假设两者都从-1位置开始）
+    易错点：fast走两步时，需要判断fast.next是不是None
+
+
+
 """
 # Definition for singly-linked list.
 # class ListNode:

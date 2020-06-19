@@ -233,6 +233,7 @@
    | HMM&CRF                   |            |              | [[file:./MachineLearning/HMM&CRF/HMM&CRF_compressed.pdf][HMM&CRF]]                |
    | DecisionTree+RandomForest | -          | [[file:/MachineLearning/DecisionTree&RandomForest/tree.org][decisiontree]] | -                      |
    | xgboost                   |            |              | xgboost                |
+   | KMeans                    | -          | [[file:/MachineLearning/KMeans/pytorch_手推KMeans.org][手推kmeans]]   | -                      |
 *   TO_DO list
    | 数学基础       | 6月 待安排 |
    | 笔试题         | 6月 待安排 |

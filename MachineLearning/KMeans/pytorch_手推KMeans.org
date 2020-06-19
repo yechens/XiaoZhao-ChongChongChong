@@ -97,6 +97,7 @@ y_pred = k.fit_predict(X)
 plt.scatter(X[:, 0], X[:, 1], c=y_pred, s=20)
 plt.scatter(k.centers[:, 0], k.centers[:, 1], c='red', s=80, alpha=.8)
 
+# 打印离聚类中心最近的点（绿色表示）
 representative_samples = X
 plt.scatter(X[k.representative_samples][:, 0], X[k.representative_samples][:, 1], c='green', s=80, alpha=.8)
 plt.show()

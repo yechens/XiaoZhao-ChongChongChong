@@ -1,0 +1,33 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成24）/截屏2020-06-19 下午4.42.57.png @ 2020-06-19 16:43:00
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-19_16-43-00_%E6%88%AA%E5%B1%8F2020-06-19%20%E4%B8%8B%E5%8D%884.42.57.png]]
+
+* 思路
+*** 找规律 -> 完成所有任务需要的最短时间只和出现频率最高的1个或几个任务相关
+**** 最高频率的任务之间，时间间隔要为n，这期间可以做其他频率的任务或处于空闲状态（如果其他任务都已完成）；详细分析见下图：
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成25）/截屏2020-06-19 下午4.46.48.png @ 2020-06-19 16:46:52
+[[file:Screen-Pictures/%E6%80%9D%E8%B7%AF/2020-06-19_16-46-52_%E6%88%AA%E5%B1%8F2020-06-19%20%E4%B8%8B%E5%8D%884.46.48.png]]
+
+* code
+#+BEGIN_SRC python
+class Solution:
+    def leastInterval(self, tasks: List[str], n: int) -> int:
+
+        count = {}
+        for i in range(len(tasks)):
+            count[ord(tasks[i]) - 65] = count.get(ord(tasks[i]) - 65, 0) + 1
+        # print("count:", count)
+        maxCount = 0 # 统计有几个频率最高的任务
+        # 统计词频
+        # 最终的最短时间只和频率最高的1个或几个任务相关
+        count = list(sorted(count.items(),key=lambda x: x[1], reverse=True))
+        for i in count:
+            if i[1] != count[0][1]:
+                break
+            maxCount += 1
+        res = (count[0][1] - 1) * (n + 1) + maxCount
+        print("res:", res)
+        return max(res, len(tasks))
+#+END_SRC

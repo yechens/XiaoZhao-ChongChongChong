@@ -1,0 +1,32 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成23）/截屏2020-06-19 下午4.35.20.png @ 2020-06-19 16:35:24
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-19_16-35-24_%E6%88%AA%E5%B1%8F2020-06-19%20%E4%B8%8B%E5%8D%884.35.20.png]]
+
+* 思路
+*** 回溯法
+**** 记录字符串长度n，对于字符串每一位字母所对应的字符串，依次遍历，并递归地保存字母组合；当当前组合的长度等于n时，将组合存入最终结果并返回。
+
+* code
+#+BEGIN_SRC python
+class Solution:
+    def letterCombinations(self, digits: str) -> List[str]:
+
+        if not digits: return []
+
+        # 回溯法
+        d = [" ","*","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"]
+        res = []
+        n = len(digits)
+        def helper(tmp, index):
+            if index == n:
+                res.append(tmp)
+                return
+            num = ord(digits[index]) - 48 # str -> number
+            letter = d[num] # 如 abc
+            for l in letter:
+                # tmp += l 
+                helper(tmp + l, index + 1)
+        helper("", 0)
+        return res
+#+END_SRC

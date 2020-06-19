@@ -1,0 +1,106 @@
+#+BEGIN_SRC python
+import torch
+import matplotlib.pyplot as plt
+#+END_SRC
+*** 生成随机数
+#+BEGIN_SRC python
+n_data = torch.ones(100, 2)
+xy0 = torch.normal(2 * n_data, 1)  # 生成均值为2，2 标准差为1的随机数组成的矩阵 shape=(100, 2)
+c0 = torch.zeros(100)
+xy1 = torch.normal(-2 * n_data, 1) # 生成均值为-2，-2 标准差为1的随机数组成的矩阵 shape=(100, 2)
+c1 = torch.ones(100)
+X = torch.cat((xy0, xy1), 0)
+c = torch.cat((c0,c1), 0)
+plt.scatter(X[:,0],X[:,1], c=c, s=100, cmap='RdYlGn')
+plt.show()
+print(X.shape)
+#+END_SRC
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成21）/截屏2020-06-19 下午4.12.27.png @ 2020-06-19 16:12:31
+[[file:Screen-Pictures/xxx/2020-06-19_16-12-31_%E6%88%AA%E5%B1%8F2020-06-19%20%E4%B8%8B%E5%8D%884.12.27.png]]
+
+*** 
+#+BEGIN_SRC python
+class KMeans:
+    def __init__(self, n_clusters=10, max_iter=None, verbose=True, device=torch.device("cpu")):
+        self.n_clusters = n_clusters
+        self.labels = None
+        self.dists = None # 各个样本点离聚类中心的距离，shape: [x.shape[0], n_clusters]
+        self.centers = None
+        self.variance = torch.Tensor([float("inf")]).to(device)
+        self.verbose = verbose
+        self.started = False
+        self.max_iter = max_iter
+        self.count = 0
+        self.device = device
+        
+    def fit_predict(self, x):
+        # 随机选择初始中心点
+        init_row = torch.randint(0, x.shape[0], (self.n_clusters, )).to(self.device) # torch.randint(low=0, high, size,)
+        init_points = x[init_row]
+        self.centers = init_points
+        while True:
+            # 聚类标记
+            self.nearest_center(x)
+            # 更新中心点
+            self.update_center(x)
+            if self.verbose:
+                print(self.variance, torch.argmin(self.dists, (0)))
+            if torch.abs(self.variance) < 1e-3 and self.max_iter is None:
+                break
+            elif self.max_iter is not None and self.count == self.max_iter:
+                break
+            
+            self.count += 1
+    
+        self.representive_sample()
+        return self.labels
+    
+    def nearest_center(self, x):
+        """计算离每个样本最近的中心点
+        """
+        labels = torch.empty((x.shape[0], )).to(self.device) # torch.empty(*size)
+        dists = torch.empty((0, self.n_clusters)).to(self.device)
+        for i, sample in enumerate(x):
+            dist = torch.sum(torch.mul(sample - self.centers, sample - self.centers), (1)) # 减少第一个维度
+            labels[i] = torch.argmin(dist)
+            dists = torch.cat([dists, dist.unsqueeze(0).to(self.device)], 0)
+        self.labels = labels
+        if self.started:
+            self.variance = torch.sum(self.dists - dists)
+        self.dists = dists
+        self.started = True
+    
+    def update_center(self, x):
+        """根据最新的样本点labels，更新中心点
+        """
+        centers = torch.empty((0, x.shape[1])).to(self.device) # []
+        for i in range(self.n_clusters):
+            mask = (self.labels == i) # 等于i的部分为1，其余为0
+            cluster_samples = x[mask]
+            centers = torch.cat([centers, torch.mean(cluster_samples, 0).unsqueeze(0)], 0)
+        self.centers = centers
+            
+    def representive_sample(self):
+        print('ok')
+        # 查找距离中心点最近的样本，作为聚类的代表样本，更加直观
+        self.representative_samples = torch.argmin(self.dists, (0))
+#+END_SRC
+
+*** Test
+
+#+BEGIN_SRC python
+# def __init__(self, n_clusters=10, max_iter=None, verbose=True, device=torch.device("cuda:3")):
+k = KMeans(n_clusters=2, max_iter=10, verbose=False)
+k = KMeans(n_clusters=2, max_iter=10, verbose=True)
+y_pred = k.fit_predict(X)
+plt.scatter(X[:, 0], X[:, 1], c=y_pred, s=20)
+plt.scatter(k.centers[:, 0], k.centers[:, 1], c='red', s=80, alpha=.8)
+
+representative_samples = X
+plt.scatter(X[k.representative_samples][:, 0], X[k.representative_samples][:, 1], c='green', s=80, alpha=.8)
+plt.show()
+#+END_SRC
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成22）/截屏2020-06-19 下午4.13.57.png @ 2020-06-19 16:14:00
+[[file:Screen-Pictures/dd/2020-06-19_16-14-00_%E6%88%AA%E5%B1%8F2020-06-19%20%E4%B8%8B%E5%8D%884.13.57.png]]

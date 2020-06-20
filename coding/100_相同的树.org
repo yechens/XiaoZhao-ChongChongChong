@@ -1,0 +1,28 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成26）/截屏2020-06-20 下午11.18.06.png @ 2020-06-20 23:18:09
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-20_23-18-09_%E6%88%AA%E5%B1%8F2020-06-20%20%E4%B8%8B%E5%8D%8811.18.06.png]]
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成27）/截屏2020-06-20 下午11.18.19.png @ 2020-06-20 23:18:24
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-20_23-18-24_%E6%88%AA%E5%B1%8F2020-06-20%20%E4%B8%8B%E5%8D%8811.18.19.png]]
+
+* 思路
+**** 递归判断两棵树的根结点、左/右结点是否相同
+**** 有一处不相同，直接返回False
+* code
+#+BEGIN_SRC python
+class Solution:
+    def isSameTree(self, p: TreeNode, q: TreeNode) -> bool:
+
+        def helper(r1, r2):
+            if not r1 and not r2:
+                return True
+            elif not r1 or not r2:
+                return False
+            # r1 r2 都存在
+            if r1.val != r2.val:
+                return False
+            return helper(r1.left, r2.left) and helper(r1.right, r2.right)
+        
+        return helper(p, q)
+#+END_SRC

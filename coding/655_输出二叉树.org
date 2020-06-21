@@ -1,0 +1,48 @@
+* 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成19）/截屏2020-06-21 上午9.20.07.png @ 2020-06-21 09:20:10
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-21_09-20-10_%E6%88%AA%E5%B1%8F2020-06-21%20%E4%B8%8A%E5%8D%889.20.07.png]]
+
+* 思路
+  + 先构建最大可能的填充二维数组，再递归填充值，1）求的🌲的高度，可以观察到数组中所有节点都能向下映射到最后一行刚好把最后一行填满（完全二叉树）
+  + BFS:层序遍历填充数组
+* code
+#+BEGIN_SRC python
+# 常规做法-48ms
+class Solution:
+    def printTree(self, root: TreeNode) -> List[List[str]]:
+        # 常规方法
+        def get_height(root):
+            if not root:
+                return 0
+            return max(get_height(root.left)+1, get_height(root.right)+1)
+
+        def fill(root, res, left, right, row):
+            if not root:
+                return
+            res[row][(left+right)//2] = str(root.val)
+            fill(root.left, res, left, (left+right)//2-1, row+1)
+            fill(root.right, res, (left+right)//2+1, right, row+1)
+
+        height = get_height(root)
+        res = [['' for j in range(2**height-1)] for i in range(height)]
+        fill(root, res, 0, len(res[0])-1, 0)
+        return res
+
+# BFS-40ms
+class Solution:
+    def printTree(self, root: TreeNode) -> List[List[str]]:
+        def fill(node, res):
+            res[node[-1]][(node[1]+node[2])//2] = str(node[0].val)
+
+        queue = [(root, 0, len(res[0])-1, 0)]
+        while queue:
+            queue_len = len(queue)
+            for i in range(queue_len):
+                node = queue.pop(0)
+                fill(node, res)
+                if node[0].left:
+                    queue.append((node[0].left, node[1], (node[1]+node[2])//2-1, node[-1]+1))
+                if node[0].right:
+                    queue.append((node[0].right, (node[1]+node[2])//2+1, node[2], node[-1]+1))
+        return res
+#+END_SRC

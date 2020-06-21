@@ -1,0 +1,34 @@
+* 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成22）/截屏2020-06-21 下午5.04.21.png @ 2020-06-21 17:04:24
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-21_17-04-24_%E6%88%AA%E5%B1%8F2020-06-21%20%E4%B8%8B%E5%8D%885.04.21.png]]
+
+* 思路
+DFS判断2个子🌲是否一样：2个根一样，左右子树也一样。层序遍历s寻找可能一样的2个子树，找到后停止遍历
+* code
+#+BEGIN_SRC python
+class Solution:
+    def isSubtree(self, s: TreeNode, t: TreeNode) -> bool:
+        ans = False
+        def visit(s, t):
+            if not s and not t:
+                return True
+            elif not s or not t:
+                return False
+            if s.val == t.val:
+                return visit(s.left, t.left) and visit(s.right, t.right)
+            return False
+        # 层序
+        queue = [s]
+        while queue:
+            queue_len = len(queue)
+            for i in range(queue_len):
+                node = queue.pop(0)
+                if visit(node, t):
+                    ans = True
+                    break
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+        return ans
+#+END_SRC

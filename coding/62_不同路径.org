@@ -1,0 +1,38 @@
+* 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成20）/截屏2020-06-21 下午4.09.09.png @ 2020-06-21 16:09:12
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-21_16-09-12_%E6%88%AA%E5%B1%8F2020-06-21%20%E4%B8%8B%E5%8D%884.09.09.png]]
+
+* 思路
+  + DP: dp[i][j]表示起始点到达第i,j个位置的不同方法数目，每个位置只能由左边或者上面到达，状态转移方程为：dp[i][j] = dp[i-1][j] + dp[i][j-1](i!=0&j!=0);第一行和第一列只能由左边或者上面转移得到。
+  + DFS-回溯：用字典备忘录存储某个点到达目标点的方法数目，对DFS进行剪枝
+* code
+#+BEGIN_SRC python
+# DP-32ms
+dp = [[0 for j in range(n)] for i in range(m)]
+        dp[0][0] = 0
+        for i in range(m):
+            for j in range(n):
+                if i == 0:
+                    dp[i][j] = 1
+                    continue
+                if j == 0:
+                    dp[i][j] = 1
+                    continue
+                dp[i][j] = dp[i-1][j] + dp[i][j-1]
+        return dp[m-1][n-1]
+
+# DFS-备忘录-52ms
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        # DFS-备忘录
+        self.path = {}
+        def search(x, y):
+            if x>m-1 or y>n-1:
+                return 0
+            if x==m-1 and y==n-1:
+                return 1
+            if (x, y) not in self.path.keys():
+                self.path[(x, y)] = search(x+1, y) + search(x, y+1)
+            return self.path[(x, y)]
+        return search(0, 0)
+#+END_SRC

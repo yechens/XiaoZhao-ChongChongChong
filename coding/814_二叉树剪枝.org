@@ -1,0 +1,28 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成28）/截屏2020-06-21 下午10.04.12.png @ 2020-06-21 22:04:17
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-21_22-04-17_%E6%88%AA%E5%B1%8F2020-06-21%20%E4%B8%8B%E5%8D%8810.04.12.png]]
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成29）/截屏2020-06-21 下午10.04.25.png @ 2020-06-21 22:04:29
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-21_22-04-29_%E6%88%AA%E5%B1%8F2020-06-21%20%E4%B8%8B%E5%8D%8810.04.25.png]]
+
+* 思路
+**** 递归地判断当前根结点、左子树、右子树是否满足剪枝条件
+**** 每一层递归中要及时更新当前树的左右子树
+* code
+#+BEGIN_SRC python
+class Solution:
+    def pruneTree(self, root: TreeNode) -> TreeNode:
+        
+        def helper(root):
+            if not root:
+                return None
+            # 每一层递归都要更新左右子树
+            root.left = helper(root.left)
+            root.right = helper(root.right)
+            if not root.left and not root.right: # 叶结点
+                return None if root.val==0 else root
+            return root
+
+        return helper(root)
+#+END_SRC

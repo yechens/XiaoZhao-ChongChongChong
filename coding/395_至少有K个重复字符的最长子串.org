@@ -1,0 +1,27 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成30）/截屏2020-06-22 上午11.55.27.png @ 2020-06-22 11:55:30
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-22_11-55-30_%E6%88%AA%E5%B1%8F2020-06-22%20%E4%B8%8A%E5%8D%8811.55.27.png]]
+
+* 思路
+*** 分治法
+**** 统计字符串中的各个字符，对于不满足出现k次的字符依次切分字符串s；并对切分后的字符串片段递归判断是否满足条件
+* code
+#+BEGIN_SRC python
+class Solution:
+    def longestSubstring(self, s: str, k: int) -> int:
+        
+        def helper(s):
+            if not s:
+                return 0
+            letters = set(s) # 单独分出s中的各个字母
+            for l in letters:
+                if s.count(l) < k: # 需要过滤的字母
+                    ss = s.split(l) 
+                    # helper 会递归判断需要过滤的字符
+                    return max([helper(i) for i in ss])
+            # 如果都满足条件，返回字符串s本身的长度
+            return len(s)
+             
+        return helper(s)
+#+END_SRC

@@ -13,10 +13,10 @@ def quickSort(nums, left, right):
     while left < right:
         while left < right and nums[right] >= tmp:
             right -= 1
-        nums[left], nums[right] = nums[right], nums[left]
+        nums[left] = nums[right]
         while left < right and nums[left] < tmp:
             left += 1
-        nums[left], nums[right] = nums[right], nums[left]
+        nums[right] = nums[left]
     nums[left] = tmp
     # 递归对 k 的左半边和右半边进行递归排序
     quickSort(nums, low, left - 1)

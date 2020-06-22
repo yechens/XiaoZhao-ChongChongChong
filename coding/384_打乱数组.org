@@ -1,0 +1,56 @@
+* 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成23）/截屏2020-06-22 上午11.52.14.png @ 2020-06-22 11:52:17
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-22_11-52-17_%E6%88%AA%E5%B1%8F2020-06-22%20%E4%B8%8A%E5%8D%8811.52.14.png]]
+
+* 思路
+https://leetcode-cn.com/problems/shuffle-an-array/solution/da-luan-shu-zu-by-leetcode/
+* code
+#+BEGIN_SRC python
+# 暴力法
+class Solution:
+
+    def __init__(self, nums: List[int]):
+        self.nums = nums
+        self.original = nums[:]
+
+    def reset(self) -> List[int]:
+        """
+        Resets the array to its original configuration and return it.
+        """
+        return self.original
+        
+
+    def shuffle(self) -> List[int]:
+        """
+        Returns a random shuffling of the array.
+        """
+        self.array = self.nums[:]
+        for i in range(len(self.nums)):
+            remove_index = random.randrange(len(self.array))
+            self.nums[i] = self.array.pop(remove_index)
+        return self.nums
+
+# 洗牌算法-优化
+class Solution:
+
+    def __init__(self, nums: List[int]):
+        self.nums = nums
+        self.original = nums[:]
+
+    def reset(self) -> List[int]:
+        """
+        Resets the array to its original configuration and return it.
+        """
+        return self.original
+        
+
+    def shuffle(self) -> List[int]:
+        """
+        Returns a random shuffling of the array.
+        """
+        self.array = self.nums[:]
+        for i in range(len(self.array)):
+            switch_index = random.randrange(i, len(self.array))
+            self.array[i], self.array[switch_index] = self.array[switch_index], self.array[i]
+        return self.array
+#+END_SRC

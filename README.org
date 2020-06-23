@@ -235,6 +235,8 @@
     * [[file:./coding/990_等式方程的可满足性.org][990.等式方程的可满足性]]
 **** 位运算
     * [[file:./coding/338_比特位计数.org][338.比特位计数]]
+**** 其他
+    * [[file:/coding/326_3的幂.org][326.3的幂]]
 * 📣MachineLearning分享篇
 ** ✈️学习计划
    | 专题                      | deadline      |

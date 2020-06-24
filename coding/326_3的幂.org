@@ -1,0 +1,23 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成31）/截屏2020-06-23 下午8.04.40.png @ 2020-06-23 20:04:46
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-23_20-04-46_%E6%88%AA%E5%B1%8F2020-06-23%20%E4%B8%8B%E5%8D%888.04.40.png]]
+
+* 思路
+**** 循环整除3，判断最终余数是否为1即可
+* code
+#+BEGIN_SRC python
+class Solution:
+    def isPowerOfThree(self, n: int) -> bool:
+
+        # 1.循环
+        while n>=3:
+            n /= 3
+        if n == 1:
+            return True
+        else:
+            return False
+
+        # 2.非循环，需要提前计算int范围内3的幂次方的最大值       
+        return n > 0 and 1162261467 % n == 0  # 3^19
+#+END_SRC

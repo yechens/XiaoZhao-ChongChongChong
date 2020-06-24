@@ -1,0 +1,240 @@
+* 买卖股票的系列问题
+** I
+*** 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成25）/截屏2020-06-23 下午2.02.17.png @ 2020-06-23 14:02:19
+[[file:Screen-Pictures/%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E7%B3%BB%E5%88%97%E9%97%AE%E9%A2%98/2020-06-23_14-02-19_%E6%88%AA%E5%B1%8F2020-06-23%20%E4%B8%8B%E5%8D%882.02.17.png]]
+
+*** 思路
+    + DP：每天有三种选择：买入、卖出、无操作；状态有天数、卖出次数（交易次数）、是否持有。状态转移过程为：
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成27）/截屏2020-06-23 下午2.06.12.png @ 2020-06-23 14:06:14
+[[file:Screen-Pictures/%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E7%B3%BB%E5%88%97%E9%97%AE%E9%A2%98/2020-06-23_14-06-14_%E6%88%AA%E5%B1%8F2020-06-23%20%E4%B8%8B%E5%8D%882.06.12.png]]
+dp[天数][当前是否持有股票][卖出的次数]
+一天结束的4种状态：
++ 未持有，卖出0次
+dp[i][0][0] = 0
++ 未持有，卖出1次
+dp[i][0][1] = max(dp[i-1][0][1], dp[i-1][1][0]+prices[i])
++ 持有，卖出0次
+dp[i][1][0] = max(dp[i-1][1][0], dp[i-1][0][0]-prices[i])
++ 持有，卖出1次
+dp[i][1][1] = float('-inf')
+base case:
++ 第0天未持有卖出1次：dp[0][0][1] = float('-inf')
++ 第0天未持有卖出0次：dp[0][0][0] = 0
++ 第0天持有卖出0次：dp[0][1][0] = -prices[0]
++ 第0天持有卖出1次：dp[0][1][1] = float('-inf')
+*** 代码
+#+BEGIN_SRC python
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        # 模板DP
+        if not prices:
+            return 0
+        dp = [[[0, 0], [0, 0]] for i in range(len(prices))]
+        dp[0][1] = [-prices[0], float('-inf')]
+        dp[0][0][1] = float('-inf')
+        for i in range(1, len(prices)):
+            dp[i][0][0] = 0
+            dp[i][0][1] = max(dp[i-1][0][1], dp[i-1][1][0]+prices[i])
+            dp[i][1][0] = max(dp[i-1][1][0], dp[i-1][0][0]-prices[i])
+            dp[i][1][1] = float('-inf')
+        return max(dp[len(prices)-1][0][1], 0)
+#+END_SRC
+** II
+*** 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成29）/截屏2020-06-23 下午3.08.56.png @ 2020-06-23 15:08:59
+[[file:Screen-Pictures/%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E7%B3%BB%E5%88%97%E9%97%AE%E9%A2%98/2020-06-23_15-08-59_%E6%88%AA%E5%B1%8F2020-06-23%20%E4%B8%8B%E5%8D%883.08.56.png]]
+*** 思路
+    + DP：交易数目K没有限制，因此该状态和结果无关，不需要考虑卖出次数k。动态数组为dp[天数][是否持有股票]。
+一天的最终状态只有2种可能：
+1）持有股票 dp[i][1] = max(dp[i-1][1], dp[i-1][0]-prices[i])
+2)未持有股票 dp[i][0] = max(dp[i-1][0], dp[i-1][1]+prices[i])
+*** 代码
+#+BEGIN_SRC python
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        dp = [[0, 0] for i in range(len(prices))]
+        dp[0][1] = -prices[0]
+        for i in range(1, len(prices)):
+            dp[i][0] = max(dp[i-1][0], dp[i-1][1]+prices[i])
+            dp[i][1] = max(dp[i-1][1], dp[i-1][0]-prices[i])
+        return max(dp[len(prices)-1][0], 0)
+#+END_SRC
+** III
+*** 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成28）/截屏2020-06-23 下午2.23.52.png @ 2020-06-23 14:23:55
+[[file:Screen-Pictures/%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E7%B3%BB%E5%88%97%E9%97%AE%E9%A2%98/2020-06-23_14-23-55_%E6%88%AA%E5%B1%8F2020-06-23%20%E4%B8%8B%E5%8D%882.23.52.png]]
+*** 思路
+    + DP
+      一天结束时，可能有持股、可能未持股、可能卖出过1次、可能卖出过2次、也可能未卖出过
+
+所以定义状态转移数组dp[天数][当前是否持股][卖出的次数]
+
+具体一天结束时的6种状态：
+1）未持股，未卖出过股票：说明从未进行过买卖，利润为0
+dp[i][0][0]=0
+2）未持股，卖出过1次股票：可能是今天卖出，也可能是之前卖的（昨天也未持股且卖出过）
+dp[i][0][1]=max(dp[i-1][1][0]+prices[i],dp[i-1][0][1])
+3）未持股，卖出过2次股票:可能是今天卖出，也可能是之前卖的（昨天也未持股且卖出过）
+dp[i][0][2]=max(dp[i-1][1][1]+prices[i],dp[i-1][0][2])
+4）持股，未卖出过股票：可能是今天买的，也可能是之前买的（昨天也持股）
+dp[i][1][0]=max(dp[i-1][0][0]-prices[i],dp[i-1][1][0])
+5）持股，卖出过1次股票：可能是今天买的，也可能是之前买的（昨天也持股）
+dp[i][1][1]=max(dp[i-1][0][1]-prices[i],dp[i-1][1][1])
+6）持股，卖出过2次股票：最多交易2次，这种情况不存在
+dp[i][1][2]=float('-inf')
+需要注意的边界情况为：
+        #第一天休息
+        dp[0][0][0]=0
+        #第一天买入
+        dp[0][1][0]=-prices[0]
+        #第一天不可能已经有卖出
+        dp[0][0][1] = float('-inf')
+        dp[0][0][2] = float('-inf')
+        #第一天不可能已经卖出
+        dp[0][1][1]=float('-inf')
+        dp[0][1][2]=float('-inf')
+*** 代码
+#+BEGIN_SRC python
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        if not prices:
+            return 0
+        length = len(prices)
+        dp = [[[0, 0, 0], [0, 0, 0]]for i in range(length)]
+        # base case
+        dp[0][0][1], dp[0][0][2] = float('-inf'), float('-inf')
+        dp[0][1][1], dp[0][1][2] = float('-inf'), float('-inf')
+        dp[0][1][0] = -prices[0]
+        for i in range(1, length):
+            # 未持股，卖出0次
+            dp[i][0][0] = 0
+            # 未持股，卖出1次
+            dp[i][0][1] = max(dp[i-1][0][1], dp[i-1][1][0]+prices[i])
+            # 未持股，卖出2次
+            dp[i][0][2] = max(dp[i-1][0][2], dp[i-1][1][1]+prices[i])
+            # 持股，卖出0次
+            dp[i][1][0] = max(dp[i-1][1][0], dp[i-1][0][0]-prices[i])
+            # 持股，卖出1次
+            dp[i][1][1] = max(dp[i-1][1][1], dp[i-1][0][1]-prices[i])
+            # 持股，卖出2次
+            dp[i][1][2] = float('-inf')
+        return max(dp[len(prices)-1][0][1], dp[len(prices)-1][0][2], 0)
+#+END_SRC
+** IV
+*** 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成30）/截屏2020-06-23 下午3.33.32.png @ 2020-06-23 15:33:35
+[[file:Screen-Pictures/%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E7%B3%BB%E5%88%97%E9%97%AE%E9%A2%98/2020-06-23_15-33-35_%E6%88%AA%E5%B1%8F2020-06-23%20%E4%B8%8B%E5%8D%883.33.32.png]]
+*** 思路
++ DP：动态规划数组为dp[天数][是否持有][卖出次数k]
+一天中可能的状态为：
+1）未持有，卖出0次
+dp[i][0][0] = 0
+2）未持有，卖出k次(k>=1)
+dp[i][0][k] = max(dp[i-1][0][k], dp[i-1][1][k-1]+prices[i])
+3）持有，卖出0次
+dp[i][1][0] = max(dp[i-1][1][0], dp[i-1][0][0]-prices[i])
+4）持有，卖出k次(k<=K-1)
+dp[i][1][k] = max(dp[i-1][1][k], dp[i-1][0][k]-prices[i])
+dp[i][1][K] = float('-inf')
+
+base case:
+dp[0][0][1~K] = float('-inf')
+dp[0][1][0] = -prices[0]
+dp[0][1][1~K] = float('-inf')
+
+bad case: prices数组中最多卖出len(prices)//2次，也即是k>len(prices)//2时，相当于II的无限次购买，需要忽略k这个状态。
+*** 代码
+#+BEGIN_SRC python
+class Solution:
+    def maxProfit(self, k: int, prices: List[int]) -> int:
+        if not prices or not k:
+            return 0
+        if k <= math.ceil(len(prices)/2):
+            dp = [[[0 for j in range(k+1)], [0 for j in range(k+1)]]for i in range(len(prices))]
+            dp[0][0] = [0] + [float('-inf') for j in range(1, k+1)]
+            dp[0][1] = [-prices[0]] + [float('-inf') for j in range(1, k+1)]
+            for i in range(1, len(prices)):
+                for _ in range(k+1):
+                    if _ == 0:
+                        dp[i][0][_] = 0
+                        dp[i][1][_] = max(dp[i-1][1][_], dp[i-1][0][_]-prices[i])
+                        continue
+                    if _ < k:
+                        dp[i][1][_] = max(dp[i-1][1][_], dp[i-1][0][_]-prices[i])
+                    else:
+                        dp[i][1][_] = float('-inf')
+                    dp[i][0][_] = max(dp[i-1][0][_], dp[i-1][1][_-1]+prices[i])
+            return max(max(dp[len(prices)-1][0]), 0)
+        else:
+            dp = [[0, 0] for i in range(len(prices))]
+            dp[0][1] = -prices[0]
+            for i in range(1, len(prices)):
+                dp[i][0] = max(dp[i-1][0], dp[i-1][1]+prices[i])
+                dp[i][1] = max(dp[i-1][1], dp[i-1][0]-prices[i])
+            return max(dp[len(prices)-1][0], 0)
+#+END_SRC
+** 最佳买卖股票时机含冷冻期
+*** 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成31）/截屏2020-06-24 上午9.53.29.png @ 2020-06-24 09:53:31
+[[file:Screen-Pictures/%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E7%B3%BB%E5%88%97%E9%97%AE%E9%A2%98/2020-06-24_09-53-31_%E6%88%AA%E5%B1%8F2020-06-24%20%E4%B8%8A%E5%8D%889.53.29.png]]
+*** 思路
++ DP: 动态数组为dp[天数][是否持有股票][今天买入/卖出/无操作]
+1）未持有，无操作：dp[i][0][0] = max(dp[i-1][0][0], dp[i-1][0][2])
+2）未持有，买入：dp[i][0][1] = float('-inf')
+3）未持有，卖出：dp[i][0][2] = max(dp[i-1][1][0], dp[i-1][1][1])+prices[i]
+4）持有，无操作：dp[i][1][0] = max(dp[i-1][1][0], dp[i-1][1][1])
+5）持有，买入：dp[i][1][1] = max(dp[i-2][0][2], dp[i-1][0][0])-prices[i] #买入的前一天不能卖出
+6）持有，卖出：dp[i][1][2] = float('-inf')
+base case:
+dp[0][0][1] = float('-inf')
+dp[0][0][2] = float('-inf')
+dp[0][1][0] = float('-inf')
+dp[0][1][1] = -prices[0]
+dp[0][1][2] = float('-inf')
+*** 代码
+#+BEGIN_SRC python
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        if not prices:
+            return 0
+        dp = [[[0,0,0], [0,0,0]]for i in range(len(prices))]
+        dp[0][0][1] = float('-inf')
+        dp[0][0][2] = float('-inf')
+        dp[0][1][0] = float('-inf')
+        dp[0][1][1] = -prices[0]
+        dp[0][1][2] = float('-inf')
+        for i in range(1, len(prices)):
+            dp[i][0][0] = max(dp[i-1][0][0], dp[i-1][0][2])
+            dp[i][0][1] = float('-inf')
+            dp[i][0][2] = max(dp[i-1][1][0], dp[i-1][1][1])+prices[i]
+            dp[i][1][0] = max(dp[i-1][1][0], dp[i-1][1][1])
+            dp[i][1][1] = max(dp[i-2][0][2], dp[i-1][0][0])-prices[i]
+            dp[i][1][2] = float('-inf')
+        return max(max(dp[len(prices)-1][0]), 0)
+#+END_SRC
+** 买卖股票的最佳时机含手续费
+*** 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成32）/截屏2020-06-24 上午10.37.03.png @ 2020-06-24 10:37:06
+[[file:Screen-Pictures/%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E7%B3%BB%E5%88%97%E9%97%AE%E9%A2%98/2020-06-24_10-37-06_%E6%88%AA%E5%B1%8F2020-06-24%20%E4%B8%8A%E5%8D%8810.37.03.png]]
+*** 思路
++ DP：交易数目k没有限制, 动态数组dp=[天数][是否持有股票]
+1）未持有
+dp[i][0] = max(dp[i-1][0], dp[i-1][1]+prices[i]-fee)
+2）持有
+dp[i][1] = max(dp[i-1][1], dp[i-1][0]-prices[i])
+base case:
+dp[0][1] = -prices[0]
+*** 代码
+#+BEGIN_SRC python
+class Solution:
+    def maxProfit(self, prices: List[int], fee: int) -> int:
+        if not prices:
+            return 0
+        dp = [[0, 0]for i in range(len(prices))]
+        dp[0][1] = -prices[0]
+        for i in range(1, len(prices)):
+            dp[i][0] = max(dp[i-1][0], dp[i-1][1]+prices[i]-fee)
+            dp[i][1] = max(dp[i-1][1], dp[i-1][0]-prices[i])
+        return dp[len(prices)-1][0]
+#+END_SRC

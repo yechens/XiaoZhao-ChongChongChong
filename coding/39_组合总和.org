@@ -1,0 +1,48 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成34）/截屏2020-06-24 下午3.33.54.png @ 2020-06-24 15:33:57
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-24_15-33-57_%E6%88%AA%E5%B1%8F2020-06-24%20%E4%B8%8B%E5%8D%883.33.54.png]]
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成35）/截屏2020-06-24 下午3.34.06.png @ 2020-06-24 15:34:09
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-24_15-34-09_%E6%88%AA%E5%B1%8F2020-06-24%20%E4%B8%8B%E5%8D%883.34.06.png]]
+
+* 思路
+*** 回溯法
+**** 不断更新target和组合tmp
+**** 因为可能多次选取，所以每一次都要遍历所有的候选数字
+**** 最后，注意对选取结果去重！
+* code
+#+BEGIN_SRC python
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+
+        # 1.如果只是求组合数目，问题简化为完全背包问题
+        # dp = [0] * (target + 1)
+        # dp[0] = 1
+        # candidates.sort() 
+        # for c in candidates:
+        #     if c > target:        
+        #         break
+        #     for i in range(c, target + 1):
+        #         dp[i] += dp[i-c]
+        # return dp[target]
+
+        # 2.要求具体的组合，需要用回溯法
+        res = []
+        candidates.sort()
+        def helper(target, path):
+            if target == 0:
+                # 注意这里要去重
+                tmp = path[:] 
+                tmp.sort() 
+                if tmp not in res:
+                    res.append(tmp)
+                return
+            for c in candidates: # 因为可能多次选取，每一次都要遍历所有的候选数字
+                if c > target: 
+                    break
+                helper(target - c, path + [c, ])
+        helper(target, [])
+        return res
+#+END_SRC
+

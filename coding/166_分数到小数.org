@@ -1,0 +1,40 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成36）/截屏2020-06-24 下午3.35.34.png @ 2020-06-24 15:35:38
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-24_15-35-38_%E6%88%AA%E5%B1%8F2020-06-24%20%E4%B8%8B%E5%8D%883.35.34.png]]
+
+* 思路
+*** 核心思想：当余数出现循环的时候，对应的商也会循环
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成37）/截屏2020-06-24 下午3.36.16.png @ 2020-06-24 15:36:20
+[[file:Screen-Pictures/%E6%80%9D%E8%B7%AF/2020-06-24_15-36-20_%E6%88%AA%E5%B1%8F2020-06-24%20%E4%B8%8B%E5%8D%883.36.16.png]]
+
+* code
+#+BEGIN_SRC python
+class Solution:
+    def fractionToDecimal(self, numerator: int, denominator: int) -> str:
+        flag = 1 if numerator*denominator>=0 else -1
+        numerator = abs(numerator)
+        denominator = abs(denominator) #python对于负数的除法依然是向下取整，题中的要求是按照绝对值除法余数的，所以取绝对值
+       
+        head = numerator//denominator
+        head = str(head) if flag>0 else '-'+str(head)
+
+        rest = numerator%denominator
+        res = []
+        rest_dic = {}  #注意到余数只能取0(除尽了),1,2,....denominator-1这么多情况,用字典计算余数出现的最后一次位置，一旦发生了重复代表从余数上一次在字典中记录的位置开始发生了循环
+        ind = 0
+        while(rest!=0 and rest not in rest_dic):          
+            rest_dic[rest] = ind
+            rest *= 10
+            res.append(str(rest//denominator))
+            rest = rest%denominator
+            ind += 1
+
+        if not res:
+            return head
+        if rest==0:
+            return head+'.'+''.join(res) # 能除尽
+        else:
+            return head+'.'+''.join(res[:rest_dic[rest]])+'('+''.join(res[rest_dic[rest]:])+')'
+
+#+END_SRC

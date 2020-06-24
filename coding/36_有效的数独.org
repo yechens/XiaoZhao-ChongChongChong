@@ -1,0 +1,38 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成38）/截屏2020-06-25 上午6.59.08.png @ 2020-06-25 06:59:12
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-25_06-59-12_%E6%88%AA%E5%B1%8F2020-06-25%20%E4%B8%8A%E5%8D%886.59.08.png]]
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成39）/截屏2020-06-25 上午6.59.27.png @ 2020-06-25 06:59:30
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-25_06-59-30_%E6%88%AA%E5%B1%8F2020-06-25%20%E4%B8%8A%E5%8D%886.59.27.png]]
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成40）/截屏2020-06-25 上午6.59.51.png @ 2020-06-25 06:59:55
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-25_06-59-55_%E6%88%AA%E5%B1%8F2020-06-25%20%E4%B8%8A%E5%8D%886.59.51.png]]
+
+* 思路
+**** 分别开辟一个数组，记录某行、某列、某3*3宫格内，查看某位数字是否已经被摆放
+**** 子数独宫格id = i // 3 * 3 + j // 3
+**** i是行标，j是列标。行标决定一组block的起始位置（因为block为3行，所以除3取整得到组号，又因为每组block为3个，所以需要乘3），列标再细分出是哪个block（因为block是3列，所以除3取整）
+* code
+#+BEGIN_SRC python
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+
+        # 分别开辟一个数组，记录某行、某列、某3*3宫格内，某位数字是否已经被摆放
+        row = [[0] * 9 for _ in range(9)]
+        col = [[0] * 9 for _ in range(9)]
+        block = [[0] * 9 for _ in range(9)]
+        for i in range(9):
+            for j in range(9):
+                if board[i][j] == '.':
+                    continue
+                block_id = i // 3 * 3 + j // 3
+                num = ord(board[i][j]) - 49 # '1' -> 0
+                # 某个数num已经在行/列/3*3宫格内出现过
+                if row[i][num]==1 or col[num][j] == 1 or block[block_id][num]==1:
+                    return False
+                row[i][num] = 1
+                col[num][j] = 1
+                block[block_id][num] = 1
+        return True
+#+END_SRC

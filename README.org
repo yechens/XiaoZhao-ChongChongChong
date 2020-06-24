@@ -145,6 +145,7 @@
     * [[file:./coding/208_实现Trie(前缀树).py][208.实现Trie(前缀树)]]➕
 **** 数组
     * [[file:/coding/31_下一个排列.py][31.下一个排列]]
+    * [[file:/coding/36_有效的数独.org][36.有效的数独]]
     * [[file:/coding/48_旋转图像.org][48.旋转图像]]
     * [[file:./coding/169_多数元素.py][169.多数元素😄]]
     * [[file:/coding/240_搜索二维矩阵II.py][240.搜索二维矩阵 II😄]]

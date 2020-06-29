@@ -1,0 +1,46 @@
+* 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成10）/截屏2020-06-29 下午3.45.18.png @ 2020-06-29 15:45:20
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-29_15-45-20_%E6%88%AA%E5%B1%8F2020-06-29%20%E4%B8%8B%E5%8D%883.45.18.png]]
+* 思路
++ DP:dp[i]表示组成数目为i所需最小的硬币数目，那么组成i的最后一个硬币可以是coins中的任何一个硬币，dp[i] = min(dp[i-coins[0]], dp[i-coins[1]].....)
++ BFS:将amount依层次往下按照coins进行拆分，直至拆分为0或者无法进行拆分返回-1为止。利用visited保存拆分过的节点，进行剪枝
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成9）/截屏2020-06-29 下午3.44.49.png @ 2020-06-29 15:44:52
+[[file:Screen-Pictures/%E6%80%9D%E8%B7%AF/2020-06-29_15-44-52_%E6%88%AA%E5%B1%8F2020-06-29%20%E4%B8%8B%E5%8D%883.44.49.png]]
+* code
+#+BEGIN_SRC python
+# DP-1704ms
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        if not coins:
+            return -1
+        dp = [float('inf') for i in range(amount+1)]
+        dp[0] = 0
+        for coin in coins:
+            for x in range(coin, amount+1):
+                dp[x] = min(dp[x], dp[x-coin]+1)
+        return dp[amount] if dp[amount]!=float('inf') else -1
+
+# BFS
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        if not amount:
+            return 0
+        queue = [(amount, 0)]
+        visited = set([amount])
+        step = 0
+        while queue:
+            step += 1
+            q_l = len(queue)
+            for i in range(q_l):
+                node = queue.pop(0)
+		# 需要判断是否>=coin，否则无法继续拆分；
+		# 必须取=，否则后面无法遇到正确答案；
+                residual = [node[0]-coin for coin in coins if node[0]-coin>=0]
+                for re in residual:
+                    if re == 0:
+                        return step
+                    elif re not in visited:
+                        visited.add(re)
+                        queue.append((re, step))
+        return -1
+#+END_SRC

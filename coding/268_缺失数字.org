@@ -1,0 +1,29 @@
+* 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成8）/截屏2020-06-29 下午3.43.41.png @ 2020-06-29 15:43:44
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-29_15-43-44_%E6%88%AA%E5%B1%8F2020-06-29%20%E4%B8%8B%E5%8D%883.43.41.png]]
+* 思路
+  + 常规法：以空间换时间，构建长度为n+1的数组array，遍历nums，将遇到的元素按照下标存储在array中，即array[n]=n，之后遍历array,找出元素值等于-1的索引即为答案
+  + 数学求和法：遍历nums，累加元素，再减去下标。最后加上len(nums)
+* code
+#+BEGIN_SRC python
+# O(n)/O(n)
+class Solution:
+    def missingNumber(self, nums: List[int]) -> int:
+        array = [-1 for i in range(len(nums)+1)]
+        for n in nums:
+            array[n] = n
+        for i in array:
+            if i == -1:
+                return array.index(i)
+
+# O(n)/O(1)
+class Solution:
+    def missingNumber(self, nums: List[int]) -> int:
+        # 数学
+        S = 0
+        for i, n in enumerate(nums):
+            S -= n
+            S += i
+        S += len(nums)
+        return S
+#+END_SRC

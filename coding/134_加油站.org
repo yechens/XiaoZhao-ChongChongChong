@@ -1,0 +1,41 @@
+* 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成7）/截屏2020-06-29 下午3.42.55.png @ 2020-06-29 15:42:58
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-29_15-42-58_%E6%88%AA%E5%B1%8F2020-06-29%20%E4%B8%8B%E5%8D%883.42.55.png]]
+* 思路
++ 暴力解法：1)sum(gas)>=sum(cost);2)出发点的gas>=cost
++ 贪心：倘若存在i -> j的路径，那么gas(i-j) >= cost(i-j)，也即是gas[k]-cost[k]从i - j的累加和>=0，否则这个路径不存在。倘若到达j点的剩余油量为负数，说明i 不能顺利到达j，可以直到i和j之间的点也不能作为出发点到达j，因为gas[i]-cost[i]>=0，如果设定i+1为出发点，倘若gas[i+1]-cost[i+1]>=0，那么从i+1 到j的累加和肯定小于等于i到j的累加和，连i到j的累加和都小于0，何况i+1 到j，因此新的可能的出发点只能是j+1。如果sum(gas)>=sum(cost)则必然有解，因此遍历一遍即可。
+* code
+#+BEGIN_SRC python
+# 暴力法
+class Solution:
+    def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
+        # 暴力法
+        if not sum(gas) >= sum(cost):
+            return -1
+        for i, (g, c) in enumerate(zip(gas, cost)):
+            if g < c:
+                continue
+            current_gas = 0
+            new_gas, new_cost = gas[i:] + gas[:i], cost[i:] + cost[:i]
+            for j, (ng, nc) in enumerate(zip(new_gas, new_cost)):
+                current_gas = current_gas + ng - nc
+                if current_gas < 0:
+                    break
+            if j == len(new_gas)-1:
+                return i
+        return -1
+
+# 贪心
+class Solution:
+    def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
+        sum, total, start = 0, 0, 0
+        for i in range(len(gas)):
+            total += (gas[i] - cost[i])
+            if(sum < 0):
+                sum = gas[i]-cost[i]
+                start = i
+            else:
+                sum += (gas[i]-cost[i])
+            # print(sum)
+        return start if total >= 0 else -1
+#+END_SRC

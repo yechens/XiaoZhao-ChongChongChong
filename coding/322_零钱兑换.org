@@ -20,7 +20,7 @@ class Solution:
                 dp[x] = min(dp[x], dp[x-coin]+1)
         return dp[amount] if dp[amount]!=float('inf') else -1
 
-# BFS
+# BFS-1380ms
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
         if not amount:
@@ -43,4 +43,7 @@ class Solution:
                         visited.add(re)
                         queue.append((re, step))
         return -1
+
+# DFS+贪心
+
 #+END_SRC

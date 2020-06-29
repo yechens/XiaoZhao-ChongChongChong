@@ -1,0 +1,31 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成41）/截屏2020-06-29 上午9.01.53.png @ 2020-06-29 09:01:58
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-29_09-01-58_%E6%88%AA%E5%B1%8F2020-06-29%20%E4%B8%8A%E5%8D%889.01.53.png]]
+
+* 思路
+**** 对于一系列的位，例如 [1, 1, 0, 1, 1]，只要有一个零值的位，那么之后一系列位的与结果运算都将为零。
+**** 当(m,m+1,...n-1,n)进行连续“与操作”时，最终剩余部分是各个字符二进制表示的公共部分（公共前缀）
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成42）/截屏2020-06-29 上午9.03.57.png @ 2020-06-29 09:04:01
+[[file:Screen-Pictures/%E6%80%9D%E8%B7%AF/2020-06-29_09-04-01_%E6%88%AA%E5%B1%8F2020-06-29%20%E4%B8%8A%E5%8D%889.03.57.png]]
+
+**** 所以我们可以将m、n的二进制分别向右移动，直到数字相等，即数字被缩减为它们的公共前缀。然后，通过将公共前缀向左移动，将零附加到公共前缀以获得最终结果。
+* code
+#+BEGIN_SRC python
+class Solution:
+    def rangeBitwiseAnd(self, m: int, n: int) -> int:
+
+        offset = 0
+        while m != n:
+            m >>= 1
+            n >>= 1
+            offset += 1
+        n <<= offset
+        return n
+
+        # 暴力法，超时
+        # ans = m
+        # for i in range(m+1, n+1):
+        #     ans &= i
+        # return ans
+#+END_SRC

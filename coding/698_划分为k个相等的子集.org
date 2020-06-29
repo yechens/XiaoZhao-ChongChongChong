@@ -1,0 +1,39 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成43）/截屏2020-06-29 上午9.08.38.png @ 2020-06-29 09:08:41
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-29_09-08-41_%E6%88%AA%E5%B1%8F2020-06-29%20%E4%B8%8A%E5%8D%889.08.38.png]]
+
+* 思路
+*** 回溯法
+**** 对于k个要求的组合，不断回溯搜索；同时开辟一个数组记录nums中的每一个数是否已被访问
+**** 注意 badcase 判断（如 sum(nums) 是否能被 k 整除）
+* code
+#+BEGIN_SRC python
+class Solution:
+    def canPartitionKSubsets(self, nums: List[int], k: int) -> bool:
+
+        # 需要开辟一个额外数组保持 nums 中的数是否已经被访问
+        tot = sum(nums)
+        mmax = max(nums)
+        # badcase
+        if tot % k != 0 or mmax > tot // k:
+            return False
+        n = len(nums)
+        visited = [0] * n
+        target = tot // k 
+
+        def back(target, cur_sum, start, k):
+            if k == 0:
+                return True # k 个子集都构建完成了
+            if cur_sum == target: # 当前第 start 个子集构建成功，去构建下一个集合
+                return back(target, 0, 0, k - 1) # 需要构建的总数 - 1
+            for i in range(start, n): # 从 start 开始搜索 ！
+                if visited[i] == 0 and cur_sum + nums[i] <= target:
+                    visited[i] = 1 # 先占位，表示nums[i]暂时已被访问
+                    if back(target, cur_sum + nums[i], i + 1, k):
+                        return True 
+                    visited[i] = 0 # 继续寻找其他可能的组合
+            return False
+        
+        return back(target, 0, 0, k)
+#+END_SRC

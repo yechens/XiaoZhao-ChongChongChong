@@ -1,0 +1,48 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成45）/截屏2020-06-30 下午11.38.02.png @ 2020-06-30 23:38:05
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-30_23-38-05_%E6%88%AA%E5%B1%8F2020-06-30%20%E4%B8%8B%E5%8D%8811.38.02.png]]
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成46）/截屏2020-06-30 下午11.38.14.png @ 2020-06-30 23:38:17
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-30_23-38-17_%E6%88%AA%E5%B1%8F2020-06-30%20%E4%B8%8B%E5%8D%8811.38.14.png]]
+
+* 思路
+*** 二分查找法
+**** 通过确定一个数中有多少个丑数因子，来确定是第几个丑数
+**** 计算 X 中包含多少个丑数因子的方法：sum(情况) = X/a + X/b + X/c - X/MCM_a_b - X/MCM_a_c - X/MCM_b_c + X/MCM_a_b_c
+**** MCM_a_b 表示a、b的最小公倍数
+* code
+#+BEGIN_SRC python
+class Solution:
+    def nthUglyNumber(self, n: int, a: int, b: int, c: int) -> int:
+
+        # 二分查找法
+        # 通过确定一个数中有多少个丑数因子，来确定是第几个丑数
+        # 计算 X 中包含多少个丑数因子的方法：
+        # sum(情况) = X/a + X/b + X/c - X/MCM_a_b - X/MCM_a_c - X/MCM_b_c + X/MCM_a_b_c
+
+        left, right = min(a,b,c), min(a,b,c) * n # 上下边界
+
+        import math
+        def binarySearch(low, high, n):
+            if low >= high:
+                return low
+            mid = low + (high - low) // 2
+            lcm_ab = a*b // math.gcd(a,b)
+            lcm_bc = b*c // math.gcd(b,c)
+            lcm_ac = a*c // math.gcd(a,c)
+            lcm_abc = lcm_ab*c // math.gcd(lcm_ab,c)
+
+            sum_mid = mid // a + mid // b + mid // c - mid // lcm_ab - mid // lcm_ac - mid // lcm_bc + mid // lcm_abc
+            if sum_mid == n:
+                return mid
+            elif sum_mid >= n:
+                return binarySearch(low, mid - 1, n)
+            else:
+                return binarySearch(mid + 1, high, n)
+
+        res = binarySearch(left, right, n)
+        a_left, b_left, c_left = res % a, res % b, res % c 
+        res -= min(a_left, b_left, c_left)
+        return res
+#+END_SRC

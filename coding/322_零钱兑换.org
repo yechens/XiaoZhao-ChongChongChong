@@ -6,6 +6,7 @@
 + BFS:将amount依层次往下按照coins进行拆分，直至拆分为0或者无法进行拆分返回-1为止。利用visited保存拆分过的节点，进行剪枝
 #+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成9）/截屏2020-06-29 下午3.44.49.png @ 2020-06-29 15:44:52
 [[file:Screen-Pictures/%E6%80%9D%E8%B7%AF/2020-06-29_15-44-52_%E6%88%AA%E5%B1%8F2020-06-29%20%E4%B8%8B%E5%8D%883.44.49.png]]
++ DFS：dfs(amount)返回amount能拆分的最小零钱数目，用memo存储已经计算得到的结果，进行剪枝
 * code
 #+BEGIN_SRC python
 # DP-1704ms
@@ -44,6 +45,41 @@ class Solution:
                         queue.append((re, step))
         return -1
 
-# DFS+贪心
+# DFS-2280ms
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        # DFS
+        memo = {}
+        def dfs(memo, amount):
+            if amount == 0:
+                return 0
+            if amount not in memo:
+                cnt = float('inf')
+                for coin in coins:
+                    if amount-coin >= 0:
+                        cnt = min(cnt, dfs(memo, amount-coin)+1)
+                memo[amount] = cnt
+            return memo[amount]
+        ans = dfs(memo, amount)
+        return ans if ans != float('inf') else -1
 
+# 贪心
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        # DFS+贪心剪枝
+        def coinChanging(coins, amount, c_index, count, ans):
+            if amount == 0:
+                return min(ans, count)
+            if c_index == len(coins):
+                return ans
+            k = amount // coins[c_index]
+            while k >= 0 and k + count < ans:
+                ans = coinChanging(coins, amount - k * coins[c_index], c_index + 1, count + k, ans)
+                k -= 1
+            return ans
+        if amount == 0:
+            return 0
+        coins.sort(reverse=True)
+        ans = coinChanging(coins, amount, 0, 0, float('inf'))
+        return ans if ans != float('inf') else -1
 #+END_SRC

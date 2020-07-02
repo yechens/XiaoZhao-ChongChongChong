@@ -1,0 +1,45 @@
+* 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成16）/截屏2020-07-02 下午1.23.37.png @ 2020-07-02 13:23:39
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-02_13-23-39_%E6%88%AA%E5%B1%8F2020-07-02%20%E4%B8%8B%E5%8D%881.23.37.png]]
+* 思路
++ DP：类似于[[https://leetcode-cn.com/problems/longest-increasing-subsequence/][最长上升子序列]]这道题，只不过dp存储的是tuple，dp[i]=(a,b)表示以第i个元素结束的最长摆动序列长度为a；b表示第i个元素和前i-1个元素结束的最长摆动序列中最后一个元素的相对大小：0-相等/1-nums[k]>nums[k-1]/-1-nums[k]<nums[k-1]。
+
+因此前i个序列的最长摆动序列为，依次判断0～i-1的元素的最长摆动序列和第i个元素的相对大小以及摆动序列的最后元素的相对大小即可。
+* code
+#+BEGIN_SRC python
+# dp-248ms
+class Solution:
+    def wiggleMaxLength(self, nums: List[int]) -> int:
+        # special case
+        if not nums:
+            return 0
+        if len(nums)==1 or (len(nums)==2 and nums[0]==nums[1]):
+            return 1
+        elif len(nums)==2 and nums[0]!=nums[1]:
+            return 2
+        dp = [(1, 0) for i in range(len(nums))]
+        # base case
+        if nums[1]-nums[0]<0:
+            dp[1] = (2, -1) 
+        elif nums[1]-nums[0] > 0:
+            dp[1] = (2, 1)
+        for i in range(2, len(nums)):
+            for j in range(i):
+	        # 和第0个元素组合的摆动序列
+                if dp[j][0] == 1 and nums[i]!=nums[j]:
+                    dp[i] =  (2, -1 if nums[i]<nums[j] else 1)
+                    continue
+		# 和第j个元素组合，且    
+                if nums[i]-nums[j]>0 and dp[j][1]==-1:
+                    if dp[j][0] + 1 > dp[i][0]:
+                        dp[i] = (dp[j][0]+1, 1)
+                    continue
+                if nums[i]-nums[j]<0 and dp[j][1]==1:
+                    if dp[j][0] + 1 > dp[i][0]:
+                        dp[i] = (dp[j][0]+1, -1)
+                    continue
+                if nums[i]==nums[j]:
+                    if dp[j][0] > dp[i][0]:
+                        dp[i] = (dp[j][0], 0)
+        return dp[len(nums)-1][0]
+#+END_SRC

@@ -1,0 +1,25 @@
+* 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成15）/截屏2020-07-02 上午10.51.59.png @ 2020-07-02 10:52:04
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-02_10-52-04_%E6%88%AA%E5%B1%8F2020-07-02%20%E4%B8%8A%E5%8D%8810.51.59.png]]
+* 思路
+遍历矩阵，找出0的行列索引，分别存进set()中，再遍历一遍矩阵，将行列在set中的元素置0
+* code
+#+BEGIN_SRC python
+class Solution:
+    def setZeroes(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        # 暴力法
+        m, n = len(matrix), len(matrix[0])
+        row, column = set(), set()
+        for i in range(m):
+            for j in range(n):
+                if matrix[i][j] == 0:
+                    row.add(i)
+                    column.add(j)
+        for i in range(m):
+            for j in range(n):
+                if i in row or j in column:
+                    matrix[i][j] = 0
+#+END_SRC

@@ -1,0 +1,32 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成53）/截屏2020-07-02 上午10.43.15.png @ 2020-07-02 10:43:18
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-02_10-43-18_%E6%88%AA%E5%B1%8F2020-07-02%20%E4%B8%8A%E5%8D%8810.43.15.png]]
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成54）/截屏2020-07-02 上午10.43.34.png @ 2020-07-02 10:43:37
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-02_10-43-37_%E6%88%AA%E5%B1%8F2020-07-02%20%E4%B8%8A%E5%8D%8810.43.34.png]]
+
+* 思路
+**** 先计算各个数字的权重，然后排序（先按权重，再按数值大小）
+* code
+#+BEGIN_SRC python
+class Solution:
+    def getKth(self, lo: int, hi: int, k: int) -> int:
+
+        if lo == hi:
+            return lo
+        def change(x):
+            cot = 0
+            while x != 1:
+                if x%2 == 0:
+                    x /= 2
+                else:
+                    x = 3 * x + 1
+                cot += 1
+            return cot
+        
+        nums = [(i, change(i)) for i in range(lo, hi+1)]
+        # sort 排序 O(nlogn)
+        nums = sorted(nums, key=lambda x: (x[1], x[0]))
+        return nums[k-1][0]
+#+END_SRC

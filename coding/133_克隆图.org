@@ -1,0 +1,45 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成55）/截屏2020-07-02 上午10.44.33.png @ 2020-07-02 10:44:36
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-02_10-44-36_%E6%88%AA%E5%B1%8F2020-07-02%20%E4%B8%8A%E5%8D%8810.44.33.png]]
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成56）/截屏2020-07-02 上午10.44.45.png @ 2020-07-02 10:44:47
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-02_10-44-47_%E6%88%AA%E5%B1%8F2020-07-02%20%E4%B8%8A%E5%8D%8810.44.45.png]]
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成57）/截屏2020-07-02 上午10.44.54.png @ 2020-07-02 10:44:56
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-02_10-44-56_%E6%88%AA%E5%B1%8F2020-07-02%20%E4%B8%8A%E5%8D%8810.44.54.png]]
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成58）/截屏2020-07-02 上午10.45.08.png @ 2020-07-02 10:45:10
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-02_10-45-10_%E6%88%AA%E5%B1%8F2020-07-02%20%E4%B8%8A%E5%8D%8810.45.08.png]]
+
+* 思路
+*** BFS
+**** 用一个 hash字典 存放已访问过的新克隆的结点（避免重复访问），列表 queue 中存放现有图的结点；不断访问结点node及其neighbors
+* code
+#+BEGIN_SRC python
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val, neighbors):
+        self.val = val
+        self.neighbors = neighbors
+"""
+class Solution:
+    def cloneGraph(self, node: 'Node') -> 'Node':
+        if not node:
+            return None
+        # bfs
+        hash = {} # hash 中存放已访问过的新克隆的结点
+        queue = [node] # queue 中存放现有图的结点
+        new = Node(node.val, [])
+        hash[node] = new
+        while queue:
+            t = queue[0]
+            queue = queue[1:]
+            for nei in t.neighbors:
+                if nei not in hash:
+                    hash[nei] = Node(nei.val, [])
+                    queue.append(nei)
+                hash[t].neighbors.append(hash[nei])
+        return new
+#+END_SRC

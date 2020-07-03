@@ -1,0 +1,33 @@
+* 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成18）/截屏2020-07-03 下午3.17.59.png @ 2020-07-03 15:18:01
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-03_15-18-01_%E6%88%AA%E5%B1%8F2020-07-03%20%E4%B8%8B%E5%8D%883.17.59.png]]
+* 思路
++ DFS+层序遍历:用一个函数dfs(A，B)判断A和B是否递归的具有相同的结构，用层序方法依次遍历🌲中每一个节点，判断A中是否存在和B递归的具有相同结构的部分即可
+* code
+#+BEGIN_SRC python
+class Solution:
+    def isSubStructure(self, A: TreeNode, B: TreeNode) -> bool:
+        if not B or not A:
+            return False
+        def dfs(A, B):
+            if not B:
+                return True
+            if not A:
+                return False
+            if A.val == B.val:
+                return dfs(A.left, B.left) and dfs(A.right, B.right)
+            else:
+                return False
+        queue = [A]
+        while queue:
+            queue_len = len(queue)
+            for i in range(queue_len):
+                node = queue.pop(0)
+                if dfs(node, B):
+                    return True
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+        return False
+#+END_SRC

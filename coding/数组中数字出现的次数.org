@@ -1,0 +1,23 @@
+* 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成20）/截屏2020-07-04 上午11.51.08.png @ 2020-07-04 11:51:11
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-04_11-51-11_%E6%88%AA%E5%B1%8F2020-07-04%20%E4%B8%8A%E5%8D%8811.51.08.png]]
+* 思路
+[[https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/solution/jie-di-qi-jiang-jie-fen-zu-wei-yun-suan-by-eddievi/]]
+* code
+#+BEGIN_SRC python
+class Solution:
+    def singleNumbers(self, nums: List[int]) -> List[int]:
+        k = 0
+        for n in nums:
+            k ^= n
+        mask = 1
+        while (k & mask==0):
+            mask <<= 1
+        a, b = 0, 0
+        for n in nums:
+            if n & mask == 0:
+                a ^= n
+            else:
+                b ^= n
+        return [a, b]
+#+END_SRC

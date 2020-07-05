@@ -1,0 +1,121 @@
+* 路径总和I
+** 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成21）/截屏2020-07-05 下午4.45.18.png @ 2020-07-05 16:45:21
+[[file:Screen-Pictures/%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8CI/2020-07-05_16-45-21_%E6%88%AA%E5%B1%8F2020-07-05%20%E4%B8%8B%E5%8D%884.45.18.png]]
+** 思路
+DFS函数判断是否存在一条路径满足条件，全局变量ans维护是否找到了一条存在的路径，如果找到了，就不用继续找了，对DFS直接剪枝
+** code
+ #+BEGIN_SRC python
+class Solution:
+    def hasPathSum(self, root: TreeNode, sum: int) -> bool:
+        if not root:
+            return False
+        ans = False
+        def dfs(root, path, s):
+            nonlocal ans
+	    # 剪枝
+            if not ans:
+                path_ = path + [root.val]
+                s_ = s + root.val
+                if not root.left and not root.right and s_ == sum:
+                    ans = True
+                if root.left:
+                    dfs(root.left, path_, s_)
+                if root.right:
+                    dfs(root.right, path_, s_)
+        dfs(root, [], 0)
+        return ans
+ #+END_SRC
+* 路径总和II
+** 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成22）/截屏2020-07-05 下午10.58.35.png @ 2020-07-05 22:58:37
+[[file:Screen-Pictures/%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8CII/2020-07-05_22-58-37_%E6%88%AA%E5%B1%8F2020-07-05%20%E4%B8%8B%E5%8D%8810.58.35.png]]
+** 思路
+DFS函数判断到叶子节点时，路径之和是否满足条件，添加到全局变量ans中即可，需要全部遍历完
+** code
+#+BEGIN_SRC python
+class Solution:
+    def pathSum(self, root: TreeNode, sum: int) -> List[List[int]]:
+        ans = []
+        if not root:
+            return []
+        def dfs(root, s, path):
+            nonlocal ans
+            path_ = path + [root.val]
+            s_ = s + root.val
+            if not root.left and not root.right:
+                if s_ == sum:
+                    ans.append(path_)
+            else:
+                if root.left:
+                    dfs(root.left, s_, path_)
+                if root.right:
+                    dfs(root.right, s_, path_)
+        dfs(root, 0, [])
+        return ans
+#+END_SRC
+* 路径总和III
+** 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成23）/截屏2020-07-05 下午11.16.58.png @ 2020-07-05 23:17:02
+[[file:Screen-Pictures/%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8CIII/2020-07-05_23-17-02_%E6%88%AA%E5%B1%8F2020-07-05%20%E4%B8%8B%E5%8D%8811.16.58.png]]
+** 思路
++ BFS+DFS：BFS遍历🌲中每一个节点，用DFS的函数找出以当前节点为根的子树可能存在的满足条件的路径总和
++ 前N项和优化：DFS函数判断该节点的元素路径中是否存在子路径满足条件，对于前N项和而言，如果S[k]-S[j]==sum，则说明存在从j+1到k的路径满足条件，需要注意的是，子路径包含该路径本身
+** code
+#+BEGIN_SRC python
+# BFS+DFS-5348 ms
+class Solution:
+    def pathSum(self, root: TreeNode, sum: int) -> int:
+        ans = 0
+        if not root:
+            return ans
+        def dfs(root, s, path):
+            nonlocal ans
+            s_ = s + root.val
+            path_ = path + [root]
+            if s_ == sum:
+                ans += 1
+            if root.left:
+                dfs(root.left, s_, path_)
+            if root.right:
+                dfs(root.right, s_, path_)
+        queue = [root]
+        while queue:
+            queue_len = len(queue)
+            for i in range(queue_len):
+                node = queue.pop(0)
+                dfs(node, 0, [])
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+        return ans
+
+# 前N项和优化-196 ms
+class Solution:
+    def pathSum(self, root: TreeNode, sum: int) -> int:
+        ans = 0
+        if not root:
+            return ans
+        def dfs(root, s, pre_sum):
+            nonlocal ans
+            s_ = s + root.val
+	    # 从根节点到该节点的路径和是否满足条件
+            if s_ == sum:
+                ans += 1
+            pre_sum_ = pre_sum + [s_]
+	    # 是否存在中间路径和满足条件
+            for p in pre_sum:
+                if s_ - p == sum:
+                    ans += 1
+            if root.left:
+                dfs(root.left, s_, pre_sum_)
+            if root.right:
+                dfs(root.right, s_, pre_sum_)
+        dfs(root, 0, [])
+        return ans
+#+END_SRC
+* 路径总和IV
+** 题目
+** 思路
+** code

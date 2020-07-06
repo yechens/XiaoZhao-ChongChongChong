@@ -115,7 +115,96 @@ class Solution:
         dfs(root, 0, [])
         return ans
 #+END_SRC
-* 路径总和IV
+
+* 最长同值路径
 ** 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成24）/截屏2020-07-06 上午9.43.43.png @ 2020-07-06 09:43:46
+[[file:Screen-Pictures/%E6%9C%80%E9%95%BF%E5%90%8C%E5%80%BC%E8%B7%AF%E5%BE%84/2020-07-06_09-43-46_%E6%88%AA%E5%B1%8F2020-07-06%20%E4%B8%8A%E5%8D%889.43.43.png]]
 ** 思路
+[[https://leetcode-cn.com/problems/longest-univalue-path/solution/dfsyi-ceng-di-gui-by-bu-hui-er-cha-shu/][我的解法]]
 ** code
+#+BEGIN_SRC python
+class Solution:
+    def longestUnivaluePath(self, root: TreeNode) -> int:
+        if not root:
+            return 0
+        ans = 0
+        def dfs(root, s):
+            nonlocal ans
+            left, right = 0, 0
+            if root.left:
+                left = max(dfs(root.left, root.val))
+                # print(left)
+            if root.right:
+                right = max(dfs(root.right, root.val))
+                # print(right)
+            ans = max(ans, left+right)
+            # print(ans)
+            if root.val != s:
+                return [0, 0]
+            else:
+                return [left+1, right+1]
+
+        left, right = 0, 0
+        if root.left:
+            left = max(dfs(root.left, root.val))
+        if root.right:
+            right = max(dfs(root.right, root.val))
+        ans = max(ans, left+right)
+        return ans
+#+END_SRC
+
+* 从叶结点开始的最小字符串
+** 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成25）/截屏2020-07-06 上午10.12.47.png @ 2020-07-06 10:12:50
+[[file:Screen-Pictures/%E4%BB%8E%E5%8F%B6%E7%BB%93%E7%82%B9%E5%BC%80%E5%A7%8B%E7%9A%84%E6%9C%80%E5%B0%8F%E5%AD%97%E7%AC%A6%E4%B8%B2/2020-07-06_10-12-50_%E6%88%AA%E5%B1%8F2020-07-06%20%E4%B8%8A%E5%8D%8810.12.47.png]]
+** 思路
+类似于上面的题目，dfs遍历节点，找出可能的最小字典序路径。需要注意的是，要提前将数字通过ASII码转换为字母chr(97+root.val)，后面方便直接对字符串进行字典序的比较；
+
+真正需要考虑的是需不需要剪枝，按照要求最小的字符串取决于首字母的字典序，而首字母在叶子节点，如果不全部遍历完，很难知道某个路径是不是最小的，因此每个叶子节点都需要遍历。
+** code
+#+BEGIN_SRC python
+class Solution:
+    def smallestFromLeaf(self, root: TreeNode) -> str:
+        if not root:
+            return None
+        # print(chr(97))
+        ans = ''
+        def dfs(root, s):
+            nonlocal ans
+            s_ = chr(97+root.val) + s
+            if not root.left and not root.right:
+                if not ans:
+                   ans = s_
+                elif s_ < ans:
+                    ans = s_
+            if root.left:
+                dfs(root.left, s_)
+            if root.right:
+                dfs(root.right, s_)
+        dfs(root, '')
+        return ans
+#+END_SRC
+* 二叉树中的最大路径和-困难
+** 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成26）/截屏2020-07-06 上午10.30.24.png @ 2020-07-06 10:30:28
+[[file:Screen-Pictures/%E4%BB%8E%E5%8F%B6%E7%BB%93%E7%82%B9%E5%BC%80%E5%A7%8B%E7%9A%84%E6%9C%80%E5%B0%8F%E5%AD%97%E7%AC%A6%E4%B8%B2/2020-07-06_10-30-28_%E6%88%AA%E5%B1%8F2020-07-06%20%E4%B8%8A%E5%8D%8810.30.24.png]]
+** 思路
+对比于之前的题目，树中节点可能为负值，因此在求left和right时，应该和0做比较，如果子树返回的最大路径和小于0，则选择0。同时用全局变量存储最大值
+** code
+#+BEGIN_SRC python
+class Solution:
+    def maxPathSum(self, root: TreeNode) -> int:
+        ans = float('-inf')
+        def dfs(root):
+            nonlocal ans
+            left, right = 0, 0
+            if root.left:
+                left = max(left, max(dfs(root.left)))
+            if root.right:
+                right = max(right, max(dfs(root.right)))
+            ans = max(ans, root.val+left+right)
+            return [left+root.val, right+root.val]
+        dfs(root)
+        return ans
+#+END_SRC

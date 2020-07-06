@@ -1,0 +1,23 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成64）/截屏2020-07-06 下午7.23.09.png @ 2020-07-06 19:23:14
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-06_19-23-14_%E6%88%AA%E5%B1%8F2020-07-06%20%E4%B8%8B%E5%8D%887.23.09.png]]
+
+* 思路
+*** 和最长上升子序列思想一致
+**** 状态 dp[i] 表示以 i 结尾所能形成的最长上升子序列的长度。因为可以以任何顺序选择其中的一些数对来构造，所以先对 pairs 排序
+* code
+#+BEGIN_SRC python
+class Solution:
+    def findLongestChain(self, pairs: List[List[int]]) -> int:
+
+        pairs = sorted(pairs, key=lambda x: (x[0], -x[1]))
+        n = len(pairs)
+        dp = [1] * n
+        for i in range(1, n):
+            for j in range(i):
+                if pairs[j][1] < pairs[i][0]:
+                    dp[i] = max(dp[i], dp[j] + 1)
+        # print(dp)
+        return dp[-1]
+#+END_SRC

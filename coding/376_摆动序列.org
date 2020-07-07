@@ -1,15 +1,38 @@
 * 题目
 #+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成16）/截屏2020-07-02 下午1.23.37.png @ 2020-07-02 13:23:39
 [[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-02_13-23-39_%E6%88%AA%E5%B1%8F2020-07-02%20%E4%B8%8B%E5%8D%881.23.37.png]]
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成65）/截屏2020-07-07 下午3.04.27.png @ 2020-07-07 15:04:30
+[[file:Screen-Pictures/%E6%80%9D%E8%B7%AF/2020-07-07_15-04-30_%E6%88%AA%E5%B1%8F2020-07-07%20%E4%B8%8B%E5%8D%883.04.27.png]]
 * 思路
 + DP：类似于[[https://leetcode-cn.com/problems/longest-increasing-subsequence/][最长上升子序列]]这道题，只不过dp存储的是tuple，dp[i]=(a,b)表示以第i个元素结束的最长摆动序列长度为a；b表示第i个元素和前i-1个元素结束的最长摆动序列中最后一个元素的相对大小：0-相等/1-nums[k]>nums[k-1]/-1-nums[k]<nums[k-1]。
 
 因此前i个序列的最长摆动序列为，依次判断0～i-1的元素的最长摆动序列和第i个元素的相对大小以及摆动序列的最后元素的相对大小即可。
+**** 使用两个数组up、down分别保存上升、下降的状态
+**** 其中 up[i] 存的是目前为止最长的以第 i 个元素结尾的上升摆动序列的长度，down[i] 记录的是目前为止最长的以第i个元素结尾的下降摆动序列的长度。
+**** 注：子序列可以不连续，子串要连续
 * code
 #+BEGIN_SRC python
 # dp-248ms
 class Solution:
     def wiggleMaxLength(self, nums: List[int]) -> int:
+
+        # 7.7 补充一种 O(n) 的dp方法：
+	up = [0] * n
+        down = [0] * n
+        up[0], down[0] = 1, 1
+        for i in range(1, n):
+            if nums[i] > nums[i-1]:
+                up[i] = down[i-1] + 1
+                down[i] = down[i-1] # down[i] 不变
+            elif nums[i] < nums[i-1]:
+                down[i] = up[i-1] + 1
+                up[i] = up[i-1] # up[i] 不变
+            elif nums[i] == nums[i-1]:
+                up[i] = up[i-1]
+                down[i] = down[i-1]
+        return max(up[-1], down[-1])
+
+	# old：
         # special case
         if not nums:
             return 0

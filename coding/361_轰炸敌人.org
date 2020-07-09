@@ -1,0 +1,41 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成67）/截屏2020-07-09 下午4.23.41.png @ 2020-07-09 16:23:44
+[[file:Screen-Pictures/%E6%80%9D%E8%B7%AF/2020-07-09_16-23-44_%E6%88%AA%E5%B1%8F2020-07-09%20%E4%B8%8B%E5%8D%884.23.41.png]]
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成68）/截屏2020-07-09 下午4.24.10.png @ 2020-07-09 16:24:14
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-09_16-24-13_%E6%88%AA%E5%B1%8F2020-07-09%20%E4%B8%8B%E5%8D%884.24.10.png]]
+
+* 思路
+*** 搜索方向受限的DFS
+**** 因为只能炸一行、一列中的敌人，所以每次搜索时只能按同一个指定方向进行
+* code
+#+BEGIN_SRC python
+class Solution:
+    def maxKilledEnemies(self, grid: List[List[str]]) -> int:
+
+        # DFS
+        if not grid or not grid[0]:
+            return 0
+        m, n = len(grid), len(grid[0])
+
+        def dfs(i, j, cot, d): # 搜索方向受限的DFS(只能按d方向搜索)
+            if i < 0 or j < 0 or i>=m or j>=n or grid[i][j] == 'W':
+                return cot
+            if grid[i][j] == 'E': # 干掉了一个敌人
+                cot += 1
+            # 继续搜索
+            return dfs(i+d[0], j+d[1], cot, d)
+        mmin = 0
+        dist = [[0,1],[0,-1],[1,0],[-1,0]]
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] == '0': # 只有空格才能放炸弹！
+                    r = 0
+                    for d in dist:
+                        # 每次往同一个方向进行搜索
+                        r += dfs(i, j, 0, d)
+                    if r > mmin:
+                        mmin = r
+        return mmin
+#+END_SRC

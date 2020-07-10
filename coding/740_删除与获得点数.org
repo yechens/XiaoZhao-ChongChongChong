@@ -1,0 +1,27 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成69）/截屏2020-07-10 下午10.59.15.png @ 2020-07-10 22:59:19
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-10_22-59-19_%E6%88%AA%E5%B1%8F2020-07-10%20%E4%B8%8B%E5%8D%8810.59.15.png]]
+
+* 思路
+*** DP:打家劫舍
+**** 将nums数组转换为每一个数字出现的频次，例如[3,4,2]->[0,0,1,1,1]，长度为max(nums)
+**** 这样，动态转移方程和打家劫舍基本一致：dp[i] = max(dp[i-2] + i * times[i], dp[i-1])，times记录的是频次
+* code
+#+BEGIN_SRC python
+class Solution:
+    def deleteAndEarn(self, nums: List[int]) -> int:
+
+        if len(nums) <= 1: # badcase: nums 元素个数小于等于2
+            return nums[0] if nums else 0
+        # 转换成打家劫舍问题
+        mmax = max(nums)
+        times = [0] * (mmax + 1)
+        for num in nums:
+            times[num] += 1
+        dp = [0] * (mmax + 1)
+        dp[1] = times[1] * 1
+        for i in range(2, mmax + 1):
+            dp[i] = max(dp[i-2] + times[i] * i, dp[i-1])
+        return dp[-1]
+#+END_SRC

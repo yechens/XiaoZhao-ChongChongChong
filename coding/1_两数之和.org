@@ -117,5 +117,96 @@ class Solution:
                                 left += 1
         return ans
 #+END_SRC
+* 和为K的子数组
+** 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成35）/截屏2020-07-10 下午11.45.59.png @ 2020-07-10 23:46:02
+[[file:Screen-Pictures/%E5%92%8C%E4%B8%BAK%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/2020-07-10_23-46-02_%E6%88%AA%E5%B1%8F2020-07-10%20%E4%B8%8B%E5%8D%8811.45.59.png]]
+** 思路
++ 前N项和：遍历数组，计算前N项和替代数组原本的元素，节省存储空间，对于第i个前N项和，遍历j~[0,i-1]的前N项和，判断nums[i]-nums[j]是否等于k，记录数量即可。时间复杂度O(n**2)，空间复杂度O(1)。无法通过全部的测试用例，会超时
++ 哈希表优化：对于第i个前N项和，当遍历[0,i-1]的元素也即是找到前面是否存在presum[i]-k的前N项和的值，那么可以直接用字典存储每个前N项和的值对应的数目，第i个前N项和只需要查找当前存储的hashmap[presum[i]-k]的值即可，便可通过O(1)得到符合条件的连续子序列，总的时间复杂度为O(N),空间为O(1)。由于可能存在nums[:i+1]都满足要求，因此需要存储{0:1}表示还没有添加数组元素时的前-1项和
+** code
+#+BEGIN_SRC python
+# 前N项和
+class Solution:
+    def subarraySum(self, nums: List[int], k: int) -> int:
+        s = 0
+        ans = 0
+        for i in range(len(nums)):
+            s += nums[i]
+            nums[i] = s
+            if nums[i] == k:
+                ans += 1
+            for j in range(0, i):
+                if nums[i] - nums[j] == k:
+                    ans += 1
+        # print(nums)
+        return ans   
 
-* 
+# 前N项和+hash优化
+class Solution:
+    def subarraySum(self, nums: List[int], k: int) -> int:
+        s = 0
+        ans = 0
+        hashmap = {0:1}
+        for i in range(len(nums)):
+            s += nums[i]
+            nums[i] = s
+	    # 先判断前面的前缀和，再把当前值添加到字典
+            if s - k in hashmap.keys():
+                ans += hashmap[s-k]
+            if s not in hashmap.keys():
+                hashmap[s] = 1
+            else:
+                hashmap[s] += 1
+        return ans
+#+END_SRC
+* 两数之和IV-输入BST
+** 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成36）/截屏2020-07-11 上午6.23.50.png @ 2020-07-11 06:23:53
+[[file:Screen-Pictures/%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8CIV-%E8%BE%93%E5%85%A5BST/2020-07-11_06-23-53_%E6%88%AA%E5%B1%8F2020-07-11%20%E4%B8%8A%E5%8D%886.23.50.png]]
+** 思路
++ 中序+双指针：BST中序遍历转换为升序数组，然后用双指针求2数之和
++ hashset：遍历某个节点时，如果k-node.val存在遍历过的节点值的集合中，那么返回True；这里注意要先判断，再将该节点加入到集合中，否则当k-node.val==node.val时，会重复地计算当前节点值
+** code
+#+BEGIN_SRC python
+# 中序遍历+双指针
+class Solution:
+    def findTarget(self, root: TreeNode, k: int) -> bool:
+        nums = []
+        stack = [root]
+        node = root
+        while stack:
+            while node and node.left:
+                node = node.left
+                stack.append(node)
+            node = stack.pop()
+            nums.append(node.val)
+            if node.right:
+                stack.append(node.right)
+                node = node.right
+            else:
+                node = None
+        left, right = 0, len(nums)-1
+        while left < right:
+            if nums[left]+nums[right]==k:
+                return True
+            elif nums[left]+nums[right]>k:
+                right -= 1
+            else:
+                left += 1
+        return False
+
+# HashSet
+class Solution:
+    def findTarget(self, root: TreeNode, k: int) -> bool:
+        hashset = set()
+        def dfs(root, hashset):
+            if not root:
+                return False
+            if k-root.val in hashset:
+                return True
+            else:
+                hashset.add(root.val)
+                return dfs(root.left, hashset) or dfs(root.right, hashset)
+        return dfs(root, hashset)
+#+END_SRC

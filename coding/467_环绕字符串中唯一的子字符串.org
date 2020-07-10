@@ -1,0 +1,36 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成61）/截屏2020-07-06 下午3.33.58.png @ 2020-07-06 15:34:02
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-06_15-34-02_%E6%88%AA%E5%B1%8F2020-07-06%20%E4%B8%8B%E5%8D%883.33.58.png]]
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成62）/截屏2020-07-06 下午3.34.10.png @ 2020-07-06 15:34:13
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-06_15-34-13_%E6%88%AA%E5%B1%8F2020-07-06%20%E4%B8%8B%E5%8D%883.34.10.png]]
+
+* 思路
+**** 常规的 dfs 搜索会超时，需要将问题转换为：
+**** 统计以每个字母结尾而形成最长连续的字符串长度
+**** 最长长度就表示以该字母结尾所能形成的连续子串的个数，如 abcd，dp[d] = 4 -> d,cd,bcd,abcd；最终将各个字母的结果求和即可，时间复杂度 O(n)
+* code
+#+BEGIN_SRC python
+class Solution:
+    def findSubstringInWraproundString(self, p: str) -> int:
+
+        if not p: return 0
+
+        dp = {}
+        dp[p[0]] = 1
+        n = len(p)
+        count = 1
+        for i in range(1, n):
+            if ord(p[i]) - ord(p[i-1]) in [1, -25]: # 连续子串(ab or za ..)
+                count += 1
+            else:
+                count = 1
+            if p[i] not in dp:
+                dp[p[i]] = count
+            else:
+                dp[p[i]] = max(count, dp[p[i]])
+        # print(dp)
+        return sum(dp.values())
+
+#+END_SRC

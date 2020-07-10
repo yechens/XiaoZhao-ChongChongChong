@@ -42,4 +42,26 @@ class Solution:
                     queue.append(nei)
                 hash[t].neighbors.append(hash[nei])
         return new
+--lyf
+class Solution:
+    def cloneGraph(self, node: 'Node') -> 'Node':
+        #DFS
+        #递归创建 
+        #使用list存储已经创建过的node
+        self.cr_node={}
+        print(node)
+        def recursive(root):
+            if not root :return None
+            if root.val  in self.cr_node.keys():
+                return self.cr_node[root.val]
+            self.cr_node[root.val]=Node(root.val)
+            root_node=self.cr_node[root.val]
+            #邻接点
+            #root别写成node!!!
+            adjlist=root.neighbors
+            for ival in adjlist:
+                root_node.neighbors.append(recursive(ival))
+            return self.cr_node[root.val]   
+        root=(recursive(node))
+        return root
 #+END_SRC

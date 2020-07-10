@@ -1,0 +1,24 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成63）/截屏2020-07-06 下午7.13.15.png @ 2020-07-06 19:13:19
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-06_19-13-19_%E6%88%AA%E5%B1%8F2020-07-06%20%E4%B8%8B%E5%8D%887.13.15.png]]
+
+* 思路
+**** DP: dp[i][j] 表示 A[:i] 到 B[:j] 最长的子数组的长度
+**** 动态转移方程：如果 A[i-1] == B[j], dp[i][j] = dp[i-1][j-1]
+* code
+#+BEGIN_SRC python
+class Solution:
+    def findLength(self, A: List[int], B: List[int]) -> int:
+
+        m, n = len(A), len(B)
+        if not m or not n:
+            return 0
+        # dp[i][j] 表示 A[:i] 到 B[:j] 最长的子数组的长度
+        dp = [[0] * (n + 1) for _ in range(m + 1)]
+        for i in range(1, m + 1):
+            for j in range(1, n + 1):
+                if A[i-1] == B[j-1]:
+                    dp[i][j] = dp[i-1][j-1] + 1
+        return max(max(row) for row in dp)
+#+END_SRC

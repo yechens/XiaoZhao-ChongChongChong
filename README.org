@@ -104,6 +104,7 @@
      * [[file:./coding/5_最长回文子串.py][5.最长回文子串]]⛽️
      * [[file:/coding/10_正则表达式匹配.py][10. 正则表达式匹配]]😭推荐阅读:[[https://leetcode-cn.com/problems/regular-expression-matching/solution/ji-yu-guan-fang-ti-jie-gen-xiang-xi-de-jiang-jie-b/][正则表达式-详细讲解，由浅入深]]
      * [[file:./coding/44_通配符匹配.py][44.通配符匹配🦶]]
+     * [[file:./coding/46_全排列.org][46.全排列]]
      * [[/coding/53_最大子序和.py][53.最大子序和]]
      * [[file:./coding/62_不同路径.org][62.不同路径]]
      * [[file:./coding/64_最小路径和.py][64.最小路径和]]😭
@@ -115,27 +116,29 @@
      * [[file:./coding/152_乘积的最大子数组.py][152.乘积的最大子数组]]🦷
      * [[file:./coding/198_打家劫舍.py][198.打家劫舍]]
      * [[file:/coding/221_最大正方形.py][221.最大正方形]]😄进阶版：[[https://leetcode-cn.com/problems/maximal-rectangle/][85.最大矩形]]
+     * [[file:./coding/238_除自身以外数组的乘积.py][238.除自身以外数组的乘积👟]]
      * [[file:/coding/279_完全平方数.py][279.完全平方数]]😄(类似题型: [[https://leetcode-cn.com/problems/coin-change/][零钱兑换]])
      * [[file:./coding/300_最长上升子序列.py][300.最长上升子序列]]😣
      * [[file:./coding/309_最佳买卖股票时机含冷冻期.py][309.最佳买卖股票时机含冷冻期]]
      * [[file:./coding/322_零钱兑换.org][322.零钱兑换]]
      * [[file:./coding/337_打家劫舍III.py][🍊337.打家劫舍III]]
+     * [[file:./coding/376_摆动序列.org][376.摆动序列]]
      * [[file:./coding/416_分割等和子集.py][416.分割等和子集]]🤓
+     * [[file:/coding/467_环绕字符串中唯一的子字符串.org][467.环绕字符串中唯一的子字符串]]
      * [[file:./coding/474_一和零.py][474.一和零😢]]
-     * [[file:./coding/494_目标和.org][494.目标和]]🌟🌟
-     * [[file:./coding/迷路的机器人.org][迷路的机器人]]
+     * [[file:./coding/494_目标和.org][494.目标和]]🌟
+     * [[file:/coding/676_最长数对链.org][676.最长数对链]]
+     * [[file:/coding/718_最长重复子数组.org][718.最长重复子数组]]
+     * [[file:./coding/801_使序列递增的最小交换次数.org][801.使序列递增的最小交换次数]]
      * [[file:./coding/808_分汤.py][808.分汤😭]]
      * [[file:./coding/837_新21点.org][837.新21点]]😒
      * [[file:/coding/983_最低票价.org][983.最低票价]]😁
      * [[file:./coding/1155_掷骰子的N种方法.py][1155.掷骰子的N种方法😢]]
      * [[file:/coding/1186_删除一次得到子数组最大和.org][1186.删除一次得到子数组最大和]]😭基础版:[[https://leetcode-cn.com/problems/maximum-subarray/][53. 最大子序和]]
      * [[file:/coding/983_最低票价.org][983.最低票价]]😁
-     * [[file:./coding/46_全排列.org][46.全排列]]
      * [[file:./coding/1406_石子游戏3.py][ 1406.石子游戏3😭]]
      * [[file:./coding/面试题17_23_最大黑方阵.py][面试题17_23_最大黑方阵]]😢
-     * [[file:./coding/238_除自身以外数组的乘积.py][238.除自身以外数组的乘积👟]]
-     * [[file:./coding/801_使序列递增的最小交换次数.org][801.使序列递增的最小交换次数]]
-     * [[file:./coding/376_摆动序列.org][376.摆动序列]]
+     * [[file:./coding/迷路的机器人.org][迷路的机器人]]
      * [[file:./coding/🎪人塔.org][🎪人塔🌧️]]
 **** 二叉树
     * [[file:./coding/94_二叉树的中序遍历.py][94.二叉树的中序遍历]]
@@ -158,10 +161,11 @@
     * [[file:./coding/1339_分裂二叉树的最大乘积.py][1339.分裂二叉树的最大乘积]]🉑️
     * [[file:./coding/655_输出二叉树.org][655.输出二叉树]]
     * [[file:./coding/572_另一个🌲的子🌲.org][572.另一个🌲的子🌲]]
-    * [[file:./coding/面试题04.10.检查子树.py][面试题04.10.检查子树➕]]
-    * [[file:./coding/968_监控二叉树.py][968.监控二叉树]]😭
+    * [[file:/coding/740_删除与获得点数.org][740.删除与获得点数]]
     * [[file:/coding/814_二叉树剪枝.org][814.二叉树剪枝✌️]]
+    * [[file:./coding/968_监控二叉树.py][968.监控二叉树]]😭
     * [[file:./coding/面试题04.06.后继者.py][面试题04.06.后继者]]➕
+    * [[file:./coding/面试题04.10.检查子树.py][面试题04.10.检查子树➕]]
     * [[file:./coding/🌲的子结构.org][🌲的字结构😭]]
     * [[file:./coding/二叉树中路径总和.org][二叉树中路径总和]]
 **** 前缀树Trie
@@ -202,6 +206,7 @@
 **** 三指针
     * [[file:/coding/15_三数之和.org][15.三数之和]]
     * [[file:./coding/74_颜色分类.py][74.颜色分类]]😭
+    * [[file:/coding/264_丑数II.org][264.丑数II]]
 **** 字符串
     * [[file:/coding/838_推多米诺.org][838.推多米诺]]
     * [[file:./coding/49_字母异位词分组.py][49.字母异位词分组]]➕
@@ -235,11 +240,13 @@
     * [[file:/coding/22_括号生成.org][22.括号生成]]😁
     * [[file:./coding/130_被围绕的区域.org][130.被围绕的区域😭]]
     * [[file:/coding/200_岛屿数量.py][200.岛屿数量]]😊
+    * [[file:/coding/361_轰炸敌人.org][361.轰炸敌人]]
     * [[file:./coding/417_太平洋大西洋水流问题.py][417.太平洋大西洋水流问题]]👖
     * [[file:/coding/486_预测赢家.org][486.预测赢家.org]]
     * [[file:./coding/576_出界的路径数.org][576.出界的路径数]]
     * [[file:/coding/695_岛屿的最大面积.py][695.岛屿的最大面积😁]]
     * [[file:./coding/1415.长度为n的开心字符串中字典序第k小的字符串.py][1415.长度为n的开心字符串中字典序第k小的字符串]]➕
+    * [[file:./coding/面试题17.22.单词转换.py][面试题17.22.单词转换👖]]
 **** 拓扑排序
     * [[file:./coding/207_课程表.py][207.课程表]]
     * [[file:./coding/802_找到最终的安全状态.py][802.找到最终的安全状态]]👖
@@ -253,6 +260,7 @@
     * [[file:/coding/162_寻找峰值.org][162.寻找峰值🐶]]
     * [[file:/coding/287_寻找重复数.org][287.寻找重复数]]😁
     * [[file:./coding/378_有序矩阵中第K小的元素.org][378.有序矩阵中第K小的元素]]😭
+    * [[file:/coding/875_爱吃香蕉的珂珂.org][875.爱吃香蕉的珂珂]]💪
     * [[file:/coding/1201_丑数III.org][1201.丑数III]]
 **** 递归
     * [[file:./coding/29_两数相除.py][29.两数相除]]😢

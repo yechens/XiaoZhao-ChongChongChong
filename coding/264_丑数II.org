@@ -1,0 +1,47 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成66）/截屏2020-07-08 下午9.14.44.png @ 2020-07-08 21:14:48
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-08_21-14-48_%E6%88%AA%E5%B1%8F2020-07-08%20%E4%B8%8B%E5%8D%889.14.44.png]]
+
+* 思路
+*** 1.DP/三指针
+**** 保存2、3、5所使用的次数，从i=1开始，不断更新第 i+1 个丑数，时间复杂度：O(n)
+*** 2.小顶堆
+**** 不断把2、3、5的倍数压入栈，再顺序弹出即可（较小的丑数会被优先弹出），时间复杂度：O(nlogn)
+* code
+#+BEGIN_SRC python
+class Solution:
+    def nthUglyNumber(self, n: int) -> int:
+
+        # 1. 动态规划解法（有点像三指针）
+        dp = [0] * n
+        dp[0] = 1 # 第一个丑数是 1
+        cot_2, cot_3, cot_5 = 0, 0, 0 # 统计2、3、5使用的个数
+        # 时间复杂度O(n)
+        for i in range(1, n):
+            dp[i] = min(2 * dp[cot_2], 3 * dp[cot_3], 5 * dp[cot_5])
+            # 易错点：
+            # 因为可能出现 2*dp[cot_2] == 3*dp[cot_3] 的情况
+            # 所以每一个条件都需要判断一下！
+            if dp[i] == 2 * dp[cot_2]:
+                cot_2 += 1 # 对应的个数 + 1
+            if dp[i] == 3 * dp[cot_3]:
+                cot_3 += 1 # 对应的个数 + 1
+            if dp[i] == 5 * dp[cot_5]:
+                cot_5 += 1 # 对应的个数 + 1
+        return dp[-1]
+
+        # 2 用堆来做
+        import heapq
+        myheap = [1]
+        n -= 1
+        while n:
+            tmp = heapq.heappop(myheap)
+            while myheap and myheap[0] == tmp: # 去除重复的 tmp
+                heapq.heappop(myheap)
+            for num in [2,3,5]:
+                t = tmp * num
+                heapq.heappush(myheap, t)
+            n -= 1
+        return heapq.heappop(myheap) # 返回小顶堆的堆顶
+#+END_SRC

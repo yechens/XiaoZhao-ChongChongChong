@@ -1,0 +1,44 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成59）/截屏2020-07-06 下午3.27.12.png @ 2020-07-06 15:27:15
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-06_15-27-15_%E6%88%AA%E5%B1%8F2020-07-06%20%E4%B8%8B%E5%8D%883.27.12.png]]
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成60）/截屏2020-07-06 下午3.27.24.png @ 2020-07-06 15:27:27
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-06_15-27-27_%E6%88%AA%E5%B1%8F2020-07-06%20%E4%B8%8B%E5%8D%883.27.24.png]]
+
+* 思路
+*** 二分查找
+**** 吃香蕉的速度最低为 1，最高为 max(piles)；所以只需要在这个区间内搜索吃香蕉的最小速度即可！
+*** 易错点：
+**** 1.统计速度k下，吃香蕉的总时长时，需要考虑 k 是否等于当前香蕉的堆数 p
+**** 2.如果按当前速度 mid 吃香蕉的速度总时长 < H（表示吃太快了），最终结果可能比mid小，也可能等于 mid！
+* code
+#+BEGIN_SRC python
+class Solution:
+    def minEatingSpeed(self, piles: List[int], H: int) -> int:
+
+        if len(piles) == H:
+            return max(piles)
+        
+        # 最少 1根/小时，最多 max(piles)根/小时
+        # 对该范围进行二分查找
+        def binarySearch(piles, low, high): # 返回吃 mid根/小时 所需要的时间
+            if low >= high:
+                return low
+            mid = low + (high - low) // 2
+            # print('low:', low, 'high:', high, 'mid:', mid)
+            cot = 0 # 易错点1: 统计总时长
+            for p in piles:
+                if p == mid: cot += 1
+                else: cot += p // mid + 1
+            if cot == H: # 最后速度可能等于mid，可能比mid还小
+                return binarySearch(piles, low, mid)
+            elif cot > H: # 说明吃的太慢了
+                return binarySearch(piles, mid + 1, high)
+            elif cot < H: # 易错点2: 最后速度可能等于mid! 也可能比mid还小
+                return binarySearch(piles, low, mid)
+                # return binarySearch(piles, low, mid - 1)
+
+        # 总时间复杂度：O(nlogn)
+        return binarySearch(piles, 1, max(piles))
+#+END_SRC

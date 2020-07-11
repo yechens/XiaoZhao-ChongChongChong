@@ -1,0 +1,212 @@
+* 两数之和
+** 题目
+ #+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成27）/截屏2020-07-06 下午12.02.34.png @ 2020-07-06 12:02:37
+ [[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-06_12-02-37_%E6%88%AA%E5%B1%8F2020-07-06%20%E4%B8%8B%E5%8D%8812.02.34.png]]
+** 思路
+ + 暴力法：O(n**2)
+ + 双指针：将nums和下标zip后排序，用头尾2个指针向中间遍历，直至找出和等于目标值的2个索引，时间复杂度为排序的O(nlogn)+遍历的O(n) = O(nlogn)，空间为O(n)保存额外的数组
+** code
+ #+BEGIN_SRC python
+ # 暴力-5920 ms
+ class Solution:
+     def twoSum(self, nums: List[int], target: int) -> List[int]:
+         for i in range(len(nums)):
+             for j in range(i+1, len(nums)):
+                 if nums[i] + nums[j] == target:
+                     return [i, j]
+
+ # 双指针优化-56ms
+ class Solution:
+     def twoSum(self, nums: List[int], target: int) -> List[int]:
+         # 双指针
+         nums_ = sorted(zip(range(len(nums)), nums), key= lambda x:x[1])
+         left, right = 0, len(nums)-1
+         while left < right:
+             if nums_[left][1] + nums_[right][1] > target:
+                 right -= 1
+             elif nums_[left][1] + nums_[right][1] < target:
+                 left += 1
+             else:
+                 return [nums_[left][0], nums_[right][0]]
+ #+END_SRC
+* 三数之和
+** 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成28）/截屏2020-07-06 下午5.38.18.png @ 2020-07-06 17:38:20
+[[file:Screen-Pictures/%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/2020-07-06_17-38-20_%E6%88%AA%E5%B1%8F2020-07-06%20%E4%B8%8B%E5%8D%885.38.18.png]]
+** 思路
++ 暴力：O(n**3)
++ 双指针优化：类似于两数之和的解法，只不过这里a+b=-c；可以知道a,b,c中至少有一个是负数，可以利用这个特性对遍历进行优化。
+
+首先对nums排序，遍历nums的元素为c，则为了不出现重复的元素，在c右边的元素中寻找剩下a和b，这里就用双指针法寻找a和b，需要注意的是，会存在相同的元素，因此需要用while跳过相同的元素，为了在跳过相同元素时不越界，left必须<right-1。在第一层循环中，需要保证c<=0，因为a<=b<=c，如果a>0则不可能存在和为0
+** code
+#+BEGIN_SRC python
+# 双指针优化-O(n**2)
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        # 双指针
+        ans = []
+        nums.sort()
+        for i, c in enumerate(nums):
+            if c <= 0 and (i==0 or nums[i]!=nums[i-1]):
+                left, right = i+1, len(nums)-1
+                while left < right:
+                    if nums[left] + nums[right] == -c:
+                        ans.append([c, nums[left], nums[right]])
+                        while nums[right]==nums[right-1] and left<right-1:
+                            right -= 1
+                        while nums[left]==nums[left+1] and left<right-1:
+                            left += 1
+                        right -= 1
+                        left += 1
+                    elif nums[left] + nums[right] > -c:
+                        while nums[right]==nums[right-1] and left<right-1:
+                            right -= 1
+                        right -= 1
+                    else:
+                        while nums[left]==nums[left+1] and left<right-1:
+                            left += 1
+                        left += 1
+        return ans
+#+END_SRC
+* 四数之和
+** 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成29）/截屏2020-07-06 下午5.54.36.png @ 2020-07-06 17:54:38
+[[file:Screen-Pictures/%E5%9B%9B%E6%95%B0%E4%B9%8B%E5%92%8C/2020-07-06_17-54-38_%E6%88%AA%E5%B1%8F2020-07-06%20%E4%B8%8B%E5%8D%885.54.36.png]]
+** 思路
+[[https://leetcode-cn.com/problems/4sum/solution/gu-ding-tao-lu-jian-dan-qing-xi-pai-xu-shuang-zhi-/][如何剪枝]]
+
+剪枝优化后，时间2256ms -> 136ms
+** code
+#+BEGIN_SRC python
+class Solution:
+    def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
+        ans = []
+        # special case
+        if len(nums)<4: return ans
+        # normal case
+        nums.sort()
+        for i in range(len(nums)-3):
+            # 最小的4个数和大于目标值
+            if sum(nums[:4]) > target:
+                break
+	    # 剪枝	
+            if (i==0 or nums[i]!=nums[i-1]) and nums[i]+nums[-3]+nums[-2]+nums[-1]>=target:
+                for j in range(i+1, len(nums)-2):
+                    # 最小的4个数和大于目标值
+                    if sum(nums[j:j+3]) + nums[i] > target:
+                        break
+		    # 添加剪枝条件	
+                    if (j==i+1 or nums[j]!=nums[j-1]) and nums[i]+nums[j]+nums[-2]+nums[-1]>=target:
+                        left, right = j+1, len(nums)-1
+                        while left < right:
+                            if nums[i]+nums[j]+nums[left]+nums[right]==target:
+                                ans.append([nums[i], nums[j], nums[left], nums[right]])
+                                while nums[right]==nums[right-1] and left<right-1:
+                                    right -= 1
+                                while nums[left]==nums[left+1] and left<right-1:
+                                    left += 1
+                                right -= 1
+                                left += 1
+                            elif nums[i]+nums[j]+nums[left]+nums[right]>target:
+                                while nums[right]==nums[right-1] and left<right-1:
+                                    right -= 1
+                                right -= 1
+                            else:
+                                while nums[left]==nums[left+1] and left<right-1:
+                                    left += 1
+                                left += 1
+        return ans
+#+END_SRC
+* 和为K的子数组
+** 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成35）/截屏2020-07-10 下午11.45.59.png @ 2020-07-10 23:46:02
+[[file:Screen-Pictures/%E5%92%8C%E4%B8%BAK%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/2020-07-10_23-46-02_%E6%88%AA%E5%B1%8F2020-07-10%20%E4%B8%8B%E5%8D%8811.45.59.png]]
+** 思路
++ 前N项和：遍历数组，计算前N项和替代数组原本的元素，节省存储空间，对于第i个前N项和，遍历j~[0,i-1]的前N项和，判断nums[i]-nums[j]是否等于k，记录数量即可。时间复杂度O(n**2)，空间复杂度O(1)。无法通过全部的测试用例，会超时
++ 哈希表优化：对于第i个前N项和，当遍历[0,i-1]的元素也即是找到前面是否存在presum[i]-k的前N项和的值，那么可以直接用字典存储每个前N项和的值对应的数目，第i个前N项和只需要查找当前存储的hashmap[presum[i]-k]的值即可，便可通过O(1)得到符合条件的连续子序列，总的时间复杂度为O(N),空间为O(1)。由于可能存在nums[:i+1]都满足要求，因此需要存储{0:1}表示还没有添加数组元素时的前-1项和
+** code
+#+BEGIN_SRC python
+# 前N项和
+class Solution:
+    def subarraySum(self, nums: List[int], k: int) -> int:
+        s = 0
+        ans = 0
+        for i in range(len(nums)):
+            s += nums[i]
+            nums[i] = s
+            if nums[i] == k:
+                ans += 1
+            for j in range(0, i):
+                if nums[i] - nums[j] == k:
+                    ans += 1
+        # print(nums)
+        return ans   
+
+# 前N项和+hash优化
+class Solution:
+    def subarraySum(self, nums: List[int], k: int) -> int:
+        s = 0
+        ans = 0
+        hashmap = {0:1}
+        for i in range(len(nums)):
+            s += nums[i]
+            nums[i] = s
+	    # 先判断前面的前缀和，再把当前值添加到字典
+            if s - k in hashmap.keys():
+                ans += hashmap[s-k]
+            if s not in hashmap.keys():
+                hashmap[s] = 1
+            else:
+                hashmap[s] += 1
+        return ans
+#+END_SRC
+* 两数之和IV-输入BST
+** 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成36）/截屏2020-07-11 上午6.23.50.png @ 2020-07-11 06:23:53
+[[file:Screen-Pictures/%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8CIV-%E8%BE%93%E5%85%A5BST/2020-07-11_06-23-53_%E6%88%AA%E5%B1%8F2020-07-11%20%E4%B8%8A%E5%8D%886.23.50.png]]
+** 思路
++ 中序+双指针：BST中序遍历转换为升序数组，然后用双指针求2数之和
++ hashset：遍历某个节点时，如果k-node.val存在遍历过的节点值的集合中，那么返回True；这里注意要先判断，再将该节点加入到集合中，否则当k-node.val==node.val时，会重复地计算当前节点值
+** code
+#+BEGIN_SRC python
+# 中序遍历+双指针
+class Solution:
+    def findTarget(self, root: TreeNode, k: int) -> bool:
+        nums = []
+        stack = [root]
+        node = root
+        while stack:
+            while node and node.left:
+                node = node.left
+                stack.append(node)
+            node = stack.pop()
+            nums.append(node.val)
+            if node.right:
+                stack.append(node.right)
+                node = node.right
+            else:
+                node = None
+        left, right = 0, len(nums)-1
+        while left < right:
+            if nums[left]+nums[right]==k:
+                return True
+            elif nums[left]+nums[right]>k:
+                right -= 1
+            else:
+                left += 1
+        return False
+
+# HashSet
+class Solution:
+    def findTarget(self, root: TreeNode, k: int) -> bool:
+        hashset = set()
+        def dfs(root, hashset):
+            if not root:
+                return False
+            if k-root.val in hashset:
+                return True
+            else:
+                hashset.add(root.val)
+                return dfs(root.left, hashset) or dfs(root.right, hashset)
+        return dfs(root, hashset)
+#+END_SRC

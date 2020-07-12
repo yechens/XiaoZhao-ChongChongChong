@@ -1,0 +1,36 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成70）/截屏2020-07-11 下午10.33.03.png @ 2020-07-11 22:33:07
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-11_22-33-07_%E6%88%AA%E5%B1%8F2020-07-11%20%E4%B8%8B%E5%8D%8810.33.03.png]]
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成71）/截屏2020-07-11 下午10.33.17.png @ 2020-07-11 22:33:20
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-11_22-33-20_%E6%88%AA%E5%B1%8F2020-07-11%20%E4%B8%8B%E5%8D%8810.33.17.png]]
+
+* 思路
+*** DFS
+**** 可以将问题等价为：求无向图连通块的个数。用DFS搜索，额外用一个visited数组保存第i个结点是否被访问，没有的话进行DFS搜索、更新，并将visited[i]置为true，总数count+1
+**** 时间复杂度：O(n^2)，整个矩阵都要被遍历
+* code
+#+BEGIN_SRC python
+class Solution:
+    def findCircleNum(self, M: List[List[int]]) -> int:
+
+        if not M: return 0
+        self.matrix = M
+        n = len(M)
+        self.res = 0
+        self.visited = [0] * n
+        # 问题等价于无向图连通块的个数
+        def dfs(visited, i, n): # 遍历第i个同学的朋友圈
+            for j in range(n):
+                # i和j是朋友，且第j个人还没被访问过
+                if self.matrix[i][j] == 1 and visited[j] == 0: 
+                    visited[j] = 1
+                    dfs(visited, j, n)
+
+        for i in range(n):
+            if self.visited[i] == 0:
+                self.res += 1
+                dfs(self.visited, i, n)
+        return self.res
+#+END_SRC

@@ -1,23 +1,117 @@
-* 题目
-#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成38）/截屏2020-07-11 上午8.19.53.png @ 2020-07-11 08:19:56
-[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-11_08-19-56_%E6%88%AA%E5%B1%8F2020-07-11%20%E4%B8%8A%E5%8D%888.19.53.png]]
-* 思路
-+ 数字转成字符串，分片取逆序，再判断是否溢出即可
-* code
+* 整数反转
+** 题目
+ #+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成38）/截屏2020-07-11 上午8.19.53.png @ 2020-07-11 08:19:56
+ [[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-11_08-19-56_%E6%88%AA%E5%B1%8F2020-07-11%20%E4%B8%8A%E5%8D%888.19.53.png]]
+** 思路
+ + 数字转成字符串，分片取逆序，再判断是否溢出即可
+** code
+ #+BEGIN_SRC python
+ class Solution:
+     def reverse(self, x: int) -> int:
+         x = str(x)
+         if x[0]=='-':
+             x = x[0] + x[1:][::-1]
+         else:
+             x = x[::-1]
+         try:
+             x = int(x)
+	     # python未溢出，但超过题目要求范围
+             if x >= -2**31 and x<=2**31-1:
+                 return x
+             else:
+                 return 0
+         except:
+	     # python溢出
+             return 0
+ #+END_SRC
+* 8.字符串转换整数(atoi)
+** 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成47）/截屏2020-07-12 下午3.44.24.png @ 2020-07-12 15:44:26
+[[file:Screen-Pictures/8.%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2%E6%95%B4%E6%95%B0(atoi)/2020-07-12_15-44-26_%E6%88%AA%E5%B1%8F2020-07-12%20%E4%B8%8B%E5%8D%883.44.24.png]]
+** 思路
++ 规则：找出连续的有效数字的字符串，转成int类型
++ 自动机：[[https://leetcode-cn.com/problems/string-to-integer-atoi/solution/zi-fu-chuan-zhuan-huan-zheng-shu-atoi-by-leetcode-/][官方题解]]
+** code
 #+BEGIN_SRC python
+# 规则判断
 class Solution:
-    def reverse(self, x: int) -> int:
-        x = str(x)
-        if x[0]=='-':
-            x = x[0] + x[1:][::-1]
-        else:
-            x = x[::-1]
-        try:
-            x = int(x)
-            if x >= -2**31 and x<=2**31-1:
-                return x
-            else:
-                return 0
-        except:
+    def myAtoi(self, str: str) -> int:
+        if not str or str==' ':
             return 0
+        ans = ''
+        #去除开头的连续空格
+        str = str.strip()
+        # 第一个有效字符不满足条件
+        if not str or (str[0] not in ['+','-'] and not str[0].isdigit()):
+            return 0
+        # 抽取出第一个数字或者正负号
+        ans += str[0]
+        # 抽取出后续字符串中连续的数字
+        for char in str[1:]:
+            if not char.isdigit():
+                break
+            else:
+                ans += char
+        # 特判
+        if ans in ['+','-']:
+            return 0
+        # str转int
+        try:
+            number = int(ans)
+            # python 的int类型未溢出，但是超出题目要求
+            if number <= 2**31-1 and number >= -2**31:
+                return number
+            else:
+                return 2**31-1 if ans[0]!='-' else -2**31
+        # python int溢出
+        except:
+            return 2**31-1 if ans[0]!='-' else -2**31
+
+# 自动机
+class Anotation:
+    def __init__(self):
+        self.state = 'start'
+        self.sign = 1
+        self.ans = ''
+        self.table = {
+            'start': ['start', 'sign','in-number','end'],
+            'sign': ['end', 'end','in-number','end'],
+            'in-number':['end','end','in-number','end'],
+            'end':['end','end','end','end']
+        }
+    def get_col(self, c):
+        if c==' ':
+            return 0
+        elif c in ['+', '-']:
+            return 1
+        elif c.isdigit():
+            return 2
+        else:
+            return 3
+    def get_state(self, c):
+        self.state = self.table[self.state][self.get_col(c)]
+        if self.state == 'in-number':
+            self.ans += c
+        elif self.state == 'sign':
+            self.sign = 1 if c=='+' else -1
+            self.ans += c
+
+class Solution:
+    def myAtoi(self, str: str) -> int:
+        # 自动机
+        annotation = Anotation()
+        for c in str:
+            if annotation.state == 'end':
+                break
+            annotation.get_state(c)
+        if annotation.ans in ['', '+', '-']:
+            return 0
+        try:
+            number = int(annotation.ans)
+            if number <= 2**31-1 and number >= -2**31:
+                return number
+            else:
+                return 2**31-1 if annotation.sign==1 else -2**31
+        except:
+            return 2**31-1 if annotation.sign==1 else -2**31
 #+END_SRC

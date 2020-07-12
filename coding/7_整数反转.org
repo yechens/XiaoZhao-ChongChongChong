@@ -1,0 +1,23 @@
+* 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成38）/截屏2020-07-11 上午8.19.53.png @ 2020-07-11 08:19:56
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-11_08-19-56_%E6%88%AA%E5%B1%8F2020-07-11%20%E4%B8%8A%E5%8D%888.19.53.png]]
+* 思路
++ 数字转成字符串，分片取逆序，再判断是否溢出即可
+* code
+#+BEGIN_SRC python
+class Solution:
+    def reverse(self, x: int) -> int:
+        x = str(x)
+        if x[0]=='-':
+            x = x[0] + x[1:][::-1]
+        else:
+            x = x[::-1]
+        try:
+            x = int(x)
+            if x >= -2**31 and x<=2**31-1:
+                return x
+            else:
+                return 0
+        except:
+            return 0
+#+END_SRC

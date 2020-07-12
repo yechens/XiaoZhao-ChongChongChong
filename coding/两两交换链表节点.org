@@ -1,0 +1,220 @@
+* 反转链表
+** 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成40）/截屏2020-07-11 下午3.16.21.png @ 2020-07-11 15:16:22
+[[file:Screen-Pictures/%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/2020-07-11_15-16-22_%E6%88%AA%E5%B1%8F2020-07-11%20%E4%B8%8B%E5%8D%883.16.21.png]]
+** 思路
++ 链表转数组：时间复杂度：O(n);空间复杂度:O(n)
++ 递归
++ 迭代
+** code
+#+BEGIN_SRC python
+# 链表转数组-52ms
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        vals = []
+        tag = head
+        while head!=None:
+            vals.append(head.val)
+            head = head.next
+        res = tag
+        while tag!=None:
+            tag.val=vals[-1]
+            del vals[-1]
+            tag = tag.next
+        return res
+
+# 递归-40ms
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        if not head or not head.next:
+            return head
+        p = self.reverseList(head.next)
+        head.next.next = head
+        head.next = None
+        return p
+
+# 迭代-48ms
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        pre = None
+        while head:
+            p = head.next
+            head.next = pre
+            pre = head
+            head = p
+        return pre
+#+END_SRC
+* 反转链表II
+** 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成42）/截屏2020-07-11 下午4.50.32.png @ 2020-07-11 16:50:36
+[[file:Screen-Pictures/%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8II/2020-07-11_16-50-36_%E6%88%AA%E5%B1%8F2020-07-11%20%E4%B8%8B%E5%8D%884.50.32.png]]
+** 思路
+找出m的前置节点pre和n的后置节点nex，第m个节点为head,第n个节点为tail，需要把tail.next=None,方便对m到n的链表进行反转，之后再恢复连接即可
+** code
+#+BEGIN_SRC python
+class Solution:
+    def reverseBetween(self, head: ListNode, m: int, n: int) -> ListNode:
+        if m==n:
+            return head
+        def reverse(head):
+            pre = None
+            while head:
+                p = head.next
+                head.next = pre
+                pre = head
+                head = p
+            return pre
+        hair = ListNode(0)
+        hair.next = head
+        pre = hair
+        for i in range(m-1):
+            head = head.next
+            pre = pre.next
+        tail = head
+        for i in range(n-m):
+            tail = tail.next
+        nex = tail.next
+        tail.next = None
+        tmp = head
+        head = reverse(head)
+        pre.next = head
+        tail = tmp
+        tail.next = nex
+        return hair.next
+#+END_SRC
+* 两个一组翻转链表
+** 题目
+ #+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成39）/截屏2020-07-11 下午1.36.20.png @ 2020-07-11 13:36:22
+ [[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-11_13-36-22_%E6%88%AA%E5%B1%8F2020-07-11%20%E4%B8%8B%E5%8D%881.36.20.png]]
+** 思路
+ + 递归：递归的交换前2个节点
+ + 迭代：交换奇偶节点，记录交换的第一个节点的前置节点pre
+** code
+ #+BEGIN_SRC python
+ # 递归
+ class Solution:
+     def swapPairs(self, head: ListNode) -> ListNode:
+         if not head or not head.next:
+             return head
+         p = head.next.next
+         q = head.next
+         head.next = self.swapPairs(p)
+         q.next = head
+         return q
+
+ # 迭代
+ class Solution:
+     def swapPairs(self, head: ListNode) -> ListNode:
+         if not head or not head.next:
+             return head
+         p, q, pre = head, head.next, None
+         while p and q:
+             p.next = q.next
+             q.next = p
+             if not pre:
+                 head = q
+             else:
+                 pre.next = q
+             pre = p
+             p = p.next
+             if p:
+                 q = p.next
+         return head
+ #+END_SRC
+* K个一组翻转链表
+** 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成41）/截屏2020-07-11 下午4.02.11.png @ 2020-07-11 16:02:14
+[[file:Screen-Pictures/K%E4%B8%AA%E4%B8%80%E7%BB%84%E7%BF%BB%E8%BD%AC%E9%93%BE%E8%A1%A8/2020-07-11_16-02-14_%E6%88%AA%E5%B1%8F2020-07-11%20%E4%B8%8B%E5%8D%884.02.11.png]]
+** 思路
++ 迭代：拆分为K个一组，每组进行反转，数目不够k的话，不反转
++ 递归：
+** code
+#+BEGIN_SRC python
+# 迭代
+class Solution:
+    def reverseKGroup(self, head: ListNode, k: int) -> ListNode:
+        def reverse(head, tail):
+            if head == tail:
+                return head
+            p = reverse(head.next, tail)
+            head.next.next = head
+            head.next = None
+            return p
+        hair = ListNode(0)
+        hair.next = head
+        pre = hair
+        while head:
+            tail = pre
+            for i in range(k):
+                tail = tail.next
+                if not tail:
+                    return hair.next
+            nex = tail.next
+            tmp = head
+            head = reverse(head, tail)
+            tail = tmp
+            pre.next = head
+            tail.next = nex
+            pre, head = tail, tail.next
+        return hair.next
+#+END_SRC
+* 234.回文链表
+** 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成43）/截屏2020-07-11 下午5.02.58.png @ 2020-07-11 17:03:00
+[[file:Screen-Pictures/234%E5%9B%9E%E6%96%87%E9%93%BE%E8%A1%A8/2020-07-11_17-03-00_%E6%88%AA%E5%B1%8F2020-07-11%20%E4%B8%8B%E5%8D%885.02.58.png]]
+** 思路
++ 数组+双指针法
++ 取一半反转
+** code
+#+BEGIN_SRC python
+# 数组
+class Solution:
+    def isPalindrome(self, head: ListNode) -> bool:
+        list = []
+        while head:
+            list.append(head.val)
+            head = head.next
+        i, j = 0, len(list)-1
+        while i < j:
+            if list[i] == list[j]:
+                i += 1
+                j -= 1
+                continue
+            else:
+                return False
+        return True
+
+# 反转链表
+class Solution:
+    def isPalindrome(self, head: ListNode) -> bool:
+        # 链表反转解法
+        def reverse(head):
+            pre = None
+            while head:
+                p = head.next
+                head.next = pre
+                pre = head
+                head = p
+            return pre
+        
+        def helper(p, q):
+            while p and q:
+                if p.val == q.val:
+                    p = p.next
+                    q = q.next
+                else:
+                    return False
+            return True
+
+        if not head or not head.next:
+            return True
+        pre, p, q = ListNode(0), head, head
+        pre.next = head
+        while q.next and q.next.next:
+            p = p.next
+            pre = pre.next
+            q = q.next.next
+        second_node = p.next
+        hair = reverse(second_node)
+        return helper(head, hair) 
+#+END_SRC

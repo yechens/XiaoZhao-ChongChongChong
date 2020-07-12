@@ -1,0 +1,42 @@
+* 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成37）/截屏2020-07-11 上午7.04.02.png @ 2020-07-11 07:04:04
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-11_07-04-04_%E6%88%AA%E5%B1%8F2020-07-11%20%E4%B8%8A%E5%8D%887.04.02.png]]
+* 思路
++ DP：dp[i][j]表示s[i:j+1]是否重复，不重复为True,重复为False，转移方程为：dp[i][j]=True if dp[i][j-1]==True and s[j] not in s[i:j]。通过了986 / 987 个通过测试用例，最后一个超时
++ 滑动窗口：维护一个滑动窗口以及窗口的集合，如果出现重复元素，窗口一直缩减左边界直到无重复元素-O(n)
+* code
+#+BEGIN_SRC python
+# DP
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        if not s:
+            return 0
+        dp = [[False for j in range(len(s))]for i in range(len(s))]
+        ans = 1
+        for i in range(len(s)):
+            for j in range(i, len(s)):
+                if j == i:
+                    dp[i][j] = True
+                    continue
+                if s[j] not in s[i:j] and dp[i][j-1]:
+                    dp[i][j] = True
+                    ans = max(ans, j-i+1)
+        return ans
+
+# 滑动窗口
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        max_len = 0
+        hashset = set()
+        left = 0
+        cur_len = 0
+        for char in s:
+            cur_len += 1
+            while char in hashset:
+                hashset.remove(s[left])
+                left += 1
+                cur_len -= 1
+            max_len = max(max_len, cur_len)
+            hashset.add(char)
+        return max_len
+#+END_SRC

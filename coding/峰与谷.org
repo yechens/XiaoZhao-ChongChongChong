@@ -1,0 +1,33 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成72）/截屏2020-07-13 上午10.33.00.png @ 2020-07-13 10:33:05
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-13_10-33-05_%E6%88%AA%E5%B1%8F2020-07-13%20%E4%B8%8A%E5%8D%8810.33.00.png]]
+
+* 思路
+**** 先排序，再按中点mid切分，对右半部分逆序处理（避免left、right中相同的数字在相邻位置出现！）；最后交叉组合即可
+**** 注意：题目要求原地替换，无需返回
+* code
+#+BEGIN_SRC python
+class Solution:
+    def wiggleSort(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        if len(nums) <= 1:
+            return nums
+        nums.sort()
+        n = len(nums)
+        mid = n // 2
+        left, right = nums[:mid], nums[mid:]
+        # 将右半部分逆序，避免相同的数碰见!!!
+        right = right[::-1]
+        # 交叉组合
+        k = 0
+        for i in right:
+            nums[k] = i
+            k += 2
+        k = 1
+        for j in left:
+            nums[k] = j
+            k += 2
+#+END_SRC

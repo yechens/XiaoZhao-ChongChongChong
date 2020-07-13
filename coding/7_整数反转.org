@@ -115,3 +115,11 @@ class Solution:
         except:
             return 2**31-1 if annotation.sign==1 else -2**31
 #+END_SRC
+* 65.有效数字
+** 题目
+** 思路
+** code
+#+BEGIN_SRC python
+# 自动机
+
+#+END_SRC

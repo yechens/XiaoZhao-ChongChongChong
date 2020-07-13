@@ -1,0 +1,35 @@
+* 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成49）/截屏2020-07-13 下午3.00.37.png @ 2020-07-13 15:00:40
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-13_15-00-40_%E6%88%AA%E5%B1%8F2020-07-13%20%E4%B8%8B%E5%8D%883.00.37.png]]
+* 思路
++ 整数转字符串，用双指针判断
++ [[https://leetcode-cn.com/problems/palindrome-number/solution/hui-wen-shu-by-leetcode-solution/][官方-反转后面一半的数字]]
+* code
+#+BEGIN_SRC python
+# 双指针
+class Solution:
+    def isPalindrome(self, x: int) -> bool:
+        x = str(x)
+        left, right = 0, len(x)-1
+        while left < right:
+            if x[left]==x[right]:
+                left += 1
+                right -= 1
+            else:
+                return False
+        return True
+
+# 反转后面一半的数字
+class Solution:
+    def isPalindrome(self, x: int) -> bool:
+        if x < 0 or (x>0 and x%10==0):
+            return False
+        if x in range(10):
+            return True
+        revert_number = 0
+        while x > revert_number:
+            revert_number = x%10 + revert_number*10
+            print(revert_number)
+            x = x//10
+        return x==revert_number or x==revert_number//10
+#+END_SRC

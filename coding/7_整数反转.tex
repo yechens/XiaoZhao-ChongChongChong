@@ -1,0 +1,162 @@
+% Created 2020-07-13 Mon 10:37
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{blacktear}
+\date{\today}
+\title{}
+\hypersetup{
+ pdfauthor={blacktear},
+ pdftitle={},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 26.3 (Org mode 9.1.9)}, 
+ pdflang={English}}
+\begin{document}
+
+\tableofcontents
+
+\section{整数反转}
+\label{sec:orgc8f79d5}
+\subsection{题目}
+\label{sec:org6579f53}
+\begin{center}
+\includegraphics[width=.9\linewidth]{Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-11_08-19-56_%E6%88%AA%E5%B1%8F2020-07-11%20%E4%B8%8A%E5%8D%888.19.53.png}
+\end{center}
+\subsection{思路}
+\label{sec:org42b3dbb}
+\begin{itemize}
+\item 数字转成字符串，分片取逆序，再判断是否溢出即可
+\end{itemize}
+\subsection{code}
+\label{sec:org398fa22}
+\begin{verbatim}
+class Solution:
+    def reverse(self, x: int) -> int:
+	x = str(x)
+	if x[0]=='-':
+	    x = x[0] + x[1:][::-1]
+	else:
+	    x = x[::-1]
+	try:
+	    x = int(x)
+	    # python未溢出，但超过题目要求范围
+	    if x >= -2**31 and x<=2**31-1:
+		return x
+	    else:
+		return 0
+	except:
+	    # python溢出
+	    return 0
+\end{verbatim}
+\section{8.字符串转换整数(atoi)}
+\label{sec:orgdd0292c}
+\subsection{题目}
+\label{sec:org5532c5c}
+\begin{center}
+\includegraphics[width=.9\linewidth]{Screen-Pictures/8.%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2%E6%95%B4%E6%95%B0(atoi)/2020-07-12_15-44-26_%E6%88%AA%E5%B1%8F2020-07-12%20%E4%B8%8B%E5%8D%883.44.24.png}
+\end{center}
+\subsection{思路}
+\label{sec:orgd36b6f7}
+\begin{itemize}
+\item 规则：找出连续的有效数字的字符串，转成int类型
+\item 自动机：\href{https://leetcode-cn.com/problems/string-to-integer-atoi/solution/zi-fu-chuan-zhuan-huan-zheng-shu-atoi-by-leetcode-/}{官方题解}
+\end{itemize}
+\subsection{code}
+\label{sec:org7711ced}
+\begin{verbatim}
+# 规则判断
+class Solution:
+    def myAtoi(self, str: str) -> int:
+	if not str or str==' ':
+	    return 0
+	ans = ''
+	#去除开头的连续空格
+	str = str.strip()
+	# 第一个有效字符不满足条件
+	if not str or (str[0] not in ['+','-'] and not str[0].isdigit()):
+	    return 0
+	# 抽取出第一个数字或者正负号
+	ans += str[0]
+	# 抽取出后续字符串中连续的数字
+	for char in str[1:]:
+	    if not char.isdigit():
+		break
+	    else:
+		ans += char
+	# 特判
+	if ans in ['+','-']:
+	    return 0
+	# str转int
+	try:
+	    number = int(ans)
+	    # python 的int类型未溢出，但是超出题目要求
+	    if number <= 2**31-1 and number >= -2**31:
+		return number
+	    else:
+		return 2**31-1 if ans[0]!='-' else -2**31
+	# python int溢出
+	except:
+	    return 2**31-1 if ans[0]!='-' else -2**31
+
+# 自动机
+class Anotation:
+    def __init__(self):
+	self.state = 'start'
+	self.sign = 1
+	self.ans = ''
+	self.table = {
+	    'start': ['start', 'sign','in-number','end'],
+	    'sign': ['end', 'end','in-number','end'],
+	    'in-number':['end','end','in-number','end'],
+	    'end':['end','end','end','end']
+	}
+    def get_col(self, c):
+	if c==' ':
+	    return 0
+	elif c in ['+', '-']:
+	    return 1
+	elif c.isdigit():
+	    return 2
+	else:
+	    return 3
+    def get_state(self, c):
+	self.state = self.table[self.state][self.get_col(c)]
+	if self.state == 'in-number':
+	    self.ans += c
+	elif self.state == 'sign':
+	    self.sign = 1 if c=='+' else -1
+	    self.ans += c
+
+class Solution:
+    def myAtoi(self, str: str) -> int:
+	# 自动机
+	annotation = Anotation()
+	for c in str:
+	    if annotation.state == 'end':
+		break
+	    annotation.get_state(c)
+	if annotation.ans in ['', '+', '-']:
+	    return 0
+	try:
+	    number = int(annotation.ans)
+	    if number <= 2**31-1 and number >= -2**31:
+		return number
+	    else:
+		return 2**31-1 if annotation.sign==1 else -2**31
+	except:
+	    return 2**31-1 if annotation.sign==1 else -2**31
+\end{verbatim}
+\end{document}

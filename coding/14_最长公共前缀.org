@@ -1,0 +1,78 @@
+* 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成53）/截屏2020-07-13 下午5.05.18.png @ 2020-07-13 17:05:19
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-13_17-05-19_%E6%88%AA%E5%B1%8F2020-07-13%20%E4%B8%8B%E5%8D%885.05.18.png]]
+* 思路
++ 横向：两两比较，输出为2个字符串的最长公共前缀
++ 纵向：每个字符串按位数进行比较
++ 分治：两两比较，如果输入为一个，则返回自身
++ 二分查找：取最短的字符串长度，进行二分查找，找出s[:mid+1]的子串是否是所有的字符串都包含的，注意下标的变化
+* code
+#+BEGIN_SRC python
+# 横向
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        if not strs:
+            return ''
+        # 横向比较
+        def helper(str1, str2):
+            for i in range(len(str1)):
+                c = str1[i]
+                if i == len(str2) or str2[i]!=c:
+                    return str1[:i]
+            return str1
+        prefix = strs[0]
+        for i in range(1, len(strs)):
+            prefix = helper(prefix, strs[i])
+        return prefix
+
+# 纵向
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        count, length = len(strs), len(strs[0])
+        for i in range(length):
+            c = strs[0][i]
+            if any(i==len(strs[j]) or strs[j][i]!=c for j in range(1, count)):
+                return strs[0][:i]
+        return strs[0]  
+
+# 分治
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        if not strs:
+            return ''
+        def helper(s, e):
+            if s==e:
+                return strs[s]
+            elif e-s==1:
+                left = strs[s]
+                right = strs[e]
+            else:
+                mid = (s+e)//2
+                left = helper(s, mid)
+                right = helper(mid+1, e)
+            for i in range(len(left)):
+                c = left[i]
+                if i == len(right) or right[i]!=c:
+                    return left[:i]
+            return left
+        return helper(0, len(strs)-1)
+
+# 二分
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        if not strs:
+            return ''
+        def helper(length):
+            c, count = strs[0][:length+1], len(strs)
+            return all(c == strs[i][:length+1] for i in range(1, count))
+
+        min_len = min(len(s) for s in strs)
+        left, right = 0, min_len-1
+        while left <= right:
+            mid = (right + left) // 2
+            if helper(mid):
+                left = mid+1
+            else:
+                right = mid-1
+        return strs[0][:left]
+#+END_SRC

@@ -1,0 +1,54 @@
+* 罗马数转整数
+** 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成50）/截屏2020-07-13 下午3.43.45.png @ 2020-07-13 15:43:47
+[[file:Screen-Pictures/%E7%BD%97%E9%A9%AC%E6%95%B0%E8%BD%AC%E6%95%B4%E6%95%B0/2020-07-13_15-43-47_%E6%88%AA%E5%B1%8F2020-07-13%20%E4%B8%8B%E5%8D%883.43.45.png]]
+** 思路
++ 用字典存储每个罗马数字以及组合代表的整数
+** code
+ #+BEGIN_SRC python
+class Solution:
+    def romanToInt(self, s: str) -> int:
+        hashmap = {'I':1,'V':5,'X':10,'L':50,'C':100,'D':500,'M':1000}
+        special = {'IV':4,'IX':9,'XL':40,'XC':90,'CD':400,'CM':900}
+        ans, i = 0, 0
+        while i < len(s):
+            if s[i:i+2] in special.keys():
+                ans += special[s[i:i+2]]
+                i += 2
+                continue
+            else:
+                ans += hashmap[s[i]]
+                i += 1
+        return ans
+ #+END_SRC
+* 整数转罗马数
+** 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成52）/截屏2020-07-13 下午4.17.36.png @ 2020-07-13 16:17:38
+[[file:Screen-Pictures/%E6%95%B4%E6%95%B0%E8%BD%AC%E7%BD%97%E9%A9%AC%E6%95%B0/2020-07-13_16-17-38_%E6%88%AA%E5%B1%8F2020-07-13%20%E4%B8%8B%E5%8D%884.17.36.png]]
+** 思路
+** code
+#+BEGIN_SRC python
+class Solution:
+    def intToRoman(self, num: int) -> str:
+        hashmap = {4:'IV',9:'IX',40:'XL',90:'XC',400:'CD',900:'CM',1:'I',10:'X',100:'C',1000:'M',5:'V',50:'L',500:'D'}
+        tmp = 1
+        ans = ''
+        while num>0:
+            # 取不为0的最后一位
+            n = num%(10*tmp)
+            # 判断是否在字典能找到
+            if n in hashmap.keys():
+                ans = hashmap[n] + ans
+            # 找不到的话需要判断累加多少个相同字符
+            else:
+                # 该位比5小
+                if n<5*tmp:
+                    ans = hashmap[tmp]*(n//tmp) + ans
+                # 比5大
+                else:
+                    ans = hashmap[5*tmp] + hashmap[tmp]*(n//tmp-5) + ans
+            # 更新num和进位
+            num -= n
+            tmp *= 10
+        return ans
+#+END_SRC

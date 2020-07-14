@@ -1,15 +1,25 @@
 * 题目
-#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成108）/截屏2020-06-11 下午3.29.16.png @ 2020-06-11 15:29:18
-[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-06-11_15-29-18_%E6%88%AA%E5%B1%8F2020-06-11%20%E4%B8%8B%E5%8D%883.29.16.png]]
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成73）/截屏2020-07-14 下午10.08.54.png @ 2020-07-14 22:08:59
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-14_22-08-58_%E6%88%AA%E5%B1%8F2020-07-14%20%E4%B8%8B%E5%8D%8810.08.54.png]]
 
 * 思路
-双指针法，思路类似于“荷兰国旗🇳🇱”的颜色排序题目.
-p指针左边必定是小于x的节点，q指针遍历链表，遇到val<x时，交换p,q的val，并且p=p.next
+*** 双指针
+**** 指针q完整遍历一次链表，指针p的左边存放的都是比x小的值
 * code
 #+BEGIN_SRC python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
 class Solution:
     def partition(self, head: ListNode, x: int) -> ListNode:
+
         p, q = head, head
+        # q 遍历一遍链表，q指向小于x.val的左边界
+        # 即q的左边部分，一定都比x小
         while q:
             if q.val < x:
                 q.val, p.val = p.val, q.val

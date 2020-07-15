@@ -34,8 +34,8 @@ class Solution:
  #+END_SRC
 * 401.二进制手表
 ** 题目
-#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成58）/截屏2020-07-14 下午2.59.23.png @ 2020-07-14 14:59:24
-[[file:Screen-Pictures/401.%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%89%8B%E8%A1%A8/2020-07-14_14-59-24_%E6%88%AA%E5%B1%8F2020-07-14%20%E4%B8%8B%E5%8D%882.59.23.png]]
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成67）/截屏2020-07-15 上午12.56.18.png @ 2020-07-15 00:56:20
+[[file:Screen-Pictures/401.%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%89%8B%E8%A1%A8/2020-07-15_00-56-20_%E6%88%AA%E5%B1%8F2020-07-15%20%E4%B8%8A%E5%8D%8812.56.18.png]]
 ** 思路
 [[https://leetcode-cn.com/problems/binary-watch/solution/hui-su-by-bu-hui-er-cha-shu/]]
 ** code
@@ -75,8 +75,8 @@ class Solution:
 #+END_SRC
 * 39.组合总和
 ** 题目
- #+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成59）/截屏2020-07-14 下午4.23.06.png @ 2020-07-14 16:23:09
- [[file:Screen-Pictures/401.%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%89%8B%E8%A1%A8/2020-07-14_16-23-09_%E6%88%AA%E5%B1%8F2020-07-14%20%E4%B8%8B%E5%8D%884.23.06.png]]
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成66）/截屏2020-07-15 上午12.55.09.png @ 2020-07-15 00:55:11
+[[file:Screen-Pictures/39.%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C/2020-07-15_00-55-11_%E6%88%AA%E5%B1%8F2020-07-15%20%E4%B8%8A%E5%8D%8812.55.09.png]]
 ** 思路
 DFS回溯，考虑路径和超过target时进行剪枝，并且选择的时候为了避免重复，只选取>=当前索引的元素
 ** code
@@ -126,8 +126,8 @@ class Solution:
 #+END_SRC
 * 40.组合总和II
 ** 题目
-#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成62）/截屏2020-07-14 下午11.21.20.png @ 2020-07-14 23:21:22
-[[file:Screen-Pictures/40.%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII/2020-07-14_23-21-22_%E6%88%AA%E5%B1%8F2020-07-14%20%E4%B8%8B%E5%8D%8811.21.20.png]]
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成65）/截屏2020-07-15 上午12.53.47.png @ 2020-07-15 00:53:52
+[[file:Screen-Pictures/40.%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII/2020-07-15_00-53-52_%E6%88%AA%E5%B1%8F2020-07-15%20%E4%B8%8A%E5%8D%8812.53.47.png]]
 ** 思路
 [[https://leetcode-cn.com/problems/combination-sum-ii/solution/hui-su-jian-zhi-by-bu-hui-er-cha-shu/][😄]]
 ** code
@@ -152,4 +152,27 @@ class Solution:
                     path.pop()
         dfs(0, [])
         return ans
+#+END_SRC
+* 组合总和IV
+** 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成64）/截屏2020-07-15 上午12.52.18.png @ 2020-07-15 00:52:20
+[[file:Screen-Pictures/%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CIV/2020-07-15_00-52-20_%E6%88%AA%E5%B1%8F2020-07-15%20%E4%B8%8A%E5%8D%8812.52.18.png]]
+** 思路
+dp[k]表示组成数目为k的种类有多少，状态转移方程为：dp[k]=sum(dp[k-n] for n in nums)
+** code
+#+BEGIN_SRC python
+class Solution:
+    def combinationSum4(self, nums: List[int], target: int) -> int:
+        if not nums:
+            return 0
+        nums.sort()
+        dp = [0 for i in range(target+1)]
+        dp[0] = 0
+        for amount in range(nums[0], target+1):
+            for num in nums:
+                if amount>num:
+                    dp[amount] += dp[amount-num]
+                elif amount==num:
+                    dp[amount] += 1
+        return dp[target]
 #+END_SRC

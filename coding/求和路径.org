@@ -1,0 +1,26 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成74）/截屏2020-07-16 下午11.25.27.png @ 2020-07-16 23:25:31
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-16_23-25-31_%E6%88%AA%E5%B1%8F2020-07-16%20%E4%B8%8B%E5%8D%8811.25.27.png]]
+
+* 思路
+**** 先计算包含根节点的情况，再递归求解不包含根节点的左右子树，统计相加即可
+* code
+#+BEGIN_SRC python
+class Solution:
+    def pathSum(self, root: TreeNode, sum: int) -> int:
+        if not root:
+            return 0
+        # 先计算包含根节点的情况，在递归求解不包含根节点的左右子树，统计相加即可
+        return self.path(root, sum) + self.pathSum(root.left, sum) + self.pathSum(root.right, sum)
+    
+    def path(self, root, sum):
+        if not root:
+            return 0
+        res = 0
+        if root.val == sum:
+            res += 1
+        res += self.path(root.left, sum - root.val)
+        res += self.path(root.right, sum - root.val)
+        return res
+#+END_SRC

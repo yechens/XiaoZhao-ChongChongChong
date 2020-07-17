@@ -1,0 +1,37 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成75）/截屏2020-07-17 下午11.23.03.png @ 2020-07-17 23:23:07
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-17_23-23-07_%E6%88%AA%E5%B1%8F2020-07-17%20%E4%B8%8B%E5%8D%8811.23.03.png]]
+
+* 思路
+**** 同时遍历两个链表，保留并更新进位即可！
+**** 最后的进位可能不为空，需要单独判断！
+* code
+#+BEGIN_SRC python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+
+        up = 0
+        thead = ListNode(-1)
+        node = thead
+        while l1 or l2:
+            v1 = l1.val if l1 else 0
+            v2 = l2.val if l2 else 0
+            if l1: l1 = l1.next
+            if l2: l2 = l2.next
+            # 踩坑点：一定要先计算 余数，再计算 进位！
+            less = (v1 + v2 + up) % 10
+            up = (v1 + v2 + up) // 10
+            node.next = ListNode(less)
+            node = node.next
+        if up:
+            node.next = ListNode(up)
+            node = node.next
+        return thead.next
+#+END_SRC

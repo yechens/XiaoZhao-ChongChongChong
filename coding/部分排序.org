@@ -1,0 +1,28 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成78）/截屏2020-07-18 下午11.00.01.png @ 2020-07-18 23:00:04
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-18_23-00-04_%E6%88%AA%E5%B1%8F2020-07-18%20%E4%B8%8B%E5%8D%8811.00.01.png]]
+
+* 思路
+**** 先排序，再用双指针判断边界即可
+**** 注意 badcase，如输入为 []
+* code
+#+BEGIN_SRC python
+class Solution:
+    def subSort(self, array: List[int]) -> List[int]:
+
+        if not array: # badcase
+            return [-1, -1]
+        array2 = sorted(array)
+        n = len(array)
+        i, j = 0, n - 1
+        while i < n:
+            if array[i] != array2[i]:
+                break
+            i += 1
+        while j >= 0:
+            if array[j] != array2[j]:
+                break
+            j -= 1
+        return [i, j] if i < j else [-1, -1]
+#+END_SRC

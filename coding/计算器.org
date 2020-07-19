@@ -1,0 +1,50 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成80）/截屏2020-07-19 上午10.44.33.png @ 2020-07-19 10:44:36
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-19_10-44-36_%E6%88%AA%E5%B1%8F2020-07-19%20%E4%B8%8A%E5%8D%8810.44.33.png]]
+
+* 思路
+**** 考虑到乘除的优先级高于加减，先将字符串s按乘、除号分开，分别计算各个片段，最后求和或相减即可
+* code
+#+BEGIN_SRC python
+class Solution:
+    
+    def calculate(self, s: str) -> int:
+
+        s=s.replace(' ','')
+
+        # 先将字符串s按乘、除号分开，分别计算各个片段，最后求和或相减即可
+
+        # 只含有乘除的运算
+        def parse(s):
+            opindex=[]  #存乘除符号出现的位置
+            for i,c in enumerate(s):
+                if c in '*/':
+                    opindex.append(i)
+            opindex.append(len(s))
+            res=int(s[:opindex[0]])
+            for i in range(len(opindex)-1):
+                op=s[opindex[i]]
+                num=int(s[opindex[i]+1:opindex[i+1]])
+                if op=='*':
+                    res*=num
+                else:
+                    res=res//num
+            return res
+
+        opindex=[]      # 存加减符号出现的位置
+        for i,c in enumerate(s):
+            if c in '+-':
+                opindex.append(i)
+        opindex.append(len(s))
+        res=parse(s[:opindex[0]])
+        for i in range(len(opindex)-1):
+            op=s[opindex[i]]
+            s1=s[opindex[i]+1:opindex[i+1]]
+            if op=='+':
+                res+=parse(s1)
+            else:
+                res-=parse(s1)
+        return res
+
+#+END_SRC

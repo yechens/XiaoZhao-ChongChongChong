@@ -1,0 +1,18 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿）/截屏2020-07-21 下午7.58.24.png @ 2020-07-21 19:58:28
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-21_19-58-28_%E6%88%AA%E5%B1%8F2020-07-21%20%E4%B8%8B%E5%8D%887.58.24.png]]
+
+* 思路
+**** 抖机灵做法：借助 float 函数判断
+* code
+#+BEGIN_SRC python
+class Solution:
+    def isNumber(self, s: str) -> bool:
+
+        try:
+            float(s)
+            return True
+        except:
+            return False
+#+END_SRC

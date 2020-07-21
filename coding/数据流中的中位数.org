@@ -1,0 +1,46 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成2）/截屏2020-07-21 下午8.04.22.png @ 2020-07-21 20:04:25
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-21_20-04-25_%E6%88%AA%E5%B1%8F2020-07-21%20%E4%B8%8B%E5%8D%888.04.22.png]]
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成3）/截屏2020-07-21 下午8.04.36.png @ 2020-07-21 20:04:40
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-21_20-04-40_%E6%88%AA%E5%B1%8F2020-07-21%20%E4%B8%8B%E5%8D%888.04.36.png]]
+
+* 思路
+**** 用小顶堆、大顶堆维护数组的两个部分；其中小顶堆保存较大的一半，大顶堆保存较小的一半
+**** 查找中位数：O(1)，添加数字：O(logN)
+**** Python 中 heapq 模块是小顶堆。实现大顶堆方法：小顶堆的插入和弹出操作均将元素 「取反」即可
+* code
+#+BEGIN_SRC python
+# 参考：https://leetcode-cn.com/problems/shu-ju-liu-zhong-de-zhong-wei-shu-lcof/solution/mian-shi-ti-41-shu-ju-liu-zhong-de-zhong-wei-shu-y/
+class MedianFinder:
+
+    def __init__(self):
+        """
+        initialize your data structure here.
+        """
+        import heapq
+        # Python 中 heapq 模块是小顶堆。实现大顶堆：小顶堆的插入和弹出操作均将元素「取反」即可
+        self.A = [] # 小顶堆，保存较大的一半
+        self.B = [] # 大顶堆，保存较小的一半
+
+    def addNum(self, num: int) -> None:
+        # 时间复杂度
+        # 查找中位数：O(1)
+        # 添加数字： O(logN)
+        if len(self.A) == len(self.B): # 二者元素个数相同
+            heapq.heappush(self.B, -num)
+            heapq.heappush(self.A, -heapq.heappop(self.B))
+        else:
+            heapq.heappush(self.A, num)
+            heapq.heappush(self.B, -heapq.heappop(self.A))
+
+    def findMedian(self) -> float:
+        # print(self.A)
+        # print(self.B)
+        # print('-' * 100)
+        if (len(self.A) + len(self.B)) % 2 == 0: # 偶数个
+            return (self.A[0] - self.B[0]) / 2. # B 中存放的都是负数！！！（大顶堆）
+        else: # 奇数个
+            return self.A[0]
+#+END_SRC

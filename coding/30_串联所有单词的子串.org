@@ -1,0 +1,60 @@
+* 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成86）/截屏2020-07-22 下午1.34.11.png @ 2020-07-22 13:34:13
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-22_13-34-13_%E6%88%AA%E5%B1%8F2020-07-22%20%E4%B8%8B%E5%8D%881.34.11.png]]
+* 思路
++ 暴力法：遍历字符串，在每一个长度为num*word_len的子串中判断是否刚好可以由words中的字符串串联而成，记录每一个可能的索引。将子串按照word_len拆分，判断每一个是否在words中，即便存在相同元素也没关系，words需要剔除已经找到的字符串
+* code
+#+BEGIN_SRC python
+# 暴力法-2392ms
+class Solution:
+    def findSubstring(self, s: str, words: List[str]) -> List[int]:
+        if not s or not words:
+            return []
+        num = len(words)
+        word_len = len(words[0])
+        if len(s) < word_len * num:
+            return []
+        ans = []
+        def helper(s, word_len):
+	    # 防止修改原来的数组和字符串
+            s_ = s[:]
+            words_ = words[:]
+            for i in range(0, len(s_), word_len):
+                if s_[i:i+word_len] in words_:
+                    index = words_.index(s_[i:i+word_len])
+                    words_.pop(index)
+                else:
+                    return False
+            return True if not words_ else False
+        for i in range(0, len(s)):
+            if helper(s[i:i+word_len*num], word_len):
+                ans.append(i)
+        return ans
+# 暴力法优化-964ms
+class Solution:
+    def findSubstring(self, s: str, words: List[str]) -> List[int]:
+        from collections import Counter
+        if not s or not words:
+            return []
+        num = len(words)
+        word_len = len(words[0])
+        words = Counter(words)
+        all_len = word_len * num
+        if len(s) < word_len * num:
+            return []
+        ans = []
+        def helper(s, word_len):
+            tmp = []
+            for i in range(0, len(s), word_len):
+                tmp.append(s[i:i+word_len])
+            if Counter(tmp) == words:
+                return True
+            else:
+                return False
+        for i in range(0, len(s)-all_len+1):
+            if helper(s[i:i+all_len], word_len):
+                ans.append(i)
+        return ans
+
+
+#+END_SRC

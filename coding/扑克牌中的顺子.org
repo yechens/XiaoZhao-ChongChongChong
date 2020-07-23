@@ -1,0 +1,23 @@
+* 题目
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成4）/截屏2020-07-23 下午6.45.46.png @ 2020-07-23 18:45:49
+[[file:Screen-Pictures/%E6%80%9D%E8%B7%AF/2020-07-23_18-45-49_%E6%88%AA%E5%B1%8F2020-07-23%20%E4%B8%8B%E5%8D%886.45.46.png]]
+* 思路
+**** 先统计0的个数，然后过滤0；再判断最大值与最小值之间，「去重后元素的个数+0的个数」是否等于3即可
+* code
+#+BEGIN_SRC python
+class Solution:
+    def isStraight(self, nums: List[int]) -> bool:
+
+        nums0 = nums.count(0)
+        # 先删除 0
+        nums = [i for i in nums if i != 0]
+        nums.sort()
+
+        if nums[-1] - nums[0] > 4: # max - min
+            return False
+        # <= 3
+        temp = nums[1:-1]
+        if nums[0] in temp or nums[-1] in temp:
+            return False
+        return (len(set(nums[1:-1])) + nums0) == 3
+#+END_SRC

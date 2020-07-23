@@ -1,0 +1,36 @@
+* 题目
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成5）/截屏2020-07-23 下午6.47.31.png @ 2020-07-23 18:47:34
+[[file:Screen-Pictures/%E6%80%9D%E8%B7%AF/2020-07-23_18-47-34_%E6%88%AA%E5%B1%8F2020-07-23%20%E4%B8%8B%E5%8D%886.47.31.png]]
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成6）/截屏2020-07-23 下午6.47.51.png @ 2020-07-23 18:47:55
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-23_18-47-55_%E6%88%AA%E5%B1%8F2020-07-23%20%E4%B8%8B%E5%8D%886.47.51.png]]
+
+* 思路
+**** 利用BST树的性质即可，详见coding
+* code
+#+BEGIN_SRC python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+
+        pp, qq = p.val, q.val
+        if pp > qq:
+            pp, qq = qq, pp # 确保 pp <= qq
+        # 充分利用 BST 树的性质
+        def helper(root):
+            if not root:
+                return None
+            if pp <= root.val <= qq:
+                return root
+            if root.val > qq:
+                return helper(root.left)
+            elif root.val < pp:
+                return helper(root.right)
+        return helper(root)
+#+END_SRC

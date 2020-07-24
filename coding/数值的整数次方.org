@@ -1,0 +1,27 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成5）/截屏2020-07-24 下午8.20.39.png @ 2020-07-24 20:20:43
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-24_20-20-43_%E6%88%AA%E5%B1%8F2020-07-24%20%E4%B8%8B%E5%8D%888.20.39.png]]
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成6）/截屏2020-07-24 下午8.20.52.png @ 2020-07-24 20:20:55
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-24_20-20-55_%E6%88%AA%E5%B1%8F2020-07-24%20%E4%B8%8B%E5%8D%888.20.52.png]]
+
+* 思路
+**** 折半计算，每次将 n 对2整除；如果是偶数，直接将x更新为x^2即可；如果是奇数，需要额外乘上一个x
+**** 另外需要注意n是否为负数，如果是负数，需要返回 1/res
+* code
+#+BEGIN_SRC python
+class Solution:
+    def myPow(self, x: float, n: int) -> float:
+
+        # 7.24
+        flag = -1 if n < 0 else 1
+        res = 1.
+        n = abs(n)
+        while n != 0:
+            if n % 2 != 0: # 奇数
+                res *= x # 多乘上一个 x
+            x *= x # x^2
+            n //= 2
+        return res if flag == 1 else 1 / res
+#+END_SRC

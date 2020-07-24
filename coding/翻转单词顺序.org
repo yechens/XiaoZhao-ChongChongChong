@@ -1,0 +1,24 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成3）/截屏2020-07-24 下午8.16.08.png @ 2020-07-24 20:16:12
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-24_20-16-12_%E6%88%AA%E5%B1%8F2020-07-24%20%E4%B8%8B%E5%8D%888.16.08.png]]
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成4）/截屏2020-07-24 下午8.16.26.png @ 2020-07-24 20:16:30
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-24_20-16-30_%E6%88%AA%E5%B1%8F2020-07-24%20%E4%B8%8B%E5%8D%888.16.26.png]]
+
+* 思路
+**** 注意过滤多余的空格
+* code
+#+BEGIN_SRC python
+class Solution:
+    def reverseWords(self, s: str) -> str:
+
+        s = s.strip()
+        if not s: return ""
+
+        while s.find("  ") != -1:
+            s = s.replace("  ", " ") # 2个空格->1个空格
+        
+        items = s.split(" ")
+        return " ".join(items[::-1])
+#+END_SRC

@@ -1,0 +1,55 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成7）/截屏2020-07-25 下午6.46.14.png @ 2020-07-25 18:46:18
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-25_18-46-18_%E6%88%AA%E5%B1%8F2020-07-25%20%E4%B8%8B%E5%8D%886.46.14.png]]
+
+* 思路
+**** 注意控制扫描的方向（上下左右），以及记录已经访问过的点，避免重复遍历
+* code
+#+BEGIN_SRC python
+class Solution:
+    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
+
+        if not matrix: return []
+        m, n = len(matrix), len(matrix[0])
+        visit = [[0] * n for _ in range(m)]
+
+        res = []
+        i, j = 0, 0
+        flag = 0 
+        while 1:
+            if len(res) == m*n:
+                return res
+            if flag % 4 == 0: # 向右
+                while j < n and visit[i][j] == 0:
+                    visit[i][j] = 1
+                    res.append(matrix[i][j])
+                    j += 1
+                j -= 1
+                i += 1
+                flag += 1
+            elif flag % 4 == 1: # 向下
+                while i < m and visit[i][j] == 0:
+                    visit[i][j] = 1
+                    res.append(matrix[i][j])
+                    i += 1
+                i -= 1
+                j -= 1
+                flag += 1
+            elif flag % 4 == 2: # 向左
+                while j >= 0 and visit[i][j] == 0:
+                    visit[i][j] = 1
+                    res.append(matrix[i][j])
+                    j -= 1
+                j += 1
+                i -= 1
+                flag += 1
+            elif flag % 4 == 3: # 向上
+                while i >= 0 and visit[i][j] == 0:
+                    visit[i][j] = 1
+                    res.append(matrix[i][j])
+                    i -= 1
+                i += 1
+                j += 1
+                flag += 1
+#+END_SRC

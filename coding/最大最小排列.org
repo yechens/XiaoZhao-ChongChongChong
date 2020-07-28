@@ -1,0 +1,124 @@
+* 下一个排列
+** 题目
+ #+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成97）/截屏2020-07-27 上午11.15.03.png @ 2020-07-27 11:15:05
+ [[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-07-27_11-15-05_%E6%88%AA%E5%B1%8F2020-07-27%20%E4%B8%8A%E5%8D%8811.15.03.png]]
+** 思路
+ 从后往前遍历，找到第一个a[i]>a[i-1]的元素，然后在nums[a:]中找到最小的大于a[i-1]的元素，替换a[i-1]，此时nums[a:]依然为降序，反转即可
+** code
+ #+BEGIN_SRC python
+ class Solution:
+     def nextPermutation(self, nums: List[int]) -> None:
+         """
+         Do not return anything, modify nums in-place instead.
+         """
+         def reverse(i, j):
+             while i < j:
+                 nums[i], nums[j] = nums[j], nums[i]
+                 i += 1
+                 j -= 1
+
+         for i in range(len(nums)-1, 0, -1):
+             if nums[i] > nums[i-1]:
+                 j = i
+                 while j<len(nums) and nums[j] > nums[i-1]:
+                     j += 1
+                 nums[i-1], nums[j-1] = nums[j-1], nums[i-1]
+                 reverse(i, len(nums)-1)
+                 return
+         reverse(0, len(nums)-1)
+         return
+ #+END_SRC
+* 第k个排列
+** 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成98）/截屏2020-07-28 上午9.07.36.png @ 2020-07-28 09:07:38
+[[file:Screen-Pictures/%E7%AC%ACk%E4%B8%AA%E6%8E%92%E5%88%97/2020-07-28_09-07-38_%E6%88%AA%E5%B1%8F2020-07-28%20%E4%B8%8A%E5%8D%889.07.36.png]]
+** 思路
++ 暴力：利用下一个排列逐步求更大的最小排列，直到第k个
++ 回溯+剪枝：确定第一个数后，后面的数的可能性有n!种，如果小于k，那么确定的第一个数不是答案的一部分，因此第一个数应该是nums的第二个，再计算后面的数的可能性有没有超过k，没有的话，便可以确定第一位数，以此类推
+** code
+#+BEGIN_SRC python
+# 暴力-7500ms
+class Solution:
+    def getPermutation(self, n: int, k: int) -> str:
+        nums = list(range(1, n+1))
+        def helper(nums):
+            for i in range(len(nums)-1, 0, -1):
+                if nums[i] > nums[i-1]:
+                    j = i
+                    while j<len(nums) and nums[j]>nums[i-1]:
+                        j += 1
+                    nums[i-1], nums[j-1] = nums[j-1], nums[i-1]
+                    tmp = nums[i:][::-1]
+                    return nums[:i] + tmp
+        for i in range(1, k):
+            nums = helper(nums)
+        return ''.join([str(n) for n in nums])
+
+# 回溯+剪枝-40ms
+import math
+class Solution:
+    def getPermutation(self, n: int, k: int) -> str:
+        # 剪枝
+        nums = list(range(1, n+1))
+        ans = ''
+        count = 0
+        def dfs(path, ns):
+            nonlocal ans, count, k
+            if len(path)==len(nums):
+                ans = ''.join([str(n) for n in path])
+                count = 1
+                return   
+            for i, n in enumerate(ns):
+                if not count:
+                    if math.factorial(len(ns[:i]+ns[i+1:]))>=k:
+                        path.append(n)
+                        ns_ = ns[:i] + ns[i+1:]
+                        dfs(path, ns_)
+                        path.pop()
+                    else:
+                        k -= math.factorial(len(ns[:i]+ns[i+1:]))
+		else:
+		    break
+        dfs([], nums)
+        return ans
+#+END_SRC
+* 全排列
+** 题目
+** 思路
+[[https://leetcode-cn.com/problems/permutations/solution/dphui-su-by-bu-hui-er-cha-shu/][个人题解]]
+** code
+#+BEGIN_SRC python
+# 回溯
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        # 回溯DFS
+        ans = []
+        def dfs(path, ns):
+            if len(path) == len(nums):
+                ans.append(path[:])
+                return
+            for i, n in enumerate(ns):
+                path.append(n)
+                ns_ = ns[:i] + ns[i+1:]
+                dfs(path, ns_)
+                path.pop()
+        dfs([], nums)
+        return ans    
+
+# DP
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        if not nums:
+            return None
+        dp = [[] for i in range(len(nums))]
+        dp[0] = [[nums[0]]]
+        for i in range(1, len(nums)):
+            # 状态转移
+            for ans in dp[i-1]:
+                # 尾插
+                dp[i].append(ans+[nums[i]])
+                # 前插
+                for j in range(len(ans)):
+                    dp[i].append(ans[:j]+[nums[i]]+ans[j:])
+        return dp[-1]
+#+END_SRC

@@ -1,0 +1,169 @@
+* 字符串相加
+** 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成106）/截屏2020-07-31 下午1.54.53.png @ 2020-07-31 13:54:58
+[[file:Screen-Pictures/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E5%8A%A0/2020-07-31_13-54-58_%E6%88%AA%E5%B1%8F2020-07-31%20%E4%B8%8B%E5%8D%881.54.53.png]]
+** 思路
++ 先对齐2个字符串，不够的补'0'；接着用2个指针从后往前遍历，通过ord()求ASII码获得2个字符串相加的结果，考虑每一步的进位以及最终的进位
+** code
+ #+BEGIN_SRC python
+class Solution:
+    def addStrings(self, num1: str, num2: str) -> str:
+        # special case
+        if num1=='0':
+            return num2
+        elif num2 == '0':
+            return num1
+	# 字符串长度对齐    
+        if len(num2)>len(num1):
+            num1 = '0'*(len(num2)-len(num1)) + num1
+        elif len(num1)>len(num2):
+            num2 = '0'*(len(num1)-len(num2)) + num2
+	# 按位累加    
+        i, j = len(num1)-1, len(num2)-1 
+        tmp, carry, res = 0, 0, ''
+        while i>=0 and j>=0:
+            tmp = ord(num1[i])+ord(num2[j])-2*ord('0') + carry
+            carry = 0
+            if tmp>=10:
+                carry += 1
+            res += str(tmp%10)
+            i -= 1
+            j -= 1
+	# 最后的进位    
+        if carry:
+            res += '1'
+        return res[::-1]
+ #+END_SRC
+* 数组形式的整数加法
+** 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成107）/截屏2020-07-31 下午2.57.53.png @ 2020-07-31 14:57:55
+[[file:Screen-Pictures/%E6%95%B0%E7%BB%84%E5%BD%A2%E5%BC%8F%E7%9A%84%E6%95%B4%E6%95%B0%E5%8A%A0%E6%B3%95/2020-07-31_14-57-55_%E6%88%AA%E5%B1%8F2020-07-31%20%E4%B8%8B%E5%8D%882.57.53.png]]
+** 思路
++ 互相转换：设计2个函数，分别将数字转成列表以及列表转成数字
++ 列表相加：K转成列表，用0补足短列表前缀，使得2个列表长度一致，同时用双指针从后往前遍历相加
+** code
+ #+BEGIN_SRC python
+# 转换函数
+class Solution:
+    def addToArrayForm(self, A: List[int], K: int) -> List[int]:
+        if K==0:
+            return A
+        def num2list(num):
+            return [int(n) for n in str(num)]
+        def list2num(nums:List[int]):
+            return int(''.join([str(n) for n in nums]))
+        A = list2num(A)
+        A += K
+        return num2list(A)
+
+# 列表相加
+class Solution:
+    def addToArrayForm(self, A: List[int], K: int) -> List[int]:
+        # 转换函数
+        if K==0:
+            return A
+        def num2list(num):
+            return [int(n) for n in str(num)]
+        # 列表相加
+        K = num2list(K)
+        if len(K)>len(A):
+            A = [0]*(len(K)-len(A)) + A
+        elif len(A)>len(K):
+            K = [0]*(len(A)-len(K)) + K
+        i, j = len(A)-1, len(K)-1 
+        tmp, carry, res = 0, 0, []
+        while i>=0 and j>=0:
+            tmp = A[i]+K[j] + carry
+            carry = 0
+            if tmp>=10:
+                carry += 1
+            res.append(tmp%10)
+            i -= 1
+            j -= 1
+        if carry:
+            res.append(1)
+        return res[::-1]
+ #+END_SRC
+* 加一
+** 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成108）/截屏2020-07-31 下午3.28.03.png @ 2020-07-31 15:28:11
+[[file:Screen-Pictures/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E4%B9%98/2020-07-31_15-28-11_%E6%88%AA%E5%B1%8F2020-07-31%20%E4%B8%8B%E5%8D%883.28.03.png]]
+** 思路
++ 列表相加：相加的1变成[0,0...,1]，这里需要考虑剪枝，当进位为0，之后的就可以不用再遍历了
+** code
+ #+BEGIN_SRC python
+class Solution:
+    def plusOne(self, digits: List[int]) -> List[int]:
+        K = [0]*(len(digits)-1)+[1]
+        i, j = len(digits)-1, len(K)-1
+        tmp, carry, res = 0, 0, []
+        while i>=0 and j>=0:
+            tmp = digits[i] + K[j] + carry
+            carry = 0
+            if tmp >= 10:
+                carry += 1
+            res.append(tmp%10)
+	    # 剪枝
+            if carry==0:
+                break
+            i -= 1
+            j -= 1
+        if not carry:
+            return digits[:i] + res[::-1]
+        else:
+            return [1] + res[::-1]
+ #+END_SRC
+* 字符串相乘
+** 题目
+#+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成109）/截屏2020-07-31 下午4.06.47.png @ 2020-07-31 16:06:49
+[[file:Screen-Pictures/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E4%B9%98/2020-07-31_16-06-49_%E6%88%AA%E5%B1%8F2020-07-31%20%E4%B8%8B%E5%8D%884.06.47.png]]
+** 思路
++ 普通竖式：定义一个2个字符串相加的函数；num1和num2中的每一位相乘，得到的数再相加
+** code
+ #+BEGIN_SRC python
+class Solution:
+    def multiply(self, num1: str, num2: str) -> str:
+        if num1=='0' or num2=='0':
+            return '0'
+        def plus(num1, num2):
+            # 字符串长度对齐    
+            if len(num2)>len(num1):
+                num1 = '0'*(len(num2)-len(num1)) + num1
+            elif len(num1)>len(num2):
+                num2 = '0'*(len(num1)-len(num2)) + num2
+            # 按位累加    
+            i, j = len(num1)-1, len(num2)-1 
+            tmp, carry, res = 0, 0, ''
+            while i>=0 and j>=0:
+                tmp = ord(num1[i])+ord(num2[j])-2*ord('0') + carry
+                carry = 0
+                if tmp>=10:
+                    carry += 1
+                res += str(tmp%10)
+                i -= 1
+                j -= 1
+            # 最后的进位    
+            if carry:
+                res += '1'
+            return res[::-1]
+        ans, carry, tmp = '', 0, 0
+        for j in range(len(num2)-1, -1, -1):
+	    # 状态更新
+            res = ''
+            carry = 0
+            for i in range(len(num1)-1, -1, -1):
+                tmp = (ord(num1[i])-ord('0')) * (ord(num2[j])-ord('0')) + carry
+                carry = 0
+                if tmp >= 10:
+                    carry += tmp//10
+                res += str(tmp%10)
+	    # 考虑最后的进位	
+            if carry:
+                res += str(carry)
+            res = res[::-1] + '0'*(len(num2)-1-j)
+            if j<len(num2)-1:
+                ans = plus(ans, res)
+            else:
+                ans = res[:]
+        return ans
+ #+END_SRC

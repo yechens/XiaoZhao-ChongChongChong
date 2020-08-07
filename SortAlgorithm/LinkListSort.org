@@ -1,0 +1,83 @@
+* 题目
+
+#+DOWNLOADED: file:/var/folders/wk/9k90t6fs7kx91_cn9v90hx_00000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成9）/截屏2020-08-07 上午11.03.41.png @ 2020-08-07 11:03:45
+[[file:Screen-Pictures/%E9%A2%98%E7%9B%AE/2020-08-07_11-03-45_%E6%88%AA%E5%B1%8F2020-08-07%20%E4%B8%8A%E5%8D%8811.03.41.png]]
+
+* 思路
+**** 1.链表快速排序
+**** 2.链表归并排序
+* code
+#+BEGIN_SRC python
+class Solution:
+    def sortList(self, head: ListNode) -> ListNode:
+
+        if not head:
+            return None
+
+        # 2、快速排序
+        # 分成三个链表，分别是比轴心数小，相等，大的数组成的链表
+        def partition(head):
+            if not head: return None
+            big, mid, small = None, None, None
+            cur = head
+            while cur:
+                t = cur
+                cur = cur.next
+                if t.val < head.val:
+                    t.next = small 
+                    small = t
+                elif t.val > head.val:
+                    t.next = big
+                    big = t
+                else:
+                    t.next = mid
+                    mid = t 
+            # 拆分完各自排序，mid 无需排序
+            big = partition(big)
+            small = partition(small)
+
+            thead = ListNode(-1) # 新建头指针
+            node = thead
+            # 将3个链表进行合并
+            for p in [small, mid, big]:
+                while p:
+                    node.next = p
+                    p = p.next
+                    node = node.next
+            return thead.next
+        
+        res = partition(head)
+        return res
+
+
+        # 1、归并排序链表
+        def mergeSort(head):
+            if not head or not head.next: # 链表为空或只剩下唯一一个结点
+                return head
+            slow, fast = head, head.next
+            while fast and fast.next:
+                slow = slow.next
+                fast = fast.next.next
+            # slow 指向链表中点
+            mid = slow.next # 后半段链表的头结点
+            slow.next = None # 将前半段链表和后半段链表断开
+            # 递归地对链表进行切分
+            left, right = mergeSort(head), mergeSort(mid)
+            # 用「双指针法」合并2段有序链表，O(1)空间复杂度
+            thead = ListNode(-1) # 新建一个头指针
+            node = thead
+            while left and right:
+                if left.val <= right.val:
+                    node.next = left
+                    left = left.next
+                else:
+                    node.next = right
+                    right = right.next
+                node = node.next
+            # 补上剩余的结点！！！
+            node.next = left if left else right
+            return thead.next
+        
+        res = mergeSort(head)
+        return res
+#+END_SRC

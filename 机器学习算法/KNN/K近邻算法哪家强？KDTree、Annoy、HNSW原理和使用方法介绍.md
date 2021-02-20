@@ -2,6 +2,10 @@
 
 ![K近邻算法哪家强？KDTree、Annoy、HNSW原理和使用方法介绍](https://pic2.zhimg.com/v2-d26fb5e193119cdac40a021ad8caf569_1440w.jpg?source=172ae18b)
 
+> 作者：Giant
+>
+> 来源：*https://zhuanlan.zhihu.com/p/152522906*
+
 ## 1、什么是K近邻算法
 
 K近邻算法（KNN）是一种常用的分类和回归方法，它的基本思想是从训练集中寻找和输入样本最相似的k个样本，如果这k个样本中的大多数属于某一个类别，则输入的样本也属于这个类别。

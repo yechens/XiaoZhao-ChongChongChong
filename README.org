@@ -383,19 +383,22 @@
    | VAE                       | 0620~0731     |
    |                           |               |
 ** 分享链接（专题笔记文件地址）
-   | topic                     | Link                        |
-   | SVM                       | [[file:./机器学习算法/SVM/机器学习-svm全手写推导_compressed.pdf][机器学习-svm全手写推导]]      |
-   | Word2Vec                  | [[file:./MachineLearning/Word2vec/word2vec.org][word2vec]]                    |
-   | HMM&CRF                   | [[file:./机器学习算法/HMM&CRF/HMM&CRF_compressed.pdf][HMM&CRF]]                     |
-   | DecisionTree+RandomForest | [[file:/机器学习算法/DecisionTree&RandomForest/tree.org][decisiontree]]                |
-   | xgboost                   | [[file:/机器学习算法/xgboost_gbdt/GBDTXGBoost常见问题.md][GBDTXGBoost常见问题]]]        |
-   | KMeans                    | [[file:/机器学习算法/KMeans/pytorch_手推KMeans.org][手推kmeans]]                  |
-   | LogisticRegression        | [[file:/机器学习算法/LogisticRegression/7分钟搞懂逻辑回归的来龙去脉.md][7分钟搞懂逻辑回归的来龙去脉]] |
-   | KNN                       | [[file:/机器学习算法/KNN/K近邻算法哪家强？KDTree、Annoy、HNSW原理和使用方法介绍.md][K近邻算法哪家强？]]           |
-   |                           |                             |
+   | topic                     | Link                         |
+   | SVM                       | [[file:./机器学习算法/SVM/机器学习-svm全手写推导_compressed.pdf][机器学习-svm全手写推导]]       |
+   | Word2Vec                  | [[file:./MachineLearning/Word2vec/word2vec.org][word2vec原理剖析]]                |
+   | HMM&CRF                   | [[file:./机器学习算法/HMM&CRF/HMM&CRF_compressed.pdf][HMM&CRF]]                      |
+   | DecisionTree+RandomForest | [[file:/机器学习算法/DecisionTree&RandomForest/认真的聊一聊决策树和随机森林][认真的聊一聊决策树和随机森林]] |
+   | xgboost                   | [[file:/机器学习算法/xgboost_gbdt/GBDTXGBoost常见问题.md][GBDTXGBoost常见问题]]          |
+   | KMeans                    | [[file:/机器学习算法/KMeans/pytorch_手推KMeans.org][手推kmeans]]                   |
+   | LogisticRegression        | [[file:/机器学习算法/LogisticRegression/7分钟搞懂逻辑回归的来龙去脉.md][7分钟搞懂逻辑回归的来龙去脉]]  |
+   | KNN                       | [[file:/机器学习算法/KNN/K近邻算法哪家强？KDTree、Annoy、HNSW原理和使用方法介绍.md][K近邻算法哪家强？]]            |
+   |                           |                              |
 *   面试必备系列
 ** ML/NLP 面经
-**** Todo
+   | [[file:/大厂面试锦囊/腾讯、百度、滴滴最新NLP算法面经.md][腾讯、百度、滴滴最新NLP算法面经]]              |
+   | [[file:/大厂面试锦囊/2021算法阿里&腾讯&快手上岸，菜鸟小硕经验分享.md][2021算法阿里&腾讯&快手上岸，菜鸟小硕经验分享]] |
+   | [[file:/大厂面试锦囊/NLP_AI面试全记录_最全预训练总结.md][NLP_AI面试全记录_最全预训练总结]]              |
+   |                                              |
 ** 知识点归纳整理
 | 主题               | 标题                                                     | 来源        | 传送门 |
 | 预训练语言模型     | NLP算法面试必备！史上最全！PTMs：NLP预训练模型的全面总结 | 知乎        | [[https://zhuanlan.zhihu.com/p/115014536?utm_source=wechat_session&utm_medium=social&utm_oi=824921009521053696][👉]]     |

@@ -2,7 +2,7 @@
 
 > 作者：Jack Stark
 >
-> *https://zhuanlan.zhihu.com/p/81368182*
+> 原文链接：*https://zhuanlan.zhihu.com/p/81368182*
 
 在非深度学习的机器学习模型中，基于GBDT算法的XGBoost、lightgbm等有着非常优秀的性能，校招算法岗面试中“出镜率”非常高。这方面的资料非常多，因此本文不是原创，参考了很多面经、解读文章等，对GBDT相关的问题做了总结。
 

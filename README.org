@@ -393,6 +393,7 @@
    | LogisticRegression        | [[file:/机器学习算法/LogisticRegression/7分钟搞懂逻辑回归的来龙去脉.md][7分钟搞懂逻辑回归的来龙去脉]]  |
    | KNN                       | [[file:/机器学习算法/KNN/K近邻算法哪家强？KDTree、Annoy、HNSW原理和使用方法介绍.md][K近邻算法哪家强？]]            |
    | NaiveBayes                | [[file:/机器学习算法/NaiveBayes/带你理解朴素贝叶斯分类算法.md][带你理解朴素贝叶斯分类算法]]   |
+   | PCA                       | [[file:/机器学习算法/PCA/PCA主成分分析学习总结.md][PCA主成分分析学习总结]]        |
    |                           |                              |
 *   面试必备系列
 ** ML/NLP 面经

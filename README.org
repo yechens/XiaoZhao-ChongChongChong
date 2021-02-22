@@ -1,6 +1,6 @@
 *   Git加速插件：[[https://chrome.google.com/webstore/detail/github%E5%8A%A0%E9%80%9F/mfnkflidjnladnkldfonnaicljppahpg][GitHub加速😊]]
 * 🔧Emacs工具篇
-本项目内容开发及维护以Emacs为主!
+本项目开发及维护以Emacs为主!
 ** 常用快捷键(ctrl-c; alt-m)
    | 功能                      | 快捷键                               |
    | 新建文件or打开文件        | c-x c-f                              |
@@ -382,7 +382,7 @@
    | PCA                       | 0624~ 0631    |
    | VAE                       | 0620~0731     |
    |                           |               |
-** 分享链接（专题笔记文件地址）
+** 分享链接（专题笔记）
    | topic                     | Link                         |
    | SVM                       | [[file:./机器学习算法/SVM/机器学习-svm全手写推导_compressed.pdf][机器学习-svm全手写推导]]       |
    | Word2Vec                  | [[file:./MachineLearning/Word2vec/word2vec.org][word2vec原理剖析]]             |

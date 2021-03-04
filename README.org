@@ -402,6 +402,8 @@
    | [[file:/大厂面试锦囊/NLP_AI面试全记录_最全预训练总结.md][NLP_AI面试全记录_最全预训练总结]]              |
    | [[file:/大厂面试锦囊/2021校招算法面试锦囊_华为_网易游戏.md][2021校招算法面试锦囊_华为_网易游戏]]           |
    |                                              |
+** 精选仓库友情链接：
+**** [[file:https://github.com/0voice/interview_internal_reference][2021年最新总结，阿里，腾讯，百度，美团，头条等技术面试题目，以及答案，专家出题人分析汇总]]
 ** 知识点归纳整理
 | 主题               | 标题                                                     | 来源        | 传送门 |
 | 预训练语言模型     | NLP算法面试必备！史上最全！PTMs：NLP预训练模型的全面总结 | 知乎        | [[https://zhuanlan.zhihu.com/p/115014536?utm_source=wechat_session&utm_medium=social&utm_oi=824921009521053696][👉]]     |

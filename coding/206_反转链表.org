@@ -28,7 +28,7 @@ class Solution:
         res = helper(head)
         return res
 
-        # 1.头插法
+        # 1.头插法/迭代法
         tail = None
         while head:
             nxt = head.next

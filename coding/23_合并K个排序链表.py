@@ -87,5 +87,47 @@ class Solution:
         if not lists:return None
         return lists[0]
 
+
+# 分治清爽解法
+class Solution:
+    def mergeKLists(self, lists: List[ListNode]) -> ListNode:
+        # 分治
+        if not lists:
+            return None
+        if len(lists) == 1:
+            return lists[0]
+        # 合并2个有序链表
+        def fuge_list(l1, l2):
+            if not l1 and not l2:
+                return None
+            if not l1:
+                return l2
+            if not l2:
+                return l1
+            p, q = l1, l2
+            pre_head = ListNode(0)
+            z = pre_head
+            while p and q:
+                if p.val <= q.val:
+                    z.next = p
+                    p = p.next
+                else:
+                    z.next = q
+                    q = q.next
+                z = z.next
+            if p:
+                z.next = p
+            if q:
+                z.next = q
+            return pre_head.next
+        # 分治函数
+        def divide_conquer(lists):
+            if len(lists) == 1:
+                return lists[0]
+            elif len(lists) == 2:
+                return fuge_list(lists[0], lists[1])
+            else:
+                return fuge_list(divide_conquer(lists[:len(lists)//2]), divide_conquer(lists[len(lists)//2:]))
+        return divide_conquer(lists)
     
                 
